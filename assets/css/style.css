@@ -1,0 +1,304 @@
+html {
+    background: #000;
+}
+
+body {
+
+	margin: 0px;
+	padding: 0px;
+	width:100%;
+	height:100%;
+	background:#000;
+}
+
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+  /* some CSS here */
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (orientation:landscape) {
+  
+  
+#errorCase {
+	
+	width:100%;
+	height:100%;
+	background-color:black;
+	opacity:1;
+	position:absolute;
+	z-index:100000;
+	
+}
+
+#errorLandscape{
+	  
+	  background-image:url(../images/rotate.png);
+	  width:290px;
+	  height:166px;
+	  position:relative;
+	  z-index:10000;
+	  margin:0 auto;
+	  
+}
+
+}
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px){
+  /* some CSS here */
+}
+
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2){
+  /* some CSS here */
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+  /* some CSS here */
+}
+
+/* #### Desktops #### */
+@media screen and (min-width: 1024px){
+
+  #main{
+	  
+	  background-image:url()!important;
+	  
+  }
+  
+}
+
+#main {
+
+    /*background-image: url(../images/bg2x.jpg);*/
+    background-repeat: no-repeat;
+    background-size: 360px 640px;
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+
+}
+
+#gameArea{
+
+    height: 480px;
+    margin: -240px auto 0;
+    position: relative;
+    top: 50%;
+    width: 320px;
+}
+
+#main.source-image {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+}
+
+.canvas-container{
+	
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}
+/* - - - Pre Loader - - - */
+
+#preloader{
+
+	background-color:#ccc;
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:9999;
+	
+}
+
+	#preloaderClip{
+	
+		background: url("../images/mainSprite.png") no-repeat scroll -36px 0;
+		height: 49px;
+		opacity: 0;
+		position: relative;
+		margin:0 auto;
+		top: 50%;
+		width: 38px;
+		margin-top:-25px;
+	}
+	
+	#preloaderPresent{
+	
+		 background: url("../images/mainSprite.png") no-repeat scroll -72px -20px rgba(0, 0, 0, 0);
+		 height: 29px;
+		 left: 6px;
+		 opacity: 0;
+		 position: absolute;
+		 top: 45px;
+		 width: 27px;
+		
+	}
+	
+@media only screen and (-webkit-min-device-pixel-ratio: 2), 
+only screen and (min-device-pixel-ratio: 2) {
+	#preloaderClip {
+		/* Reference the @2x Sprite */
+		background: url("../images/mainSprite@2x.png") no-repeat scroll -36px 0;
+		/* Translate the @2x sprite's dimensions back to 1x */
+		background-size: 500px 500px;
+	}
+	
+	#preloaderPresent{
+	
+		background: url("../images/mainSprite@2x.png") no-repeat scroll -72px -20px rgba(0, 0, 0, 0);
+		background-size: 500px 500px; 
+		
+	}
+	
+	#resultsScreen #goldStar{
+	
+		background: url("../images/mainSprite@2x.png") no-repeat scroll -98px 0 / 500px 500px rgba(0, 0, 0, 0);
+	    height: 70px;
+	    margin: 0 auto;
+	    position: relative;
+	    top: 45px;
+	    width: 74px;
+
+	}
+	
+}
+
+/* - - - Game Items - - - */
+
+#timer{
+
+	left: 10px;
+    position: absolute;
+    top: 10px;
+
+}
+
+	#timer p{
+		
+		font-family: helvetica;
+		font-size: 25px;
+		color:white;
+		
+	}
+
+/* - - - Navigation Items - - - */
+
+#gameNavigation{
+
+	width:100%;
+	height:100%;
+
+}
+
+#gameInstructionBg{
+
+	background-color: #000000;
+    height: 100%;
+    margin: 0;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display:none;
+    z-index: 2;
+}
+
+#resultsScreen{
+
+	background-color: #333333;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+}
+
+	#greyContainer{
+	
+		 height: 50px;
+	    margin: 0 auto;
+	    position: relative;
+	    top: 45px;
+	    width: 318px;
+	
+	}
+
+	#greyStar0,#greyStar1,#greyStar2,#greyStar3,#greyStar4,#greyStar5{
+		
+		background: url("../images/mainSprite.png") no-repeat scroll -55px 0 / 500px 500px rgba(0, 0, 0, 0);
+	    float: left;
+	    height: 50px;
+	    position: relative;
+	    width: 53px;
+
+	}
+	
+	#starContainer{
+	
+		height: 50px;
+	    margin: 0 auto;
+	    position: relative;
+	    top: -5px;
+	    width: 318px;
+	
+	}
+
+	#goldStar0,#goldStar1,#goldStar2,#goldStar3,#goldStar4,#goldStar5{
+		
+		background: url("../images/mainSprite.png") no-repeat scroll 0 0 / 500px 500px rgba(0, 0, 0, 0);
+	    float: left;
+	    height: 50px;
+	    position: relative;
+	    width: 53px;
+	    display:none;
+
+	}
+	
+	#resultsScreen #resultsText{
+
+		margin: 0 auto;
+		position: relative;
+		top: 40px;
+		width: 260px;
+    
+    }
+    
+    #resultsScreen #resultsText p{
+
+	    color:white;
+		text-align: center;
+    
+    }
+
+/*#mainMenu,#gameOne,#gameTwo,#gameThree,#gameFour,#gameFive, #gameSix{
+	
+	top: 40%;
+	width:100px;
+	z-index:4;
+	color:white;
+	text-align: center;
+	background-color:blue;
+	margin: 0 auto;
+    position: relative;
+
+}
+
+	#mainMenu p,#gameOne p,#gameTwo p,#gameThree p,#gameFour p,#gameFive p, #gameSix p{
+		
+		margin: 0;
+		padding: 0;
+		position: relative;
+		top: 2px;
+		
+	}*/
