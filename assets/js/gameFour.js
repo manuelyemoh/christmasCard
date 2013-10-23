@@ -1,14 +1,35 @@
-var gameFourImages = [["assets/images/gameFour/bg2x.jpg",false]];
+var gameFourImages = ["assets/images/bg2x.jpg","#bedbe5"];
 var gameFourTimer = 10;
 var counter;
+var outsideArea = 0;
 var gameFourEnded = false;
 var gameFourStar = false;
+var currentId;
+var xPos = 0;
+var yPos = 0;
+var lastChar;
+var spriteLocation;
+var backgroundS;
+
+if (retina) {
+
+	spriteLocation = "assets/images/mainSprite@2x.png";
+	backgroundS = "750px";
+}
+else {
+
+	spriteLocation = "assets/images/mainSprite.png";
+	backgroundS = "750px";
+
+}
 
 function gameFourInit(){
 
-	if(firstTimeArray[4] == true){
+		outsideArea = 0;
+		gameFourEnded = false;
+		gameFourStar = false;
 	
-		$( "#gameNavigation #gameArea" ).append( "<div id='gameFour'><p>Start Game Instructions</p></div><div id='gameFourElements'><div id='abomSnowman'></div><div id='flick0'></div><div id='flick1'></div><div id='flick2'></div><div id='flick3'></div><div id='flick4'></div><div id='flick5'></div><div id='flick6'></div><div id='flick7'></div><div id='flick8'></div><div id='flick9'></div><div id='flick10'></div></div>" );
+		$( "#gameNavigation #gameArea" ).append( "<div id='gameFour'><p>Start Game Instructions</p></div><div id='gameFourElements'><div id='abomSnowman'></div><div id='abomSnowmanMouth'></div><div id='flick0'></div><div id='flick1'></div><div id='flick2'></div><div id='flick3'></div><div id='flick4'></div><div id='flick5'></div><div id='flick6'></div><div id='flick7'></div><div id='flick8'></div><div id='flick9'></div><div id='flick10'></div><div id='abBot'><div id='whiteSpace'></div></div>" );
 		
 		$("#gameFour").css({	
 		
@@ -20,7 +41,8 @@ function gameFourInit(){
 			backgroundColor: "blue",
 			marginLeft: "-50px",
 			left: "50%",
-			position: "absolute"
+			position: "absolute",
+			zIndex:"6"
 			
 		});
 		
@@ -42,191 +64,226 @@ function gameFourInit(){
 
 		});
 		
+		$("#gameFourElements #abBot").css({
+				
+			backgroundImage:"url(assets/images/gameFour/abBot.png)",
+		    height: "54px",
+		    left: "-20px",
+		    opacity: "1",
+		    position: "absolute",
+		    top: "388px",
+		    width: "360px",
+		    zIndex: "1"
+			
+		});
+		
+		$("#gameFourElements #abBot #whiteSpace").css({
+			
+			backgroundColor: "white",
+		    height: "800px",
+		    left: "0px",
+		    opacity: "1",
+		    position: "absolute",
+		    top: "53px",
+		    width: "360px",
+		    zIndex: "1"
+		
+		});
+		
 		$("#gameFourElements #abomSnowman").css({
 		
-			width:"220px",
-			height:"320px",
+			width:"270px",
+			height:"370px",
 			backgroundColor:"pink",
+			background: 'url('+ spriteLocation +') no-repeat scroll -309px -359px rgba(0, 0, 0, 0)',
+			backgroundSize: backgroundS+" "+backgroundS,
+			opacity:"1",
+			top:"75px",
+			left:"25px",
+			position:"absolute",
+			zIndex:"2"
+		
+		});
+		
+		$("#gameFourElements #abomSnowmanMouth").css({
+		
+			width:"120px",
+			height:"138px",
+			backgroundColor:"green",
+			background: 'url('+ spriteLocation +') no-repeat scroll -9px -489px rgba(0, 0, 0, 0)',
+			backgroundSize: backgroundS+" "+backgroundS,
 			opacity:"0.5",
-			top:"100px",
-			left:"45px",
-			position:"absolute"
-		
-		});
-		
-		$("#gameFourElements #flick0").css({
-
-			width:"25px",
-			height:"25px",
-			top:"370px",
-			left:"60px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick1").css({
-
-			width:"25px",
-			height:"25px",
-			top:"320px",
-			left:"70px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick2").css({
-
-			width:"25px",
-			height:"25px",
-			top:"260px",
-			left:"90px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick3").css({
-
-			width:"25px",
-			height:"25px",
-			top:"210px",
-			left:"80px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick4").css({
-
-			width:"25px",
-			height:"25px",
-			top:"160px",
-			left:"90px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick5").css({
-
-			width:"25px",
-			height:"25px",
-			top:"150px",
-			left:"150px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick6").css({
-
-			width:"25px",
-			height:"25px",
 			top:"200px",
-			left:"200px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
+			left:"98px",
+			position:"absolute",
+			zIndex:"2"
 		
-		$("#gameFourElements #flick7").css({
+		});	
+	
+  flickArray = [snowPart={
+			part:"flick0",
+			xL:"-110",
+			xR:"141",
+			yT:"0",
+			yB:"354",
+			sL:"141px",
+			sT:"80px",
+			width:"45px",
+			height:"40px",
+			bPosL:"-10px",
+			bPosT:"-426px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick1",
+			xL:"-28",
+			xR:"237",
+			yT:"-72",
+			yB:"248",
+			sL:"54px",
+			sT:"158px",
+			width:"20px",
+			height:"35px",
+			bPosL:"-62px",
+			bPosT:"-429px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick2",
+			xL:"-215",
+			xR:"51",
+			yT:"-74",
+			yB:"251",
+			sL:"239px",
+			sT:"148px",
+			width:"30px",
+			height:"49px",
+			bPosL:"-86px",
+			bPosT:"-417px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick3",
+			xL:"-0",
+			xR:"260",
+			yT:"-149",
+			yB:"175",
+			sL:"24px",
+			sT:"224px",
+			width:"28px",
+			height:"45px",
+			bPosL:"-122px",
+			bPosT:"-417px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick4",
+			xL:"-221",
+			xR:"41",
+			yT:"-150",
+			yB:"187",
+			sL:"253px",
+			sT:"226px",
+			width:"28px",
+			height:"54px",
+			bPosL:"-156px",
+			bPosT:"-417px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick5",
+			xL:"16",
+			xR:"265",
+			yT:"287",
+			yB:"83",
+			sL:"36px",
+			sT:"374px",
+			width:"18px",
+			height:"40px",
+			bPosL:"-187px",
+			bPosT:"-422px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick6",
+			xL:"-96",
+			xR:"175",
+			yT:"-285",
+			yB:"50",
+			sL:"123px",
+			sT:"361px",
+			width:"33px",
+			height:"47px",
+			bPosL:"-210px",
+			bPosT:"-413px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick7",
+			xL:"-202",
+			xR:"75",
+			yT:"-280",
+			yB:"64",
+			sL:"220px",
+			sT:"358px",
+			width:"36px",
+			height:"41px",
+			bPosL:"-244px",
+			bPosT:"-421px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick8",
+			xL:"-239",
+			xR:"33",
+			yT:"-222",
+			yB:"102",
+			sL:"272px",
+			sT:"308px",
+			width:"23px",
+			height:"37px",
+			bPosL:"-283px",
+			bPosT:"-426px",
+			color:"blue",
+			index:"4"
+			},snowPart={
+			part:"flick9",
+			xL:"9",
+			xR:"272",
+			yT:"-235",
+			yB:"88",
+			sL:"18px",
+			sT:"313px",
+			width:"28px",
+			height:"49px",
+			bPosL:"-275px",
+			bPosT:"-371px",
+			color:"blue",
+			index:"4"
+			}];
+				
+		for(i=0;i<=9;i++){
 
-			width:"25px",
-			height:"25px",
-			top:"260px",
-			left:"200px",
-			backgroundColor:"blue",
-			position:"absolute"
+			$('#gameFourElements '+'#'+flickArray[i].part).css({
 
-		});
-		
-		$("#gameFourElements #flick8").css({
-
-			width:"25px",
-			height:"25px",
-			top:"310px",
-			left:"220px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick9").css({
-
-			width:"25px",
-			height:"25px",
-			top:"350px",
-			left:"230px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		$("#gameFourElements #flick10").css({
-
-			width:"25px",
-			height:"25px",
-			top:"370px",
-			left:"150px",
-			backgroundColor:"blue",
-			position:"absolute"
-
-		});
-		
-		flickArray = [snowPart={
-			part:"#flick0",
-			sL:"45px",
-			sR:"100px",
-			},snowPart={
-			part:"#flick1",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick2",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick3",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick4",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick5",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick6",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick7",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick8",
-			sL:"15px",
-			sR:"34px",
-			},snowPart={
-			part:"#flick9",
-			sL:"15px",
-			sR:"34px",
-			},
+				"width":flickArray[i].width,
+				"height":flickArray[i].height,
+				"top":flickArray[i].sT,
+				"left":flickArray[i].sL,
+				"backgroundColor":flickArray[i].color,
+				"background": 'url('+ spriteLocation +') no-repeat scroll '+ flickArray[i].bPosL +' '+ flickArray[i].bPosT +' rgba(0, 0, 0, 0)',
+				"backgroundSize": backgroundS+" "+backgroundS,
+				"position":"absolute",
+				"opacity":"1",
+				"zIndex":flickArray[i].index
+			
+			})
+			
+		}
 				
 		$("#gameFour").show();
 		$("#gameInstructionBg").show();
 		setTimeout(gameFourStart, 5000);
-	
-	}
-	else{
-		
-		
-		
-	}
 	
 }
 
@@ -235,11 +292,102 @@ function gameFourStart(){
 	$('#gameFour').hide();
 	$("#gameInstructionBg").hide();
 	
-	for(i=0;i<=10;i++){
-		
-		Draggable.create(flickArray[i], {type:"x,y", edgeResistance:0, throwProps:true});
+	$('#timerInside').animate({width:"298px"},0);
+	$('#timer').show();
 	
-	}
+	jQuery( "#gameFourElements #abomSnowmanMouth" ).on( "tap", function() {
+	
+		animateManLost();
+		
+	});
+	
+	for(i=0;i<=9;i++){
+	
+	Draggable.create('#'+flickArray[i].part, {type:"x,y", edgeResistance:0, throwProps:true,
+		onDragStart: function() { 
+			
+			
+			
+			
+		},
+        onDragEnd: function() {
+	        
+	        	//console.log("xPOS-->"+this._eventTarget._gsTransform.x);
+	        	//console.log("yPOS-->"+this._eventTarget._gsTransform.y);
+	        	
+	        	//xPos = this._eventTarget._gsTransform.x;
+	        	//yPos = this._eventTarget._gsTransform.y;
+	        	
+	        	//console.log(xPos);
+	        	//console.log(yPos);
+	        	
+	        	currentId = this._eventTarget.id;
+	        	currentThis = this;
+	        	
+	        	lastChar = currentId.slice(-1);
+	        		        	
+	        	//console.log(currentId);
+	        	//console.log(lastChar);
+	        	
+	        	handleSet(currentId,currentThis,lastChar)
+
+        }, 
+      });
+      
+    }
+	
+	//counter=setInterval(gameFourtimer, 1000);
+	//gameFourtimer();
+}
+
+function handleSet(name,thisId,charLast){
+
+	setTimeout(function(){
+	        	
+    		xPos = thisId._eventTarget._gsTransform.x;
+        	yPos = thisId._eventTarget._gsTransform.y;
+        	
+        	if(xPos >= flickArray[charLast].xL && xPos <= flickArray[charLast].xR && yPos >= flickArray[charLast].yT && yPos <= flickArray[charLast].yB){
+
+	        	TweenLite.to("#"+name, 1, {css:{transform:"translateX(0px) translateX(0px)"}});
+	        	
+        	}
+        	
+        	else{
+
+	        	outsideArea++
+	        	TweenLite.to("#"+name, 0.5, {scaleX:0,scaleY:0,onComplete:function(){
+		        	
+		        	$("#"+name).hide();
+		        	
+	        	}});
+	        	
+	        	if(outsideArea >= 10){
+		        	
+		        	animateManWon();
+		        	
+	        	}
+        	}
+        	
+    	},500)
+	
+}
+
+function animateManWon(){
+	
+	
+	clearInterval(counter);
+	setTimeout(gameFourWon,2000);
+
+	
+}
+
+function animateManLost(){
+	
+	
+	clearInterval(counter);
+	setTimeout(gameFourLost,2000);
+
 	
 }
 
@@ -247,7 +395,7 @@ function gameFourtimer(){
 
 		 gameFourTimer --;
 		 
-		 $('#timer p').text(gameFourTimer);
+		 $('#timerInside').animate({width:"-=30px"},500);
 		 if (gameFourTimer <= 0)
 		 {		 
 			clearInterval(counter);
@@ -262,14 +410,28 @@ function gameFourWon(){
 		 gameFourStar = true;
 		 $("#resultsScreen").show();
 		 $("#resultsScreen #goldStar").show();
-	 
+		 for(i=0;i<=9;i++){
+
+			$('#gameFourElements '+'#'+flickArray[i].part).remove();
+		
+		}
+		$("#gameFourElements #abBot").remove();
+		$("#gameFourElements #abomSnowman").remove();
+		$("#gameFourElements #abomSnowmanMouth").remove();
+		
 }
 	
-function gameThreeLost(){
+function gameFourLost(){
 
 		 gameFourEnded = true;
 		 gameFourStar = false;
 		 $("#resultsScreen").show();
+		 for(i=0;i<=9;i++){
 
+			$('#gameFourElements '+'#'+flickArray[i].part).remove();
+		
+		}
+		$("#gameFourElements #abBot").remove();
+		$("#gameFourElements #abomSnowman").remove();
+		$("#gameFourElements #abomSnowmanMouth").remove();
 }
-

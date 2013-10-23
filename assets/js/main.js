@@ -1,6 +1,7 @@
 //alert("WindowWidth-->"+window.innerWidth+"  "+"  "+"windowHeight-->"+window.innerHeight);
 
 var firstTimeArray = [isFirstTimemainMenu = true,isFirstTimegameOne = true,isFirstTimegameTwo = true,isFirstTimegameThree = true,isFirstTimegameFour = true,isFirstTimegameFive = true,isFirstTimegameSix = true];
+var retina = window.devicePixelRatio > 1;
 
 $(document).ready(function () {
 
@@ -13,7 +14,8 @@ $(document).ready(function () {
   var gameViews = ["mainMenu","gameOne","gameTwo","gameThree","gameFour","gameFive", "gameSix"];
   var starsGot = ["none","none","none","none","none","none"];
   var currentPage = 10;
-  var randomGame;
+  var randomGame = 0;
+  var randomGameArray = [1,2,3,4];
   
   // - - - object var names - - - //
   var preloader = $('#preloader');
@@ -22,7 +24,6 @@ $(document).ready(function () {
   var gameEndCheck;
   var gameEndBooleon;
 
-  
   // - - - Local URL - - - //
   //var serverUrl = "localhost:8888/christmasGame/";
   
@@ -40,9 +41,20 @@ $(document).ready(function () {
   
   $(".ui-loader").remove();
   
-  document.ontouchmove = function(e) {e.preventDefault()};
+  function shuffle(o){ //v1.0
+  
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+    
+   };
+  
+   shuffleArray = shuffle(randomGameArray);
+  
+   document.ontouchmove = function(e) {e.preventDefault()};
 	  
 	function initPage(loadPage){
+	
+		console.log(loadPage);
 	
 		if(firstTimeArray[loadPage] == true){  
 	
@@ -55,7 +67,8 @@ $(document).ready(function () {
 			   	bgImage = eval(bgImage);
 			   	currentPage = loadPage;
 			   	//startPreLoader(bgImage,0,0,firstTimeArray[loadPage]);
-			   	setTimeout(function(){loadImage(bgImage[0][0],firstTimeArray[loadPage])}, 0);
+			   	setTimeout(function(){loadImage(bgImage[0],bgImage[1])}, 0);
+			   	//setTimeout(function(){loadImage(bgImage[0][0])}, 0);
 			    startGame(currentPage);
 			    firstTimeArray[loadPage] = false;
 			   	
@@ -71,7 +84,8 @@ $(document).ready(function () {
 		bgImage = eval(bgImage);
 			   	
 		//startPreLoader(bgImage,0,0,firstTimeArray[loadPage]);
-		setTimeout(function(){imageLoaded(bgImage[0][0],firstTimeArray[loadPage])},0);
+		setTimeout(function(){imageLoaded(bgImage[0],bgImage[1])}, 0);
+		startGame(currentPage);
 	}
 	
 	}
@@ -91,9 +105,8 @@ $(document).ready(function () {
 		},3000);
 
 		jQuery( "#"+gameViews[0] ).on( "tap", function() {
-	
-		getRandomInt(4,4);	
-		initPage(randomGame);
+
+		initPage(shuffleArray[randomGame]);
 		$("#mainMenu").hide();
 		
 	});
@@ -101,13 +114,14 @@ $(document).ready(function () {
 	
 	function hasGameEnd(){
 		
+
 		gameEndBooleon = gameViews[currentPage]+"Ended";
 		gameEndStar = gameViews[currentPage]+"Star";
 		if(eval(gameEndBooleon) == true){
 					
 			clearInterval(gameEndCheck);
-			getRandomInt(2,2);	
-			setTimeout(function(){initPage(randomGame)},2000);
+			randomGame++;
+			setTimeout(function(){initPage(shuffleArray[randomGame])},2000);
 			
 		}
 		if(eval(gameEndStar) == true){
@@ -135,12 +149,6 @@ $(document).ready(function () {
 		
 		
 	}
-	
-	function getRandomInt(min, max) {
-	
-    	randomGame = Math.floor(Math.random() * (max - min + 1)) + min;
-    
-    }
 	
 	/*for(i=1;i<=6;i++){
 		
@@ -194,7 +202,7 @@ $(document).ready(function () {
 			break;
 			
 			case 1:
-				TweenLite.to(preLoaderBox, 0.5, {alpha:0});
+				TweenLite.to(preLoaderBox, 0.5, {alpha:0});url("../images/mainSprite.png") no-repeat scroll 1px 0 / 750px 750px rgba(0, 0, 0, 0)
 				setTimeout(function(){preLoadAnimation(2)},500);
 
 			break;
@@ -209,20 +217,20 @@ $(document).ready(function () {
 		
 	}*/
 
-	function loadImage(name){
+	function loadImage(name,color){
 
 		// - - - pre Loading images - - - //
 		image = new Image();
-		image.onLoad = imageLoaded(name);
+		image.onLoad = imageLoaded(name,color);
 		image.src = name;
 		
-		}
+	}
 
-	function imageLoaded(name){
-		
+	function imageLoaded(name,color){
+	
 		// - - - alpha images off and set display none - - - //
 		
-		 TweenLite.to(preloaderClip, 0.5, {alpha:0, delay:1, onComplete:function(){
+		TweenLite.to(preloaderClip, 0.5, {alpha:0, delay:1, onComplete:function(){
 		
 			preloaderClip.hide();
 			
@@ -237,6 +245,7 @@ $(document).ready(function () {
 		
 		// - - - set PreLoaded Images to DOM - - - //
 		$("#main").css("background-image", 'url(' + name + ')');
+		$("#main").css("background-color", color);
 		$("#timer").hide();
 		$("#resultsScreen").hide();
 		$("#resultsScreen #goldStar").hide();

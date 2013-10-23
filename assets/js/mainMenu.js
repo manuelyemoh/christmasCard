@@ -1,11 +1,10 @@
 /* - - - Images to load - - - */
-var mainMenuImages = [["assets/images/mainMenu/bg2x.jpg",false]];
+var mainMenuImages = ["assets/images/bg2x.jpg","#e0f4f3"];
 
 function mainMenuInit(){
 	
-	if(firstTimeArray[0] == true){
-	
 		$( "#gameNavigation" ).append( "<div id='mainMenu'><p>Start Game</p></div>" );
+		
 		$("#mainMenu").css({	
 		
 			top: "40%",
@@ -30,12 +29,6 @@ function mainMenuInit(){
 		});
 		
 		//$("#mainMenu").show();
-		
-	}else{
-		
-		console.log("isFirstTimeMenu-->"+firstTimeArray[0]);
-		//$("#mainMenu").show();
-		
-	}
+
 
 }
