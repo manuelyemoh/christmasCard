@@ -6,10 +6,12 @@
 	<meta name="viewport" content="user-scalable=0, initial-scale=1.0" />
 	<!-- tell iOS that this app can work in full screen mode. No need for navbars -->
 	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<!-- link the app icons - shown on the home screen -->
 	<link rel="apple-touch-icon" href="./images/touch-icon-iphone.png" />
 	<link rel="apple-touch-icon" sizes="72x72" href="./images/touch-icon-ipad.png" />
 	<link rel="apple-touch-icon" sizes="114x114" href="./images/touch-icon-iphone4.png" />
+	
 	<!-- link the start screen image - shown while the app launches -->
 	<link rel="apple-touch-startup-image" href="./images/startscreen-320x460.png">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -65,5 +67,24 @@
     <script src="assets/js/TimelineMax.min.js"></script>
     <script src="assets/js/jquery.mobile.js"></script>
     <script src="assets/js/main.js"></script>
+      	<script>
+  		
+  		 $(document).one('mobileinit', function () {
+  		 
+	  		 $.support.cors = true;""
+             $.mobile.allowCrossDomainPages = true;
+             $.mobile.buttonMarkup.hoverDelay = 0;
+             $.mobile.defaultPageTransition = "slide";
+             $.mobile.phonegapNavigationEnabled = true
+             $.mobile.pushStateEnabled = false;
+             
+             /*$.mobile.loader.prototype.options.text = "loading";
+			 $.mobile.loader.prototype.options.textVisible = false;
+			 $.mobile.loader.prototype.options.theme = "a";
+			 $.mobile.loader.prototype.options.html = "";*/
+			 
+        });
+  		
+  	</script>
   </body>
 </html>
