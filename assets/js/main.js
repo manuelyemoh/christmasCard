@@ -74,7 +74,7 @@ $(document).ready(function () {
 			   	
 			  })
 			  .fail(function( jqxhr, settings, exception ) {
-			    console.log( "Need to reload" );
+			    alert( "Need to reload" );
 		});
 	}
 	else{
