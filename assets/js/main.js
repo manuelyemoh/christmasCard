@@ -10,6 +10,11 @@ $(document).ready(function () {
   	cache: true
   });
   
+  //phoneGap shiz
+  
+  $.support.cors = true;
+  $.mobile.allowCrossDomainPages = true;
+  
   // - - - Game Views and Controls - - - //
   var gameViews = ["mainMenu","gameOne","gameTwo","gameThree","gameFour","gameFive", "gameSix", "tabletGame"];
   var starsGot = ["none","none","none","none","none","none"];
@@ -73,9 +78,6 @@ $(document).ready(function () {
 			   	bgImage = eval(bgImage);
 			   	currentPage = loadPage;
 			   	startPreLoader(bgImage);
-			   	//setTimeout(function(){loadImage(bgImage[0],bgImage[1])}, 0);
-			   	//setTimeout(function(){loadImage(bgImage[0][0])}, 0);
-			    //startGame(currentPage);
 			    firstTimeArray[loadPage] = false;
 			   	
 			  })
