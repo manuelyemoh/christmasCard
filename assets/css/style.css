@@ -167,6 +167,41 @@ only screen and (min-device-pixel-ratio: 2) {
 
 	}
 	
+	#Star0,#Star1,#Star2,#Star3,#Star4,#Star5{
+	
+		 background: url("../images/mainSprite@2x.png") no-repeat scroll 0px -0px / 403px 280px rgba(0, 0, 0, 0);
+	     position: absolute;
+	     z-index: 11;
+
+	}
+	#resultsScreen #resultsCircle{
+	
+		background: url("../images/mainSprite@2x.png") no-repeat scroll -155px 0px / 403px 280px rgba(0, 0, 0, 0);
+
+	
+	}
+	
+	#resultsScreen #resultsWon{
+	
+		background: url("../images/mainSprite@2x.png") no-repeat scroll -3px -52px / 403px 280px rgba(0, 0, 0, 0);
+
+	
+	}
+	
+	#resultsScreen #resultsLost{
+		
+		background: url("../images/mainSprite@2x.png") no-repeat scroll -3px -96px / 403px 280px rgba(0, 0, 0, 0);
+
+	    
+	}
+	
+	#resultsScreen #resultsBottom{
+	
+		background: url("../images/mainSprite@2x.png") no-repeat scroll -40px -250px / 403px 280px rgba(0, 0, 0, 0);
+
+
+	}
+	
 }
 
 /* - - - Game Items - - - */
