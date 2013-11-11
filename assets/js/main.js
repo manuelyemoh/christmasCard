@@ -1,6 +1,6 @@
 //alert("WindowWidth-->"+window.innerWidth+"  "+"  "+"windowHeight-->"+window.innerHeight);
 
-var firstTimeArray = [isFirstTimemainMenu = true,isFirstTimegameOne = true,isFirstTimegameTwo = true,isFirstTimegameThree = true,isFirstTimegameFour = true,isFirstTimegameFive = true,isFirstTimegameSix = true];
+var firstTimeArray = [isFirstTimemainMenu = true,isFirstTimegameOne = true,isFirstTimegameTwo = true,isFirstTimegameThree = true,isFirstTimegameFour = true,isFirstTimegameFive = true,isFirstTimegameSix = true, isFirstTimetabletGame = true];
 var retina = window.devicePixelRatio > 1;
 
 $(document).ready(function () {
@@ -11,11 +11,12 @@ $(document).ready(function () {
   });
   
   // - - - Game Views and Controls - - - //
-  var gameViews = ["mainMenu","gameOne","gameTwo","gameThree","gameFour","gameFive", "gameSix"];
+  var gameViews = ["mainMenu","gameOne","gameTwo","gameThree","gameFour","gameFive", "gameSix", "tabletGame"];
   var starsGot = ["none","none","none","none","none","none"];
   var currentPage = 10;
   var randomGame = 0;
-  var randomGameArray = [1,2,3,4];
+  //var testingNumber = 1;
+  var randomGameArray = [1,2,3,4,5,6];
   
   // - - - object var names - - - //
   var preloader = $('#preloader');
@@ -23,7 +24,11 @@ $(document).ready(function () {
   var preLoaderBox = $('#preloaderPresent');
   var gameEndCheck;
   var gameEndBooleon;
-
+  var isLoaded = 0;
+  
+  //var ismobile=navigator.userAgent.match(/(iPhone)|(iPod)|(Android)|(webOS)/i);
+  var ismobile=navigator.userAgent.toLowerCase();
+  
   // - - - Local URL - - - //
   //var serverUrl = "localhost:8888/christmasGame/";
   
@@ -55,21 +60,22 @@ $(document).ready(function () {
 	function initPage(loadPage){
 	
 		console.log(loadPage);
+		isLoaded = 0;
 	
 		if(firstTimeArray[loadPage] == true){  
 	
 			// - - - Load external JS file, and run code if successful or return Error message - - - //
 			$.getScript( "assets/js/"+gameViews[loadPage]+".js" )
 			  .done(function( script, textStatus ) {
-			   	
+			  
 			   	var bgImage = gameViews[loadPage]+"Images"; 
 			   	// - - - eval will convert the string to an array object - - - //
 			   	bgImage = eval(bgImage);
 			   	currentPage = loadPage;
-			   	//startPreLoader(bgImage,0,0,firstTimeArray[loadPage]);
-			   	setTimeout(function(){loadImage(bgImage[0],bgImage[1])}, 0);
+			   	startPreLoader(bgImage);
+			   	//setTimeout(function(){loadImage(bgImage[0],bgImage[1])}, 0);
 			   	//setTimeout(function(){loadImage(bgImage[0][0])}, 0);
-			    startGame(currentPage);
+			    //startGame(currentPage);
 			    firstTimeArray[loadPage] = false;
 			   	
 			  })
@@ -78,14 +84,15 @@ $(document).ready(function () {
 		});
 	}
 	else{
-		
+
 		var bgImage = gameViews[loadPage]+"Images"; 
 		// - - - eval will convert the string to an array object - - - //
 		bgImage = eval(bgImage);
-			   	
-		//startPreLoader(bgImage,0,0,firstTimeArray[loadPage]);
-		setTimeout(function(){imageLoaded(bgImage[0],bgImage[1])}, 0);
-		startGame(currentPage);
+		currentPage = loadPage;
+		
+		startPreLoader(bgImage);
+		//setTimeout(function(){stopPreloader(bgImage[0],bgImage[1])}, 0);
+		//startGame(currentPage);
 	}
 	
 	}
@@ -100,13 +107,14 @@ $(document).ready(function () {
 		
 		setTimeout(function(){
 		
-		if(currentPage >= 1){gameEndCheck=setInterval(hasGameEnd, 1000)}
+		if(currentPage >= 1 && currentPage <= 6 ){gameEndCheck=setInterval(hasGameEnd, 1000)}
 		
 		},3000);
 
 		jQuery( "#"+gameViews[0] ).on( "tap", function() {
 
 		initPage(shuffleArray[randomGame]);
+		//initPage(testingNumber);
 		$("#mainMenu").hide();
 		
 	});
@@ -122,6 +130,7 @@ $(document).ready(function () {
 			clearInterval(gameEndCheck);
 			randomGame++;
 			setTimeout(function(){initPage(shuffleArray[randomGame])},2000);
+			//setTimeout(function(){initPage(testingNumber)},2000);
 			
 		}
 		if(eval(gameEndStar) == true){
@@ -129,9 +138,11 @@ $(document).ready(function () {
 			starsGot[currentPage] = "inline";
 			
 			for(i=0;i<=6;i++){
-  
-				 $("#goldStar"+[i]).css("display",starsGot[i]);
-  	
+				
+				a = i-1;
+				
+				 $("#goldStar"+[a]).css("display",starsGot[i]);
+				 
 			}
 			
 			
@@ -161,74 +172,54 @@ $(document).ready(function () {
 			console.log(startGameString);
 			startGameString();
 			
-		});
+		}); 
 	}*/
 	
-	/*function startPreLoader(whatArray,index1,index2,boolean){
+	function startPreLoader(whatArray){
 		
 		// - - - put the images in blocks and alpha them on - - - //
 		preloader.css("display","block");
 		preloaderClip.css("display","block");
 		TweenLite.to(preloader, 0.5, {alpha:1});
 		TweenLite.to(preloaderClip, 0.5, {alpha:1});
-		preLoadAnimation(0);
-		if( boolean == true){
-			
-			setTimeout(function(){loadImage(whatArray[index1][index2])}, 1000);
+		//preLoadAnimation(0);
+		
+		//Load Gif image
 
-		}
-		else{
+		setTimeout(function(){loadImage(whatArray)}, 1000);
+
+	}
+
+	function loadImage(name){
+		
+		for(i=0; i <= name.length; i++){
 			
-			setTimeout(function(){imageLoaded(whatArray[index1][index2])}, 1000);
+			// - - - pre Loading images - - - //
+			image = new Image();
+			image.onLoad = imageLoaded(name);
+			image.src = name[i];
 			
 		}
-	}*/
+
+	}
 	
-	/*function preLoadAnimation(preLoadStep){
+	function imageLoaded(arrayNumber){
 		
-		// - - - Pre loaded animation from sprite sheet - - - //
-		switch(preLoadStep){
+		isLoaded++
+		
+		if(isLoaded >= arrayNumber.length + 1){
 			
-			case 0:
-				TweenLite.to(preLoaderBox, 1.5, {y:-70});
-				TweenLite.to(preLoaderBox, 0.5, {alpha:1, delay:0.1});
-				TweenLite.delayedCall(0.5, function(){
-					
-					$(preloaderClip).css("background-position","0 0");
-					
-				});
-				
-				setTimeout(function(){preLoadAnimation(1)},2500);
-			break;
-			
-			case 1:
-				TweenLite.to(preLoaderBox, 0.5, {alpha:0});url("../images/mainSprite.png") no-repeat scroll 1px 0 / 750px 750px rgba(0, 0, 0, 0)
-				setTimeout(function(){preLoadAnimation(2)},500);
-
-			break;
-			
-			case 2:
-			
-			TweenLite.to(preLoaderBox, 0, {y:0});
-			$(preloaderClip).css("background-position","-36px 0");
-			break;
+			stopPreloader(arrayNumber);
 			
 		}
 		
-	}*/
-
-	function loadImage(name,color){
-
-		// - - - pre Loading images - - - //
-		image = new Image();
-		image.onLoad = imageLoaded(name,color);
-		image.src = name;
 		
 	}
 
-	function imageLoaded(name,color){
+	function stopPreloader(name){
 	
 		// - - - alpha images off and set display none - - - //
+		setTimeout(function(){startGame(currentPage)},500);
 		
 		TweenLite.to(preloaderClip, 0.5, {alpha:0, delay:1, onComplete:function(){
 		
@@ -239,19 +230,49 @@ $(document).ready(function () {
 		TweenLite.to(preloader, 0.5, {alpha:0, delay:1, onComplete:function(){
 			
 			preloader.hide();
-			//startGame(currentPage);
+			
 			
 		}});
 		
 		// - - - set PreLoaded Images to DOM - - - //
-		$("#main").css("background-image", 'url(' + name + ')');
-		$("#main").css("background-color", color);
+		$("#main").css("background-image", 'url(' + name[0] + ')');
+		$("#main").css("background-color", eval(gameViews[currentPage]+"Color"));
 		$("#timer").hide();
-		$("#resultsScreen").hide();
-		$("#resultsScreen #goldStar").hide();
+		$("#gameAreaResults").hide();
 		
 	}
 	
+	/*switch(ismobile.contains()){
+		
+		case "android":
+		
+		console.log("android");
+		initPage(0);
+		
+		break;
+		
+		case "iphone":
+		
+		console.log("iPhone");
+		
+		break;
+		
+		case "ipad":
+		
+		console.log("iPad");
+		
+		initPage(7);
+				
+		break;
+		
+		default:
+		
+		console.log("must be desktop");
+		
+		initPage(0);
+		
+	}*/
+
 	initPage(0);
-	
+
 });

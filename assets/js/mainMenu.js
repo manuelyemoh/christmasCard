@@ -1,8 +1,9 @@
 /* - - - Images to load - - - */
-var mainMenuImages = ["assets/images/bg2x.jpg","#e0f4f3"];
+var mainMenuImages = ["assets/images/bg2x.jpg"];
+var mainMenuColor = ["#e0f4f3"]
 
 function mainMenuInit(){
-	
+		
 		$( "#gameNavigation" ).append( "<div id='mainMenu'><p>Start Game</p></div>" );
 		
 		$("#mainMenu").css({	
@@ -27,8 +28,5 @@ function mainMenuInit(){
 			top: "2px"
 			
 		});
-		
-		//$("#mainMenu").show();
-
 
 }
