@@ -135,7 +135,6 @@ body {
 
 	#preloaderClip{
 	
-		background: url("../images/PageLoaderTree.gif") no-repeat scroll 0 0 / 80px 135px rgba(0, 0, 0, 0);
 	    height: 140px;
 	    left: 50%;
 	    margin-left: -40px;
@@ -149,58 +148,7 @@ body {
 	
 @media only screen and (-webkit-min-device-pixel-ratio: 2), 
 only screen and (min-device-pixel-ratio: 2) {
-	#preloaderClip {
-		/* Reference the @2x Sprite */
-		background: url("../images/PageLoaderTree@2x.gif") no-repeat scroll 0px 0 / 114px 61px rgba(0, 0, 0, 0);
-		/* Translate the @2x sprite's dimensions back to 1x */
-	}
-	
-	#goldStar0,#goldStar1,#goldStar2,#goldStar3,#goldStar4,#goldStar5{
-	
-		background: url("../images/mainSprite@2x.png") no-repeat scroll 0 -5px / 403px 280px rgba(0, 0, 0, 0);
-
-	}
-	
-	#greyStar0,#greyStar1,#greyStar2,#greyStar3,#greyStar4,#greyStar5{
 		
-		background: url("../images/mainSprite@2x.png") no-repeat scroll -61px -5px / 403px 280px rgba(0, 0, 0, 0);
-
-	}
-	
-	#Star0,#Star1,#Star2,#Star3,#Star4,#Star5{
-	
-		 background: url("../images/mainSprite@2x.png") no-repeat scroll 0px -0px / 403px 280px rgba(0, 0, 0, 0);
-	     position: absolute;
-	     z-index: 11;
-
-	}
-	#resultsScreen #resultsCircle{
-	
-		background: url("../images/mainSprite@2x.png") no-repeat scroll -155px 0px / 403px 280px rgba(0, 0, 0, 0);
-
-	
-	}
-	
-	#resultsScreen #resultsWon{
-	
-		background: url("../images/mainSprite@2x.png") no-repeat scroll -3px -52px / 403px 280px rgba(0, 0, 0, 0);
-
-	
-	}
-	
-	#resultsScreen #resultsLost{
-		
-		background: url("../images/mainSprite@2x.png") no-repeat scroll -3px -96px / 403px 280px rgba(0, 0, 0, 0);
-
-	    
-	}
-	
-	#resultsScreen #resultsBottom{
-	
-		background: url("../images/mainSprite@2x.png") no-repeat scroll -40px -250px / 403px 280px rgba(0, 0, 0, 0);
-
-
-	}
 	
 }
 
@@ -275,7 +223,6 @@ only screen and (min-device-pixel-ratio: 2) {
 
 	#greyStar0,#greyStar1,#greyStar2,#greyStar3,#greyStar4,#greyStar5{
 		
-		background: url("../images/mainSprite.png") no-repeat scroll -61px -5px / 403px 280px rgba(0, 0, 0, 0);
 	    float: left;
 	    height: 40px;
 	    left: 16px;
@@ -298,7 +245,6 @@ only screen and (min-device-pixel-ratio: 2) {
 
 	#goldStar0,#goldStar1,#goldStar2,#goldStar3,#goldStar4,#goldStar5{
 		
-		background: url("../images/mainSprite.png") no-repeat scroll 0 -5px / 403px 280px rgba(0, 0, 0, 0);
 	    display: none;
 	    float: left;
 	    height: 40px;
@@ -309,10 +255,8 @@ only screen and (min-device-pixel-ratio: 2) {
 
 	}
 	
-	
 	#resultsScreen #resultsCircle{
-	
-		background: url("../images/mainSprite.png") no-repeat scroll -155px 0px / 403px 280px rgba(0, 0, 0, 0);
+
 	    height: 245px;
 	    left: 36px;
 	    position: absolute;
@@ -323,8 +267,7 @@ only screen and (min-device-pixel-ratio: 2) {
 	}
 	
 	#resultsScreen #resultsWon{
-	
-		background: url("../images/mainSprite.png") no-repeat scroll -3px -52px / 403px 280px rgba(0, 0, 0, 0);
+
 	    height: 42px;
 	    left: 95px;
 	    position: absolute;
@@ -336,8 +279,7 @@ only screen and (min-device-pixel-ratio: 2) {
 	}
 	
 	#resultsScreen #resultsLost{
-		
-		background: url("../images/mainSprite.png") no-repeat scroll -3px -96px / 403px 280px rgba(0, 0, 0, 0);
+	
 	    height: 42px;
 	    left: 105px;
 	    position: absolute;
@@ -350,7 +292,6 @@ only screen and (min-device-pixel-ratio: 2) {
 	
 	#resultsScreen #resultsBottom{
 	
-		background: url("../images/mainSprite.png") no-repeat scroll -40px -250px / 403px 280px rgba(0, 0, 0, 0);
 	    height: 42px;
 	    left: -20px;
 	    position: absolute;

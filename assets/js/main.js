@@ -2,6 +2,78 @@
 
 var firstTimeArray = [isFirstTimemainMenu = true,isFirstTimegameOne = true,isFirstTimegameTwo = true,isFirstTimegameThree = true,isFirstTimegameFour = true,isFirstTimegameFive = true,isFirstTimegameSix = true, isFirstTimetabletGame = true];
 var retina = window.devicePixelRatio > 1;
+var retinaCopy = "";
+var backgroundStarArray = ["-5px -142px","-39px -142px","-71px -142px","-5px -181px","-41px -178px","-5px -142px"];
+
+
+if (retina) {
+	
+	retinaCopy = "@2x";
+
+}
+else {
+0
+	retinaCopy = "";
+
+}
+
+	$("#preloaderClip").css({
+
+		"background": 'url("assets/images/PageLoaderTree'+retinaCopy+'.gif") 0px 0',
+		"backgroundSize": '80px 135px'
+
+	});
+	
+	for (r = 0; r <= 5; r++){
+		
+		$("#goldStar"+[r]).css({
+			
+			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") 0 -5px',
+			"backgroundSize": '403px 280px'
+			
+		});
+		
+		$("#greyStar"+[r]).css({
+			
+			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -61px -5px',
+			"backgroundSize": '403px 280px'
+		
+		});
+		
+		$("#Star"+[r]).css({
+			
+			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") '+ backgroundStarArray[r] +'',
+			"backgroundSize": '403px 280px'
+			
+		});
+
+	}
+	
+	$("#resultsScreen #resultsCircle").css({
+	
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -155px 0px',
+		"backgroundSize": '403px 280px'
+	
+	});
+	
+	$("resultsScreen #resultsWon").css({
+	
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -3px -52px',
+		"backgroundSize": '403px 280px'
+	});
+	
+	$("resultsScreen #resultsLost").css({
+		
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -3px -96px',
+		"backgroundSize": '403px 280px'
+	});
+	
+	$("#resultsScreen #resultsBottom").css({
+	
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -40px -250px',
+		"backgroundSize": '403px 280px'
+
+	});
 
 $(document).ready(function () {
 
@@ -240,7 +312,7 @@ $(document).ready(function () {
 		$("#main").css("background-image", 'url(' + name[0] + ')');
 		$("#main").css("background-color", eval(gameViews[currentPage]+"Color"));
 		$("#timer").hide();
-		$("#gameAreaResults").hide();
+		//$("#gameAreaResults").hide();
 		
 	}
 	
