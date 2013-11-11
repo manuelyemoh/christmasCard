@@ -312,7 +312,7 @@ $(document).ready(function () {
 		$("#main").css("background-image", 'url(' + name[0] + ')');
 		$("#main").css("background-color", eval(gameViews[currentPage]+"Color"));
 		$("#timer").hide();
-		//$("#gameAreaResults").hide();
+		$("#gameAreaResults").hide();
 		
 	}
 	
