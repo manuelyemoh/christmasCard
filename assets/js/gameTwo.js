@@ -195,8 +195,8 @@ function gameTwoStart(){
 	$('#timerInside').animate({width:"298px"},0);
 	$('#timer').show();
 	
-	//counter=setInterval(gameTwotimer, 1000);
-	//gameTwotimer();
+	counter=setInterval(gameTwotimer, 1000);
+	gameTwotimer();
 	
 	jQuery( "#gameTwoElements #breakOne" ).on( "tap", function() {
 	

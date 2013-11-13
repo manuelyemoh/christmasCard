@@ -4,17 +4,17 @@ var firstTimeArray = [isFirstTimemainMenu = true,isFirstTimegameOne = true,isFir
 var retina = window.devicePixelRatio > 1;
 var retinaCopy = "";
 var backgroundStarArray = ["-5px -142px","-39px -142px","-71px -142px","-5px -181px","-41px -178px","-5px -142px"];
-
+var backgroundSizeMainSprite;
 
 if (retina) {
 	
 	retinaCopy = "@2x";
-
+	backgroundSizeMainSprite = "408px 1000px";  
 }
 else {
-0
-	retinaCopy = "";
 
+	retinaCopy = "";
+	backgroundSizeMainSprite = "408px 1000px"; 
 }
 
 	$("#preloaderClip").css({
@@ -29,21 +29,21 @@ else {
 		$("#goldStar"+[r]).css({
 			
 			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") 0 -5px',
-			"backgroundSize": '403px 280px'
+			"backgroundSize": backgroundSizeMainSprite
 			
 		});
 		
 		$("#greyStar"+[r]).css({
 			
 			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -61px -5px',
-			"backgroundSize": '403px 280px'
+			"backgroundSize": backgroundSizeMainSprite
 		
 		});
 		
 		$("#Star"+[r]).css({
 			
 			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") '+ backgroundStarArray[r] +'',
-			"backgroundSize": '403px 280px'
+			"backgroundSize": backgroundSizeMainSprite
 			
 		});
 
@@ -52,26 +52,26 @@ else {
 	$("#resultsScreen #resultsCircle").css({
 	
 		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -155px 0px',
-		"backgroundSize": '403px 280px'
+		"backgroundSize": backgroundSizeMainSprite
 	
 	});
 	
-	$("resultsScreen #resultsWon").css({
+	$("#resultsScreen #resultsWon").css({
 	
 		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -3px -52px',
-		"backgroundSize": '403px 280px'
+		"backgroundSize": backgroundSizeMainSprite
 	});
 	
-	$("resultsScreen #resultsLost").css({
+	$("#resultsScreen #resultsLost").css({
 		
 		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -3px -96px',
-		"backgroundSize": '403px 280px'
+		"backgroundSize": backgroundSizeMainSprite
 	});
 	
 	$("#resultsScreen #resultsBottom").css({
 	
 		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -40px -250px',
-		"backgroundSize": '403px 280px'
+		"backgroundSize": backgroundSizeMainSprite
 
 	});
 
@@ -82,17 +82,17 @@ $(document).ready(function () {
   	cache: true
   });
   
-  //phoneGap shiz
+  //phoneGap allowing Ajax Calls
   
   $.support.cors = true;
   $.mobile.allowCrossDomainPages = true;
   
   // - - - Game Views and Controls - - - //
   var gameViews = ["mainMenu","gameOne","gameTwo","gameThree","gameFour","gameFive", "gameSix", "tabletGame"];
-  var starsGot = ["none","none","none","none","none","none"];
+  var currentStar = 0;
   var currentPage = 10;
   var randomGame = 0;
-  //var testingNumber = 1;
+  var testingNumber = 6;
   var randomGameArray = [1,2,3,4,5,6];
   
   // - - - object var names - - - //
@@ -102,6 +102,12 @@ $(document).ready(function () {
   var gameEndCheck;
   var gameEndBooleon;
   var isLoaded = 0;
+  
+  for (i=0;i<=5;i++){
+	  
+	$("#goldStar"+[i]).animate({transform: 'scale(3,3) rotate(135deg)', opacity:"0"},0);
+	  
+  }
   
   //var ismobile=navigator.userAgent.match(/(iPhone)|(iPod)|(Android)|(webOS)/i);
   var ismobile=navigator.userAgent.toLowerCase();
@@ -185,11 +191,18 @@ $(document).ready(function () {
 		
 		},3000);
 
-		jQuery( "#"+gameViews[0] ).on( "tap", function() {
+		jQuery( "#mainMenuStart").on( "tap", function() {
 
 		initPage(shuffleArray[randomGame]);
 		//initPage(testingNumber);
-		$("#mainMenu").hide();
+		
+		setTimeout(function(){
+			
+			$("#mainMenu").remove();
+			$("#mainMenuElements").remove();
+			
+		},500);
+	
 		
 	});
 	}
@@ -203,24 +216,40 @@ $(document).ready(function () {
 					
 			clearInterval(gameEndCheck);
 			randomGame++;
-			setTimeout(function(){initPage(shuffleArray[randomGame])},2000);
+			setTimeout(function(){initPage(shuffleArray[randomGame])},4000);
 			//setTimeout(function(){initPage(testingNumber)},2000);
 			
-		}
-		if(eval(gameEndStar) == true){
-
-			starsGot[currentPage] = "inline";
+			if(eval(gameEndStar) == true){
+	
+				$('#resultsText p:first').text("You got a gold star");
+				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");
+				$('#resultsText').animate({opacity:1},500);
+				$('#resultsWon').animate({opacity:1},500);
+				$("#goldStar"+[currentStar]).css("display","inline");
+				$("#goldStar"+[currentStar]).animate({transform: 'scale(1,1) rotate(0deg)', opacity:"1"},200);
 			
-			for(i=0;i<=6;i++){
-				
-				a = i-1;
-				
-				 $("#goldStar"+[a]).css("display",starsGot[i]);
-				 
+			}
+			else{
+			
+				$('#resultsText p:first').text("You failed");
+				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");	
+				$('#resultsText').animate({opacity:1},500);
+				$('#resultsLost').animate({opacity:1},500);
 			}
 			
+			currentStar++;
 			
 		}
+		else{
+			
+			$('#resultsText p:first').text("");
+			$('#resultsText p:last').text("");
+			$('#resultsText').animate({opacity:0},0);
+			$('#resultsWon').animate({opacity:0},0);
+			$('#resultsLost').animate({opacity:0},0);
+			
+		}
+		
 	}
 	
 	function pausePage(){

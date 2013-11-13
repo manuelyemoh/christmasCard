@@ -190,10 +190,10 @@ function gameThreeInit(){
 		
 			snowBodyParts = [snowPart={
 			part:"snowManTopOne",
-			xL:"3",
-			xR:"35",
-			yT:"73",
-			yB:"107",
+			xL:"2",
+			xR:"38",
+			yT:"70",
+			yB:"108",
 			sL:"120px",
 			sT:"290px",
 			color:"blue",
@@ -203,9 +203,9 @@ function gameThreeInit(){
 			bPosT:"-4px"
 			},snowPart={
 			part:"snowManTopTwo",
-			xL:"117",
-			xR:"147",
-			yT:"98",
+			xL:"114",
+			xR:"153",
+			yT:"99",
 			yB:"132",
 			sL:"250px",
 			sT:"270px",
@@ -216,10 +216,10 @@ function gameThreeInit(){
 			bPosT:"-104px"
 			},snowPart={
 			part:"snowManTopThree",
-			xL:"220",
-			xR:"252",
-			yT:"129",
-			yB:"164",
+			xL:"225",
+			xR:"259",
+			yT:"135",
+			yB:"155",
 			sL:"185px",
 			sT:"260px",
 			color:"red",
@@ -229,10 +229,10 @@ function gameThreeInit(){
 			bPosT:"-174px"
 			},snowPart={
 			part:"snowManMiddleOne",
-			xL:"-17",
-			xR:"14",
-			yT:"128",
-			yB:"164",
+			xL:"-16",
+			xR:"16",
+			yT:"127",
+			yB:"163",
 			sL:"190px",
 			sT:"340px",
 			color:"blue",
@@ -242,10 +242,10 @@ function gameThreeInit(){
 			bPosT:"-17px"
 			},snowPart={
 			part:"snowManMiddleTwo",
-			xL:"90",
-			xR:"122",
-			yT:"140",
-			yB:"175",
+			xL:"83",
+			xR:"125",
+			yT:"137",
+			yB:"178",
 			sL:"20px",
 			sT:"340px",
 			color:"green",
@@ -255,10 +255,10 @@ function gameThreeInit(){
 			bPosT:"-100px"
 			},snowPart={
 			part:"snowManMiddleThree",
-			xL:"201",
-			xR:"233",
-			yT:"171",
-			yB:"199",
+			xL:"200",
+			xR:"235",
+			yT:"163",
+			yB:"201",
 			sL:"30px",
 			sT:"270px",
 			color:"red",
@@ -381,8 +381,9 @@ function gameThreeStart(){
 				}
 				else{
 					
-					$('#'+currentId).css("left",snowBodyParts[l].sL)
-					$('#'+currentId).css("top",snowBodyParts[l].sT)
+					//$('#'+currentId).css("left",snowBodyParts[l].sL)
+					//$('#'+currentId).css("top",snowBodyParts[l].sT)
+					$('#'+currentId).animate({top:snowBodyParts[l].sT,left:snowBodyParts[l].sL}, 200);
 				}
 				
 			}
@@ -393,7 +394,7 @@ function gameThreeStart(){
 	
 	}
 
-	//counter=setInterval(gameThreetimer, 1000);
+	//counter=setInterval(gameThreetimer, 1000);
 	//gameThreetimer();
 	
 }

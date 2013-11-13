@@ -430,8 +430,8 @@ function gameSixStart(){
 		});
 	}
 
-	//counter=setInterval(gameSixtimer, 1000);
-	//gameSixtimer();
+	counter=setInterval(gameSixtimer, 1000);
+	gameSixtimer();
 
 }
 

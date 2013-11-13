@@ -459,8 +459,8 @@ function gameFourStart(){
       
     }
 	
-	//counter=setInterval(gameFourtimer, 1000);
-	//gameFourtimer();
+	counter=setInterval(gameFourtimer, 1000);
+	gameFourtimer();
 }
 
 function handleSet(name,thisId,charLast){
@@ -584,6 +584,7 @@ function gameFourWon(){
 		 gameFourEnded = true;
 		 gameFourStar = true;
 		 $("#gameAreaResults").show();
+		 $("#abomSnowmanCloseUp").remove();
 		 $("#resultsScreen #goldStar").show();
 		 $('#gameFourElements').remove();
 
@@ -595,6 +596,7 @@ function gameFourLost(){
 		 gameFourEnded = true;
 		 gameFourStar = false;
 		 $("#gameAreaResults").show();
+		 $("#abomSnowmanCloseUp").remove();
 		 $('#gameFourElements').remove();
 		 
 }

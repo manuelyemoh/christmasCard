@@ -56,6 +56,7 @@ function gameFiveInit(){
 
 	gameFiveEnded = false;
 	gameFiveTimer = 11;
+	
 	$( "#gameNavigation #gameArea" ).append( "<div id='gameFive'><p>Start Game Instructions</p></div><div id='gameFiveElements'><div id='landscape'></div><div id='landscapeColour'></div><div id='funnel'></div><div id='greenWheelL'></div><div id='greenWheelM'></div><div id='greenWheelS'></div><div id='sack'></div><div id='topWheelShadow'></div><div id='lift'></div><div id='present'></div><div id='handleLeft'></div><div id='distance'><div id ='marker'></div></div><div id='handleRight'></div></div>" );
 	
 	$("#gameFive").css({	
@@ -331,8 +332,8 @@ function gameFiveStart(){
 	$("#gameInstructionBg").hide();
 	$('#timerInside').animate({width:"298px"},0);
 	$('#timer').show();
-	//counter=setInterval(gameFivetimer, 2000);
-	//gameFivetimer();
+	counter=setInterval(gameFivetimer, 2000);
+	gameFivetimer();
 	
 	tl = new TimelineMax({paused:true});
 	
@@ -506,9 +507,10 @@ function gameFivetimer(){
 
 function gameFiveComplete(){
 		//console.log('gameFiveComplete')
+		clearInterval(counter);
 		grnWhlsObj = $('#greenWheelS');
 		TweenLite.to(grnWhlsObj, 2, {css:{rotation:720}, delay:0.1, ease:Elastic.easeOut});
-		TweenLite.to(liftObj, 2, {css:{clip:"rect(150px,70px,220px,0px)", top:"-12px"}, delay:0.1, ease:Elastic.easeOut, 		onComplete:gameFiveWon});
+		TweenLite.to(liftObj, 2, {css:{clip:"rect(150px,70px,220px,0px)", top:"-12px"}, delay:0.1, ease:Elastic.easeOut,onComplete:gameFiveWon});
 }
 
 function gameFiveWon(){

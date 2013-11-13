@@ -1,32 +1,197 @@
 /* - - - Images to load - - - */
-var mainMenuImages = ["assets/images/bg2x.jpg"];
-var mainMenuColor = ["#e0f4f3"]
+var mainMenuImages = [];
+var mainMenuColor = ["#bad3e3"];
+
+var retinaCopy = "";
+
+if (retina) {
+	
+	retinaCopy = "@2x";
+	backgroundSizeMainSprite = "408px 1000px"; 
+	mainMenuImages = ["assets/images/bg2x.jpg","assets/images/mainSprite@2x.png"];
+}
+else {
+
+	retinaCopy = "";
+	backgroundSizeMainSprite = "408px 1000px"; 
+	mainMenuImages = ["assets/images/bg2x.jpg","assets/images/mainSprite.png"];
+}
 
 function mainMenuInit(){
-		
-		$( "#gameNavigation" ).append( "<div id='mainMenu'><p>Start Game</p></div>" );
-		
-		$("#mainMenu").css({	
-		
-			top: "40%",
-			width: "100px",
-			zIndex: "4",
-			color: "white",
-			textAlign: "center",
-			backgroundColor: "blue",
-			marginLeft: "-50px",
-			left: "50%",
-			position: "absolute"
-			
-		});
-		
-		$("#mainMenu p").css({
-			
-			margin: "0",
-			padding: "0",
-			position: "relative",
-			top: "2px"
-			
-		});
 
+	$( "#gameNavigation #gameArea" ).append( "<div id='mainMenu'></div><div id='mainMenuElements'><div id='ball'><div id='ballString'></div></div><div id='naughtyLogo'></div><div id='mainMenuHeader'></div><div id='mainMenuStart'></div><div id='mainMenuText'><p>Lorem ipsum dolor sit amet, consectetur adipisicingelit, sed do eiusmod tempor incididunt</p></div><div id='hill1'><div id='greySpace'></div></div><div id='hill2'><div id='whiteSpace'></div></div></div>" );
+		
+		$("#mainMenuElements").css({
+
+			width:"100%",
+			height:"100%",
+			position:"absolute",
+			top:"0px",
+			zIndex:"2"
+		});
+		
+		$("#mainMenuElements #ball").css({
+			
+			background: 'url("assets/images/mainSprite'+retinaCopy+'.png") -2px -290px',
+			backgroundSize: backgroundSizeMainSprite,
+			position:"absolute",
+			width:"212px",
+			height:"240px",
+			left:"55px",
+			top:"-330px"
+			
+		});
+		
+		$("#mainMenuElements #ball #ballString").css({
+			
+			backgroundColor:"#ffffff",
+			position:"relative",			
+			width:"3px",
+			height:"240px",
+			left:"103px",
+			top:"-239px"
+			
+		});
+		
+		$("#mainMenuElements #naughtyLogo").css({
+			
+			background: 'url("assets/images/mainSprite'+retinaCopy+'.png") -51px -828px',
+			backgroundSize: backgroundSizeMainSprite,
+			position:"absolute",
+			width:"309px",
+			height:"175px",
+			opacity:"0",
+			top:"12px",
+			left:"12px",
+			
+		});
+		
+		$("#mainMenuElements #mainMenuHeader").css({
+			
+			background: 'url("assets/images/mainSprite'+retinaCopy+'.png") -231px -398px',
+			backgroundSize: backgroundSizeMainSprite,
+			position:"absolute",
+			width:"159px",
+			height:"45px",
+			opacity:"0",
+			top:"18px",
+			left:"80px",
+		
+		});
+		
+		$("#mainMenuElements #mainMenuText").css({
+			
+			position:"absolute",
+			fontFamily:"Georgia",
+			fontSize:"12px",
+			lineHeight:"17px",
+			textAlign:"center",
+			opacity:"0",
+			width:"195px",
+			height:"45px",
+			top:"55px",
+			left:"63px",
+		
+		});
+		
+		$("#mainMenuElements #mainMenuStart").css({
+			
+			background: 'url("assets/images/mainSprite'+retinaCopy+'.png") -231px -315px',
+			backgroundSize: backgroundSizeMainSprite,
+			position:"absolute",
+			width:"169px",
+			opacity:"0",
+			height:"63px",
+			top:"132px",
+			display:"none",
+			left:"70px",
+		
+		});
+			
+		$("#mainMenuElements #hill1").css({
+			
+			background: 'url("assets/images/mainSprite'+retinaCopy+'.png") -22px -547px',
+			backgroundSize: backgroundSizeMainSprite,
+			top: "570px",
+			left:"-20px",
+			position:"absolute",
+			width:"360px",
+			height:"115px"
+			
+		});
+		
+		$("#hill1 #greySpace").css({
+			
+			width:"100%",
+			backgroundColor:"#f4f5f6",
+			position:"relative",
+			top:"113px",
+			height:"210px"
+			
+		});
+		
+		$("#mainMenuElements #hill2").css({
+			
+			background: 'url("assets/images/mainSprite'+retinaCopy+'.png") -22px -673px',
+			backgroundSize: backgroundSizeMainSprite,
+			left:"-22px",
+			position:"absolute",
+			top: "565px",
+			width:"362px",
+			height:"155px"
+			
+		});	
+		
+		$("#hill2 #whiteSpace").css({
+			
+			width:"100%",
+			position: "relative",
+			top: "154px",
+			backgroundColor:"#ffffff",
+			height:"250px"
+			
+		});
+		
+		setTimeout(function(){
+		
+		animateMainPage(1)
+
+			
+		},1000);
+}
+
+
+function animateMainPage(switchAmount){
+
+	switch(switchAmount){
+		
+		case 1 :
+		
+			TweenLite.to("#hill1", 1.8, {y:-370, ease:Expo.easeOut});
+			TweenLite.to("#hill2", 2.0, {y:-330,delay:0.2, ease:Expo.easeOut});
+			TweenLite.to("#ball", 1.5, {y:270,delay:0.8, ease:Elastic.easeOut});
+			TweenLite.to("#naughtyLogo", 2, {alpha:1, delay:2});
+			setTimeout(function(){animateMainPage(2)},4000);
+			
+		break;
+		
+		case 2 :
+			
+			TweenLite.to("#naughtyLogo", 1, {alpha:0});
+			TweenLite.to("#mainMenuHeader", 1, {alpha:1, delay:1.5});
+			TweenLite.to("#mainMenuText", 1, {alpha:1, delay:2});
+			setTimeout(function(){$("#mainMenuElements #mainMenuStart").css({display:"inline"});},2000);
+			TweenLite.to("#mainMenuStart", 1, {alpha:1, delay:2.5});		
+			
+		break;
+		
+		case 3 :
+		
+		
+		break;
+		
+		
+	}
+
+	
 }

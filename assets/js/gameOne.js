@@ -204,8 +204,8 @@ function gameOneStart(){
 	$('#timerInside').animate({width:"298px"},0);
 	$('#timer').show();
 	window.addEventListener('shake', shakeEventDidOccur, false);
-	//counter=setInterval(gameOnetimer, 1000);
-	//gameOnetimer();
+	counter=setInterval(gameOnetimer, 1000);
+	gameOnetimer();
 	
 }
 
