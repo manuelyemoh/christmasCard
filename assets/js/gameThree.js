@@ -1,6 +1,6 @@
 var gameThreeImages = [];
 var gameThreeColor = ["#c0dce6"];
-var gameThreeTimer = 15;
+var gameThreeTimer = 11;
 var counter;
 var countSuccess = 0;
 var gameThreeEnded = false;
@@ -26,7 +26,7 @@ else {
 
 function gameThreeInit(){
 
-	 gameThreeTimer = 15;
+	 gameThreeTimer = 11;
 	 countSuccess = 0;
 	 gameThreeEnded = false;
 	 middleOne = false;
@@ -333,7 +333,7 @@ function gameThreeStart(){
 	$("#gameInstructionBg").hide();
 	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
-	counter=setInterval(gameThreetimer, 1000);
+	counter=setInterval(gameThreetimer, 1500);
 	gameThreetimer();
 	
 	for(i=0;i<=5;i++){

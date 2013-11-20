@@ -124,13 +124,12 @@ else {
 
 window.onload=function() {
 	
-	var mySound = new buzz.sound( "assets/sounds/intro", {
-    formats: [ "ogg", "mp3", "aac" ]
-    });
-    
-    mySound.play()
-    .loop()
-   	
+  //sounds
+
+  var sound = new Howl({
+  	urls: ['assets/sounds/intro.mp3', 'assets/sounds/intro.ogg', 'assets/sounds/intro.wav', 'assets/sounds/intro.aac']
+  }).play();
+
 	
   //cache javaScript Pages
   $.ajaxSetup({
@@ -471,7 +470,11 @@ window.onload=function() {
 		
 		if(isLoaded >= arrayNumber.length){
 			
-			stopPreloader(arrayNumber);
+			setTimeout(function(){
+				
+				stopPreloader(arrayNumber);
+				
+			},2000)
 			
 		}
 	

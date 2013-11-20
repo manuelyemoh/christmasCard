@@ -21,6 +21,8 @@ if (retina) {
 	raindeerLocation = "assets/images/gameSix/raindeerEating@2x.png";
 	raindeerS = "188px 1314px";
 	backgroundS = "471px 220px";
+	trackS = "360px 511px";
+	peachS = "360px 165px";
 	
 }
 else {
@@ -32,6 +34,8 @@ else {
 	raindeerLocation ="assets/images/gameSix/raindeerEating.png";
 	raindeerS = "188px 1314px";
 	backgroundS = "471px 220px";
+	trackS = "360px 511px";
+	peachS = "360px 165px";
 
 }
 
@@ -106,6 +110,7 @@ function gameSixInit(){
 		$("#gameSixElements #backgroundPrints").css({
 			
 			backgroundImage:"url("+ tracksLocation +")",
+			backgroundSize: trackS,
 		    left: "-20px",
 		    opacity: "1",
 		    position: "absolute",
@@ -119,6 +124,7 @@ function gameSixInit(){
 		$("#gameSixElements #peachHillBg").css({
 			
 			backgroundImage:"url("+ peachLocation +")",
+			backgroundSize: peachS,
 		    left: "-20px",
 		    opacity: "1",
 		    position: "absolute",
