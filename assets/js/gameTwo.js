@@ -1,6 +1,6 @@
 //var gameTwoImages = ["assets/images/bg2x.jpg","#d9ebec"];
 var gameTwoImages = [];
-var gameTwoColor = ["#d9ebec"]
+var gameTwoColor = ["#d9ebec"];
 var gameTwoTimer = 11;
 var counter;
 var gameTwoEnded = false;
@@ -20,12 +20,12 @@ var backgroundS;
 var breakPositions = ["","-174px -151px","-174px -296px","-174px -439px","-174px -560px"];
 
 if (retina) {
-	gameTwoImages = ["assets/images/bg2x.jpg","assets/images/gameTwo/mainSprite@2x.png"];
+	gameTwoImages = ["assets/images/bg2x.png","assets/images/gameTwo/mainSprite@2x.png"];
 	spriteLocation = "assets/images/gameTwo/mainSprite@2x.png";
 	backgroundS = "305px 695px";
 }
 else {
-	gameTwoImages = ["assets/images/bg2x.jpg","assets/images/gameTwo/mainSprite.png"];
+	gameTwoImages = ["assets/images/bg2x.png","assets/images/gameTwo/mainSprite.png"];
 	spriteLocation = "assets/images/gameTwo/mainSprite.png";
 	backgroundS = "305px 695px";
 
@@ -184,7 +184,7 @@ function gameTwoInit(){
  
 	$("#gameTwo").show();
 	$("#gameInstructionBg").show();
-	setTimeout(gameTwoStart, 1000);
+	setTimeout(gameTwoStart, 5000);
 
 }
 
@@ -192,7 +192,7 @@ function gameTwoStart(){
 	
 	$('#gameTwo').hide();
 	$("#gameInstructionBg").hide();
-	$('#timerInside').animate({width:"298px"},0);
+	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
 	
 	counter=setInterval(gameTwotimer, 1000);
@@ -260,7 +260,7 @@ function gameTwoStart(){
 
 function allBroken(){
 	
-	if (brokeOne == true && brokeTwo == true && brokeThree == true){
+	if (brokeOne === true && brokeTwo === true && brokeThree === true){
 		
 		animateGameWon();
 		clearInterval(counter);
@@ -280,7 +280,7 @@ function animationToyOne(){
 	TweenLite.to(oneAnimation, 0.5, {rotation:10});
 	TweenLite.to(oneAnimation, 0.5, {rotation:-10,delay:0.5});
 		
-	AnimateOneCounter = setTimeout(function(){animationToyOne()},1000);	
+	AnimateOneCounter = setTimeout(function(){animationToyOne();},1000);	
 	
 }
 
@@ -291,7 +291,7 @@ function animationToyTwo(){
 	TweenLite.to(TwoAnimation, 0.5, {rotation:10});
 	TweenLite.to(TwoAnimation, 0.5, {rotation:-10,delay:0.5});
 		
-	AnimateTwoCounter = setTimeout(function(){animationToyTwo()},1000);	
+	AnimateTwoCounter = setTimeout(function(){animationToyTwo();},1000);	
 	
 }
 
@@ -302,7 +302,7 @@ function animationToyThree(){
 	TweenLite.to(ThreeAnimation, 0.5, {rotation:10});
 	TweenLite.to(ThreeAnimation, 0.5, {rotation:-10,delay:0.5});
 		
-	AnimateThreeCounter = setTimeout(function(){animationToyThree()},1000);	
+	AnimateThreeCounter = setTimeout(function(){animationToyThree();},1000);	
 	
 }
 
@@ -312,7 +312,7 @@ function animateGameWon(){
 		
 		gameTwoWon();
 		
-	},2000)
+	},2000);
 	
 }
 
@@ -336,7 +336,8 @@ function gameTwoWon(){
 		 clearTimeout(AnimateThreeCounter);
 		 gameTwoEnded = true;
 		 gameTwoStar = true;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $("#resultsScreen #goldStar").show();
 		 $("#gameTwo").remove();
 		 $("#gameTwoElements").remove();
@@ -350,7 +351,8 @@ function gameTwoLost(){
 		 clearTimeout(AnimateThreeCounter);
 		 gameTwoEnded = true;
 		 gameTwoStar = false;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $("#gameTwo").remove();
 		 $("#gameTwoElements").remove();
 		 

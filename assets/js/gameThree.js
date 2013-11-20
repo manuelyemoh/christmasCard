@@ -1,21 +1,24 @@
 var gameThreeImages = [];
-var gameThreeColor = ["#c0dce6"]
-var gameThreeTimer = 11;
+var gameThreeColor = ["#c0dce6"];
+var gameThreeTimer = 15;
 var counter;
 var countSuccess = 0;
 var gameThreeEnded = false;
 var gameThreeStar = false;
 var currentlyDown = false;
+var middleOne = false;
+var middleTwo = false;
+var middleThree = false;
 var spriteLocation;
 var backgroundS;
 
 if (retina) {
-	gameThreeImages = ["assets/images/bg2x.jpg","assets/images/gameThree/mainSprite@2x.png"];
+	gameThreeImages = ["assets/images/bg2x.png","assets/images/gameThree/mainSprite@2x.png"];
 	spriteLocation = "assets/images/gameThree/mainSprite@2x.png";
 	backgroundS = "346px 236px";
 }
 else {
-	gameThreeImages = ["assets/images/bg2x.jpg","assets/images/gameThree/mainSprite.png"];
+	gameThreeImages = ["assets/images/bg2x.png","assets/images/gameThree/mainSprite.png"];
 	spriteLocation = "assets/images/gameThree/mainSprite.png";
 	backgroundS = "346px 236px";
 
@@ -23,9 +26,12 @@ else {
 
 function gameThreeInit(){
 
-	 gameThreeTimer = 11;
+	 gameThreeTimer = 15;
 	 countSuccess = 0;
 	 gameThreeEnded = false;
+	 middleOne = false;
+	 middleTwo = false;
+	 middleThree = false;
 	
 		$( "#gameNavigation #gameArea" ).append( "<div id='gameThree'><p>Start Game Instructions</p></div><div id='gameThreeElements'><div id='snowManBodyOne'></div><div id='snowManBodyTwo'></div><div id='snowManBodyThree'></div><div id='snowManMiddleOne'></div><div id='snowManMiddleTwo'></div><div id='snowManMiddleThree'></div><div id='snowManTopOne'></div><div id='snowManTopTwo'></div><div id='snowManTopThree'></div><div id='snowManMiddleOneHit'></div><div id='snowManMiddleTwoHit'></div><div id='snowManMiddleThreeHit'></div><div id='snowManTopOneHit'></div><div id='snowManTopTwoHit'></div><div id='snowManTopThreeHit'></div><div id='snowManMount'><div id='whiteSpace'></div></div></div>");
 
@@ -113,7 +119,7 @@ function gameThreeInit(){
 			//backgroundColor:"blue",
 		    height: "75px",
 		    left: "19px",
-		    opacity: "0.1",
+		    opacity: "0",
 		    position: "absolute",
 		    top: "90px",
 		    width: "67px",
@@ -128,7 +134,7 @@ function gameThreeInit(){
 			//backgroundColor:"green",
 		    height: "55px",
 		    left: "133px",
-		    opacity: "0.1",
+		    opacity: "0",
 		    position: "absolute",
 		    top: "115px",
 		    width: "55px",
@@ -142,7 +148,7 @@ function gameThreeInit(){
 			//backgroundColor:"red",
 		    height: "53px",
 		    left: "236px",
-		    opacity: "0.1",
+		    opacity: "0",
 		    position: "absolute",
 		    top: "148px",
 		    width: "53px",
@@ -317,7 +323,7 @@ function gameThreeInit(){
 		
 		$("#gameThree").show();
 		$("#gameInstructionBg").show();
-		setTimeout(gameThreeStart, 1000);
+		setTimeout(gameThreeStart, 5000);
 	
 }
 
@@ -325,8 +331,10 @@ function gameThreeStart(){
 
 	$('#gameThree').hide();
 	$("#gameInstructionBg").hide();
-	$('#timerInside').animate({width:"298px"},0);
+	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
+	counter=setInterval(gameThreetimer, 1000);
+	gameThreetimer();
 	
 	for(i=0;i<=5;i++){
 	
@@ -338,7 +346,7 @@ function gameThreeStart(){
 		
 		$('#'+snowBodyParts[i].part).on( "vmousemove", function (event){
 			
-			if(currentlyDown == true){
+			if(currentlyDown === true){
 				
 				currentId = $(this).attr('id');
 				x = event.pageX - $('#gameArea').offset().left-35;
@@ -368,22 +376,76 @@ function gameThreeStart(){
 				console.log("left -->"+parseFloat($('#'+currentId).css("left")));
 				console.log("top -->"+parseFloat($('#'+currentId).css("top")));
 
-				
 				if(parseFloat($('#'+currentId).css("left")) >= snowBodyParts[l].xL && parseFloat($('#'+currentId).css("left")) <= snowBodyParts[l].xR && parseFloat($('#'+currentId).css("top")) >= snowBodyParts[l].yT && parseFloat($('#'+currentId).css("top")) <= snowBodyParts[l].yB){
-					
-					
-					$('#'+currentId).hide();
-					$('#'+currentId+"Hit").css("opacity","1");
-					countSuccess ++;
-					correctCounter();
-					//console.log("hit");
+				
+					switch(currentId){
+						
+						case "snowManTopOne":
+							if(middleOne === true){
+								
+								positionHit(currentId);
+								
+							}else{
+								
+								positionReset(currentId);
+								
+							}
+								
+						break;
+						case "snowManTopTwo":
+							if(middleTwo === true){
+								
+								positionHit(currentId);
+								
+							}else{
+								
+								positionReset(currentId);
+								
+							}
+						break;
+						case "snowManTopThree":
+							if(middleThree === true){
+								
+								positionHit(currentId);
+								
+							}else{
+								
+								positionReset(currentId);
+								
+							}
+						break;
+						case "snowManMiddleOne":
+							middleOne = true;
+							positionHit(currentId);
+							$("#snowManTopOneHit").css({
+								opacity:"0.1"
+							});
+							
+						break;
+						case "snowManMiddleTwo":
+							middleTwo = true;
+							positionHit(currentId);
+							$("#snowManTopTwoHit").css({	
+								opacity:"0.1"
+							});
+							
+						break;
+						case "snowManMiddleThree":
+							middleThree = true;
+							positionHit(currentId);
+							$("#snowManTopThreeHit").css({			
+								opacity:"0.1"
+							});
+						break;
+						
+						
+					}
 					
 				}
 				else{
-					
-					//$('#'+currentId).css("left",snowBodyParts[l].sL)
-					//$('#'+currentId).css("top",snowBodyParts[l].sT)
+				
 					$('#'+currentId).animate({top:snowBodyParts[l].sT,left:snowBodyParts[l].sL}, 200);
+				
 				}
 				
 			}
@@ -393,9 +455,22 @@ function gameThreeStart(){
 		});
 	
 	}
+	
+}
 
-	//counter=setInterval(gameThreetimer, 1000);
-	//gameThreetimer();
+function positionHit(currentId){
+	
+	$('#'+currentId).hide();
+	$('#'+currentId+"Hit").css("opacity","1");
+	countSuccess ++;
+	correctCounter();
+	console.log("hit");
+	
+}
+
+function positionReset(currentId){
+	
+	$('#'+currentId).animate({top:snowBodyParts[l].sT,left:snowBodyParts[l].sL}, 200);
 	
 }
 
@@ -407,18 +482,18 @@ function correctCounter(){
 		
 		$("#gameThreeElements #snowManTopOneHit").css({
 		
-			"background-position": "-4px -4px",
+			"background-position": "-4px -4px"
 
 		});
 		
 		$("#gameThreeElements #snowManTopTwoHit").css({
 			
-			"background-position": "-10px -104px",	
+			"background-position": "-10px -104px"
  
 		});
 		$("#gameThreeElements #snowManTopThreeHit").css({
 			
-			"background-position": "-10px -174px",
+			"background-position": "-10px -174px"
 		    
 		});
 		
@@ -428,7 +503,7 @@ function correctCounter(){
 }
 
 function gameThreetimer(){
-
+		 
 		 gameThreeTimer --;
 		 
 		 $('#timerInside').animate({width:"-=30px"},500);
@@ -444,7 +519,8 @@ function gameThreeWon(){
 		
 		 gameThreeEnded = true;
 		 gameThreeStar = true;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $("#resultsScreen #goldStar").show();
 		 $("#gameThree").remove();
 		 $("#gameThreeElements").remove();
@@ -454,9 +530,9 @@ function gameThreeLost(){
 
 		 gameThreeEnded = true;
 		 gameThreeStar = false;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $("#gameThree").remove();
 		 $("#gameThreeElements").remove();
 		 
 }
-

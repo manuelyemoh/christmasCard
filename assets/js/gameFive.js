@@ -40,13 +40,13 @@ var liftObj;
 
 if (retina) {
 	//console.log('retina');
-	gameFiveImages = ["assets/images/bg2x.jpg","assets/images/gameFive/mainSprite@2x.png"];
+	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite@2x.png"];
 	spriteLocation = "assets/images/gameFive/mainSprite@2x.png";
 	backgroundS = "554px 788px";
 }
 else {
 	//console.log('notRetina');
-	gameFiveImages = ["assets/images/bg2x.jpg","assets/images/gameFive/mainSprite.png"];
+	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite.png"];
 	spriteLocation = "assets/images/gameFive/mainSprite.png";
 	backgroundS = "554px 788px";
 
@@ -322,7 +322,7 @@ function gameFiveInit(){
 		
 		$("#gameFive").show();
 		$("#gameInstructionBg").show();
-		setTimeout(gameFiveStart, 500);
+		setTimeout(gameFiveStart, 5000);
 	
 }
 
@@ -330,7 +330,7 @@ function gameFiveStart(){
 	
 	$('#gameFive').hide();
 	$("#gameInstructionBg").hide();
-	$('#timerInside').animate({width:"298px"},0);
+	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
 	counter=setInterval(gameFivetimer, 2000);
 	gameFivetimer();
@@ -517,7 +517,8 @@ function gameFiveWon(){
 		
 		 gameFiveEnded = true;
 		 gameFiveStar = true;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $("#resultsScreen #goldStar").show();
 		 $('#gameFive').remove();
 		 $('#gameFiveElements').remove();
@@ -528,7 +529,8 @@ function gameFiveLost(){
 
 		 gameFiveEnded = true;
 		 gameFiveStar = false;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $('#gameFive').remove();
 		 $('#gameFiveElements').remove();
 		 

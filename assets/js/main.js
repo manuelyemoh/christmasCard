@@ -5,11 +5,15 @@ var retina = window.devicePixelRatio > 1;
 var retinaCopy = "";
 var backgroundStarArray = ["-5px -142px","-39px -142px","-71px -142px","-5px -181px","-41px -178px","-5px -142px"];
 var backgroundSizeMainSprite;
+var ismobile;
+
+var mainCopy = [];
 
 if (retina) {
 	
 	retinaCopy = "@2x";
-	backgroundSizeMainSprite = "408px 1000px";  
+	backgroundSizeMainSprite = "408px 1000px";
+
 }
 else {
 
@@ -17,10 +21,18 @@ else {
 	backgroundSizeMainSprite = "408px 1000px"; 
 }
 
+
 	$("#preloaderClip").css({
 
 		"background": 'url("assets/images/PageLoaderTree'+retinaCopy+'.gif") 0px 0',
 		"backgroundSize": '80px 135px'
+
+	});
+	
+	$("#timerInside").css({
+		
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -50px 340px',
+		"backgroundSize": backgroundSizeMainSprite
 
 	});
 	
@@ -49,6 +61,41 @@ else {
 
 	}
 	
+	$("#resultsScreen #robotLose").css({
+	
+		"background": 'url("assets/images/results/robotLose'+retinaCopy+'.gif") 0px 0px',
+		"backgroundSize":"80px 80px"
+		
+	});
+	
+	$("#resultsScreen #robotWon").css({
+	
+		"background": 'url("assets/images/results/robotWon'+retinaCopy+'.gif") 0px 0px',
+		"backgroundSize":"53px 69px"
+		
+	});
+	
+	$("#resultsScreen #abBody").css({
+	
+		"background": 'url("assets/images/results/abBody'+retinaCopy+'.png") 0px 0px',
+		"backgroundSize":"152px 203px"
+		
+	});
+	
+	$("#resultsScreen #abLose").css({
+	
+		"background": 'url("assets/images/results/abLose'+retinaCopy+'.gif") 0px 0px',
+		"backgroundSize":"78px 99px"
+		
+	});
+	
+	$("#resultsScreen #abWon").css({
+	
+		"background": 'url("assets/images/results/abWon'+retinaCopy+'.gif") 0px 0px',
+		"backgroundSize":"78px 99px"
+		
+	});
+	
 	$("#resultsScreen #resultsCircle").css({
 	
 		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -155px 0px',
@@ -75,25 +122,56 @@ else {
 
 	});
 
-$(document).ready(function () {
-
+window.onload=function() {
+	
+	var mySound = new buzz.sound( "assets/sounds/intro", {
+    formats: [ "ogg", "mp3", "aac" ]
+    });
+    
+    mySound.play()
+    .loop()
+   	
+	
   //cache javaScript Pages
   $.ajaxSetup({
   	cache: true
   });
   
+  $.ajax({ 
+    type: 'GET', 
+    url: 'assets/text/main.json', 
+    data: { get_param: 'value' }, 
+    dataType: 'json',
+    success: function (data) { 
+
+        $.each(data, function(index, element) {
+        	mainCopy.push(element);
+        	
+        });
+        
+        populateCopy();
+    }
+    });
+    
+  function populateCopy(){
+	  
+	  //console.log(mainCopy[0]);
+	  
+  }
+   
   //phoneGap allowing Ajax Calls
   
   $.support.cors = true;
   $.mobile.allowCrossDomainPages = true;
   
   // - - - Game Views and Controls - - - //
-  var gameViews = ["mainMenu","gameOne","gameTwo","gameThree","gameFour","gameFive", "gameSix", "tabletGame"];
+  var gameViews = ["mainMenu","gameOne","gameTwo","gameThree","gameFour","gameFive", "gameSix", "finalPage"];
   var currentStar = 0;
+  var starsWon = 0;
   var currentPage = 10;
   var randomGame = 0;
   var testingNumber = 6;
-  var randomGameArray = [1,2,3,4,5,6];
+  var randomGameArray = [1,2,3,4,5];
   
   // - - - object var names - - - //
   var preloader = $('#preloader');
@@ -110,7 +188,7 @@ $(document).ready(function () {
   }
   
   //var ismobile=navigator.userAgent.match(/(iPhone)|(iPod)|(Android)|(webOS)/i);
-  var ismobile=navigator.userAgent.toLowerCase();
+  ismobile=navigator.userAgent.toLowerCase();
   
   // - - - Local URL - - - //
   //var serverUrl = "localhost:8888/christmasGame/";
@@ -145,7 +223,7 @@ $(document).ready(function () {
 		console.log(loadPage);
 		isLoaded = 0;
 	
-		if(firstTimeArray[loadPage] == true){  
+		if(firstTimeArray[loadPage] === true){  
 	
 			// - - - Load external JS file, and run code if successful or return Error message - - - //
 			$.getScript( "assets/js/"+gameViews[loadPage]+".js" )
@@ -183,7 +261,17 @@ $(document).ready(function () {
 		var initGameString = gameViews[currentPage]+"Init";
 		initGameString = window[initGameString];
 		console.log(initGameString);
-		initGameString();		
+		
+		if(currentStar <= 5){
+				
+				initGameString();
+			
+			}
+		else if(currentStar == 6){
+				
+			initGameString(starsWon);
+				
+		}
 		
 		setTimeout(function(){
 		
@@ -212,14 +300,12 @@ $(document).ready(function () {
 
 		gameEndBooleon = gameViews[currentPage]+"Ended";
 		gameEndStar = gameViews[currentPage]+"Star";
-		if(eval(gameEndBooleon) == true){
+		if(eval(gameEndBooleon) === true){
 					
 			clearInterval(gameEndCheck);
 			randomGame++;
-			setTimeout(function(){initPage(shuffleArray[randomGame])},4000);
-			//setTimeout(function(){initPage(testingNumber)},2000);
 			
-			if(eval(gameEndStar) == true){
+			if(eval(gameEndStar) === true){
 	
 				$('#resultsText p:first').text("You got a gold star");
 				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");
@@ -227,7 +313,9 @@ $(document).ready(function () {
 				$('#resultsWon').animate({opacity:1},500);
 				$("#goldStar"+[currentStar]).css("display","inline");
 				$("#goldStar"+[currentStar]).animate({transform: 'scale(1,1) rotate(0deg)', opacity:"1"},200);
-			
+				starsWon++;
+				console.log("starsWon"+starsWon);
+				animateResultsPage(currentPage,"won");
 			}
 			else{
 			
@@ -235,10 +323,25 @@ $(document).ready(function () {
 				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");	
 				$('#resultsText').animate({opacity:1},500);
 				$('#resultsLost').animate({opacity:1},500);
+				animateResultsPage(currentPage,"lost");
 			}
 			
 			currentStar++;
+					
+			if(currentStar <= 4){
+				setTimeout(function(){initPage(shuffleArray[randomGame])},4000);
+				//setTimeout(function(){initPage(testingNumber)},6000);
 			
+			}else if(currentStar == 5){
+			
+				setTimeout(function(){initPage(6)},6000);
+				
+			}
+			else if(currentStar == 6){
+				
+				setTimeout(function(){initPage(7)},6000);
+				
+			}
 		}
 		else{
 			
@@ -248,8 +351,7 @@ $(document).ready(function () {
 			$('#resultsWon').animate({opacity:0},0);
 			$('#resultsLost').animate({opacity:0},0);
 			
-		}
-		
+		}	
 	}
 	
 	function pausePage(){
@@ -264,19 +366,74 @@ $(document).ready(function () {
 		
 	}
 	
-	/*for(i=1;i<=6;i++){
-		
-		$("#"+gameViews[i]).click(function() {
-	
-			currentPage = $(this).attr('id');
-			// - - - Find the ID of what has been clicked and convert the array string to the positon of the string and run init function - - - //
-			var startGameString = currentPage+"Start";
-			startGameString = window[startGameString];
-			console.log(startGameString);
-			startGameString();
+	function animateResultsPage(currentPage,condition){
+				
+		if(condition == "won"){
 			
-		}); 
-	}*/
+			switch(currentPage){
+				
+				case 1:
+				break;
+				case 2:
+				$("#robotWon").css({"display":"inline"});
+				TweenLite.to($('#robotWon'), 0.5, {alpha:1});
+				removeResultsParams($("#robotWon"));
+				break;
+				case 3:
+				break;
+				case 4:
+				$("#abBody").css({"display":"inline"});
+				TweenLite.to($('#abBody'), 0.5, {alpha:1});
+				$("#abWon").css({"display":"inline"});
+				TweenLite.to($('#abWon'), 0.5, {alpha:1});
+				removeResultsParams($("#abBody"));
+				removeResultsParams($("#abWon"));
+				break;
+				case 5:
+				break;
+				case 6:
+				break;
+				
+			}
+			
+		}
+		
+		if(condition == "lost"){
+			
+			switch(currentPage){
+				
+				case 1:
+				break;
+				case 2:
+				$("#robotLose").css({"display":"inline"});
+				TweenLite.to($('#robotLose'), 0.5, {alpha:1});
+				removeResultsParams($("#robotLose"));
+				break;
+				case 3:
+				break;
+				case 4:
+				$("#abLose").css({"display":"inline"});
+				TweenLite.to($('#abLose'), 0.5, {alpha:1});
+				removeResultsParams($("#abLose"));
+				break;
+				case 5:
+				break;
+				case 6:
+				break;
+				
+			}
+		}
+	}
+	
+	function removeResultsParams(whatElement){
+		
+		setTimeout(function(){
+		
+			$(whatElement).css({"display":"none"});
+		
+		},6000);
+	}
+
 	
 	function startPreLoader(whatArray){
 		
@@ -289,13 +446,15 @@ $(document).ready(function () {
 		
 		//Load Gif image
 
-		setTimeout(function(){loadImage(whatArray)}, 1000);
+	setTimeout(function(){loadImage(whatArray)}, 1000);
 
 	}
 
 	function loadImage(name){
 		
-		for(i=0; i <= name.length; i++){
+		//console.log(name.length);
+		
+		for(i=0; i <= name.length - 1; i++){
 			
 			// - - - pre Loading images - - - //
 			image = new Image();
@@ -308,21 +467,21 @@ $(document).ready(function () {
 	
 	function imageLoaded(arrayNumber){
 		
-		isLoaded++
+		isLoaded++;
 		
-		if(isLoaded >= arrayNumber.length + 1){
+		if(isLoaded >= arrayNumber.length){
 			
 			stopPreloader(arrayNumber);
 			
 		}
-		
-		
+	
 	}
 
 	function stopPreloader(name){
 	
 		// - - - alpha images off and set display none - - - //
 		setTimeout(function(){startGame(currentPage)},500);
+
 		
 		TweenLite.to(preloaderClip, 0.5, {alpha:0, delay:1, onComplete:function(){
 		
@@ -341,41 +500,75 @@ $(document).ready(function () {
 		$("#main").css("background-image", 'url(' + name[0] + ')');
 		$("#main").css("background-color", eval(gameViews[currentPage]+"Color"));
 		$("#timer").hide();
-		$("#gameAreaResults").hide();
+		$("#resultsScreen").hide();
 		
 	}
 	
-	/*switch(ismobile.contains()){
-		
-		case "android":
-		
-		console.log("android");
-		initPage(0);
-		
-		break;
-		
-		case "iphone":
-		
-		console.log("iPhone");
-		
-		break;
-		
-		case "ipad":
-		
-		console.log("iPad");
-		
-		initPage(7);
-				
-		break;
-		
-		default:
-		
-		console.log("must be desktop");
-		
-		initPage(0);
-		
-	}*/
+	/*function checkDevice (whatMobile){
 
+		//alert(whatMobile.indexOf('iphone'));
+		//alert(whatMobile);
+		
+		if(whatMobile.toLowerCase().indexOf("iphone") >= 0 && whatMobile.toLowerCase().indexOf("safari") >= 0){
+			
+			initPage(0);
+			alert("hit");
+			
+		}
+		else if(whatMobile.toLowerCase().indexOf("iphone") >= 0){
+			
+			alert("Open this link Safari Chrome or Firefox Please");
+			
+		}
+		else if(whatMobile.toLowerCase().indexOf("firefox") >= 0){
+			
+			initPage(0);
+			
+		}
+		else{
+			
+			alert("not in a supported browser");
+			
+		}
+		
+		/*if( whatMobile.indexOf('iphone') !== -1){
+			
+			initPage(0);
+			
+		}
+		else{
+			
+			alert("false");
+			
+		}*/
+		
+		/*switch(whatMobile.contains()){
+		
+			case "android":
+			alert("must be desktop");
+			//initPage(0);
+			
+			break;
+			
+			case "iphone":
+			alert("iPhone");
+			//initPage(0);
+			
+			break;
+			
+			case "ipad":
+			//initPage(7);
+			alert("iPad");
+			break;
+			
+			default:
+			//initPage(0);
+			alert("must be desktop or default");
+			
+		}*/
+		
+	//}
+	
+	//checkDevice(ismobile);
 	initPage(0);
-
-});
+}

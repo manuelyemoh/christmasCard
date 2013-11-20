@@ -2,7 +2,7 @@
 // SHAKE GAME //
 
 var gameOneImages = [];
-var gameOneColor = ["#e0f4f3"];
+var gameOneColor = ["#c8e2f1"];
 var gameOneTimer = 11;
 var counter;
 var shakeCounter = 0;
@@ -13,20 +13,24 @@ var spriteLocation;
 var backgroundS;
 
 if (retina) {
-	gameOneImages = ["assets/images/bg2x.jpg","assets/images/gameOne/mainSprite@2x.png"];
+
+	gameOneImages = ["assets/images/bg2x.png","assets/images/gameOne/mainSprite@2x.png"];
 	spriteLocation = "assets/images/gameOne/mainSprite@2x.png";
 	backgroundS = "227px 342px";
+	
 }
 else {
-	gameOneImages = ["assets/images/bg2x.jpg","assets/images/gameOne/mainSprite.png"];
+
+	gameOneImages = ["assets/images/bg2x.png","assets/images/gameOne/mainSprite.png"];
 	spriteLocation = "assets/images/gameOne/mainSprite.png";
 	backgroundS = "227px 342px";
-
+	
 }
 
 function gameOneInit(){	
 		gameOneTimer = 11;
 		gameOneEnded = false;
+		shakeCounter = 0;
 		snowDrop = 2;
 		$( "#gameNavigation #gameArea" ).append( "<div id='gameOne'><p>Start Game Instructions</p></div><div id='gameOneElements'><div id='pants'></div><div id='mainPole'></div><div id='northPole'></div><div id='snowFrag0'></div><div id='snowFrag1'></div><div id='snowFrag2'></div><div id='snowFrag3'></div><div id='snowFrag4'></div><div id='shakeMount'><div id='whiteSpace'></div></div></div></div>" );
 		
@@ -192,8 +196,7 @@ function gameOneInit(){
 		
 		$('#gameOne').show();
 		$("#gameInstructionBg").show();
-		
-		setTimeout(gameOneStart, 1000);
+		setTimeout(gameOneStart, 5000);
 
 }
 
@@ -201,11 +204,11 @@ function gameOneStart(){
 	
 	$('#gameOne').hide();
 	$("#gameInstructionBg").hide();
-	$('#timerInside').animate({width:"298px"},0);
+	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
 	window.addEventListener('shake', shakeEventDidOccur, false);
-	counter=setInterval(gameOnetimer, 1000);
-	gameOnetimer();
+	//counter=setInterval(gameOnetimer, 1000);
+	//gameOnetimer();
 	
 }
 
@@ -220,6 +223,7 @@ function gameOnetimer(){
 			 gameOneLost();
 
 		 }
+
 }
 
 //define a custom method to fire when shake occurs.
@@ -236,7 +240,7 @@ function shakeEventDidOccur () {
 				"width":"105px",
 				"top":"340px",
 				"left":"85px",
-				"background-position": "-107px -284px",
+				"background-position": "-85px -24px",
 				"backgroundSize": backgroundS
 			})
 		
@@ -275,7 +279,7 @@ function shakeEventDidOccur () {
 		
 		window.removeEventListener('shake', shakeEventDidOccur, false);
 		clearInterval(counter);
-		gameOneWon();
+		setTimeout(gameOneWon,3000);
 		
 	}
 		
@@ -285,9 +289,9 @@ function gameOneWon(){
 		
 		 gameOneEnded = true;
 		 gameOneStar = true;
-		 $("#gameAreaResults").show();
+		 $("#resultsScreen").show();
 		 $("#resultsScreen #goldStar").show();
-		
+		 $('#timer').hide();
 		 $('#gameOne').remove();
 		 $('#gameOneElements').remove();
 
@@ -296,8 +300,8 @@ function gameOneWon(){
 function gameOneLost(){
 		 gameOneEnded = true;
 		 gameOneStar = false;
-
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $('#gameOne').remove();
 		 $('#gameOneElements').remove();
 	}

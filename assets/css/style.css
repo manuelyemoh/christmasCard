@@ -42,8 +42,6 @@ body {
 	  
 }
 
-}
-
 /* #### Mobile Phones Portrait or Landscape #### */
 @media screen and (max-device-width: 640px){
   /* some CSS here */
@@ -70,40 +68,6 @@ body {
   
 }
 
-#main {
-
-    /*background-image: url(../images/bg2x.jpg);*/
-    background-color:#e1f3f3;
-    background-repeat: no-repeat;
-    background-size: 360px 640px;
-    display: block;
-    left: 0;
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-
-}
-
-#gameArea{
-
-    height: 480px;
-    margin: -240px auto 0;
-    position: relative;
-    top: 50%;
-    width: 320px;
-    border: 1px solid red;
-}
-
-#gameAreaResults{
-
-    height: 480px;
-    margin: -481px auto 0;
-    position: relative;
-    top: 50%;
-    width: 320px;
-
-}
-
 #main.source-image {
   width: 100%;
   position: absolute;
@@ -120,6 +84,20 @@ body {
    position: absolute;
    top: 0;
    width: 100%;
+}
+
+#main {
+
+   /*background-image: url(../images/bg2x.jpg);*/
+    background-color:#e1f3f3;
+    background-repeat: no-repeat;
+    background-size: 360px 640px;
+    display: block;
+    left: 0;
+    position: absolute!important;
+    top: 0;
+    overflow: hidden;
+
 }
 /* - - - Pre Loader - - - */
 
@@ -145,18 +123,17 @@ body {
 	    width: 80px;
 	    
 	}
-	
-@media only screen and (-webkit-min-device-pixel-ratio: 2), 
+
+/*media only screen and (-webkit-min-device-pixel-ratio: 2), 
 only screen and (min-device-pixel-ratio: 2) {
 		
-	
-}
+}*/
 
 /* - - - Game Items - - - */
 
 #timer{
 
-	background-color: #FFFFFF;
+	background-color: #07afa6;
     height: 14px;
     left: 50%;
     margin: 0 auto 0 -150px;
@@ -164,27 +141,52 @@ only screen and (min-device-pixel-ratio: 2) {
     top: 10px;
     width: 300px;
     z-index: 100;
+    border-radius:25px;
     
 }
 
 	#timerInside{
 		
 		background-color: #e63d40;
-	    height: 12px;
-	    left: 1px;
+	    height: 10px;
+	    left: 2px;
 	    position: relative;
-	    top: 1px;
-	    width: 298px;
+	    top: 2px;
+	    width: 296px;
+	    border-radius:25px;
 	    
 	}
-
 /* - - - Navigation Items - - - */
 
 #gameNavigation{
 
-	width:100%;
-	height:100%;
-	z-index: 6;
+	height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 6;
+    
+}
+
+#gameArea{
+
+    height: 480px;
+    margin: -240px auto 0;
+    position: relative;
+    top: 50%;
+    width: 320px;
+    border: 1px solid red;
+}
+
+#gameAreaResults{
+
+    height: 480px;
+    margin: -240px auto 0;
+    position: relative;
+    top: 50%;
+    width: 320px;
+
 }
 
 #gameInstructionBg{
@@ -211,16 +213,16 @@ only screen and (min-device-pixel-ratio: 2) {
     z-index: 6;
 
 }
-	#greyContainer{
-	
-		height: 50px;
-	    margin: 0 auto;
-	    position: relative;
-	    top: 65px;
-	    width: 318px;
-	    z-index: 6;	
-	
-	}
+#greyContainer{
+
+	height: 50px;
+    margin: 0 auto;
+    position: relative;
+    top: 25px;
+    width: 318px;
+    z-index: 6;	
+
+}
 
 	#greyStar0,#greyStar1,#greyStar2,#greyStar3,#greyStar4,#greyStar5{
 		
@@ -238,7 +240,7 @@ only screen and (min-device-pixel-ratio: 2) {
 		height: 50px;
 	    margin: 0 auto;
 	    position: relative;
-	    top: 15px;
+	    top: -25px;
 	    width: 318px;
 	    z-index: 7;
 	
@@ -256,12 +258,77 @@ only screen and (min-device-pixel-ratio: 2) {
 
 	}
 	
+		#resultsScreen #robotLose{
+			
+			display: none;
+		    height: 80px;
+		    left: 77px;
+		    opacity: 0;
+		    position: absolute;
+		    top: 288px;
+		    width: 75px;
+		    z-index: 10;
+			
+		}
+		
+		#resultsScreen #robotWon{
+			
+			display: none;
+		    height: 68px;
+		    left: 93px;
+		    opacity: 0;
+		    position: absolute;
+		    top: 290px;
+		    width: 54px;
+		    z-index: 10;
+			
+		}
+		
+		#resultsScreen #abBody{
+			
+			display: none;
+		    height: 210px;
+		    left: 37px;
+		    opacity: 0;
+		    position: absolute;
+		    top: 168px;
+		    width: 152px;
+		    z-index: 10;
+			
+		}
+		
+		#resultsScreen #abLost{
+			
+			display: none;
+		    height: 80px;
+		    left: 77px;
+		    opacity: 0;
+		    position: absolute;
+		    top: 288px;
+		    width: 75px;
+		    z-index: 10;
+			
+		}
+		
+		#resultsScreen #abWon{
+			
+			display: none;
+		    height: 90px;
+		    left: 73px;
+		    opacity: 0;
+		    position: absolute;
+		    top: 210px;
+		    width: 81px;
+		    z-index: 10;
+			
+		}
+	
 	#resultsScreen #resultsCircle{
 
 	    height: 245px;
 	    left: 36px;
 	    position: absolute;
-	    top: 27px;
+	    top: -23px;
 	    width: 246px;
 	    z-index: 5;
 	
@@ -272,7 +339,7 @@ only screen and (min-device-pixel-ratio: 2) {
 	    height: 42px;
 	    left: 95px;
 	    position: absolute;
-	    top: 118px;
+	    top: 70px;
 	    width: 136px;
 	    z-index: 7;
 	    opacity:0;
@@ -284,7 +351,7 @@ only screen and (min-device-pixel-ratio: 2) {
 	    height: 42px;
 	    left: 105px;
 	    position: absolute;
-	    top: 118px;
+	    top: 70px;
 	    width: 116px;
 	    z-index: 7;
 	    opacity:0;
@@ -293,12 +360,12 @@ only screen and (min-device-pixel-ratio: 2) {
 	
 	#resultsScreen #resultsBottom{
 	
-	    height: 42px;
-	    left: -20px;
-	    position: absolute;
-	    top: 357px;
-	    width: 360px;
-	    z-index: 7;
+		 height: 42px;
+		 left: -20px;
+		 position: absolute;
+		 top: 322px;
+		 width: 360px;
+		 z-index: 7;
 
 	}
 	
@@ -307,7 +374,7 @@ only screen and (min-device-pixel-ratio: 2) {
 		background-color: #FFFFFF;
 	    height: 800px;
 	    position: relative;
-	    top: 28px;
+	    top: 26px;
 	    width: 100%;
 	
 	}
@@ -318,76 +385,70 @@ only screen and (min-device-pixel-ratio: 2) {
 	     z-index: 11;
 
 	}
-	
-	#Star0{
-	
-		background-position: -5px -142px;
-	    height: 40px;
-	    left: 2px;
-	    top: -58px;
-	    width: 40px;
 
-	}
-	
-	
-	#Star1{
-	
-		background-position: -39px -142px;
-	    height: 40px;
-	    top: 301px;
-	    width: 40px;
+#Star0{
 
-	}
-	
-	
-	#Star2{
-	
-		background-position: -71px -142px;
-		height: 40px;
-		left: 57px;
-		top: 257px;
-		width: 40px;
+	background-position: -5px -142px;
+    height: 40px;
+    left: 2px;
+    top: -58px;
+    width: 40px;
 
-	}
-	
-	
-	#Star3{
-	
-		background-position: -5px -181px;
-	    height: 40px;
-	    top: 175px;
-	    width: 40px;
+}
 
-	}
-	
-	
-	#Star4{
-	
-		background-position: -41px -178px;
-	    height: 40px;
-	    left: 290px;
-	    top: 45px;
-	    width: 40px;
+#Star1{
 
-	}
-	
-	
-	#Star5{
-	
-		background-position: -5px -142px;
-	    height: 40px;
-	    left: 276px;
-	    top: 208px;
-	    width: 40px;
+	background-position: -39px -142px;
+    height: 40px;
+    top: 301px;
+    width: 40px;
 
-	}
+}
 
+#Star2{
+
+	background-position: -71px -142px;
+	height: 40px;
+	left: 57px;
+	top: 257px;
+	width: 40px;
+
+}
+
+#Star3{
+
+	background-position: -5px -181px;
+    height: 40px;
+    top: 175px;
+    width: 40px;
+
+}
+
+#Star4{
+
+	background-position: -41px -178px;
+    height: 40px;
+    left: 290px;
+    top: 45px;
+    width: 40px;
+
+}
+
+#Star5{
+
+	background-position: -5px -142px;
+    height: 40px;
+    left: 276px;
+    top: 208px;
+    width: 40px;
+
+}
 	
 	#resultsScreen #resultsText{
 
 		margin: 0 auto;
 	    position: relative;
-	    top: 70px;
+	    top: 20px;
 	    width: 260px;
 	    z-index: 6;
     

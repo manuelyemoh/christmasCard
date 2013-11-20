@@ -1,5 +1,5 @@
 var gameFourImages = [];
-var gameFourColor = ["#bedbe5"]
+var gameFourColor = ["#bedbe5"];
 var gameFourTimer = 10;
 var counter;
 var outsideArea = 0;
@@ -17,7 +17,7 @@ var eyeStep = -69;
 var t;
 
 if (retina) {
-	gameFourImages = ["assets/images/bg2x.jpg","assets/images/gameFour/mainSprite@2x.png","assets/images/gameFour/mouthAnimation@2x.png","assets/images/gameFour/eyesAnimation@2x.png","assets/images/gameFour/closeUpFace@2x.png"];
+	gameFourImages = ["assets/images/bg2x.png","assets/images/gameFour/mainSprite@2x.png","assets/images/gameFour/mouthAnimation@2x.png","assets/images/gameFour/eyesAnimation@2x.png","assets/images/gameFour/closeUpFace@2x.png"];
 	spriteLocation = "assets/images/gameFour/mainSprite@2x.png";
 	mouthLocation = "assets/images/gameFour/mouthAnimation@2x.png";
 	eyesLocation = "assets/images/gameFour/eyesAnimation@2x.png";
@@ -28,7 +28,7 @@ if (retina) {
 	backgroundS = "420px 407px";
 }
 else {
-	gameFourImages = ["assets/images/bg2x.jpg","assets/images/gameFour/mainSprite.png","assets/images/gameFour/mouthAnimation.png","assets/images/gameFour/eyesAnimation.png","assets/images/gameFour/closeUpFace.png"];
+	gameFourImages = ["assets/images/bg2x.png","assets/images/gameFour/mainSprite.png","assets/images/gameFour/mouthAnimation.png","assets/images/gameFour/eyesAnimation.png","assets/images/gameFour/closeUpFace.png"];
 	spriteLocation = "assets/images/gameFour/mainSprite.png";
 	mouthLocation = "assets/images/gameFour/mouthAnimation.png";
 	eyesLocation = "assets/images/gameFour/eyesAnimation.png";
@@ -47,7 +47,7 @@ function gameFourInit(){
 		gameFourEnded = false;
 		gameFourStar = false;
 		
-		$ ("#gameNavigation" ).append( "<div id='abomSnowmanCloseUp'></div>" );
+		$("#gameNavigation" ).append( "<div id='abomSnowmanCloseUp'></div>" );
 	
 		$( "#gameNavigation #gameArea" ).append( "<div id='gameFour'><p>Start Game Instructions</p></div><div id='gameFourElements'><div id='abomSnowman'></div><div id='abomSnowmanMouth'></div><div id='abomSnowmanEyes'></div><div id='flick0'></div><div id='flick1'></div><div id='flick2'></div><div id='flick3'></div><div id='flick4'></div><div id='flick5'></div><div id='flick6'></div><div id='flick7'></div><div id='flick8'></div><div id='flick9'></div><div id='flick10'></div><div id='abBot'><div id='whiteSpace'></div></div>" );
 		
@@ -407,19 +407,21 @@ function gameFourInit(){
 			})
 			
 		}
-		animateParts(animatePartsStep);
+		
 		$("#gameFour").show();
 		$("#gameInstructionBg").show();
-		setTimeout(gameFourStart, 1000);
+		setTimeout(gameFourStart, 5000);
 	
 }
 
 function gameFourStart(){
 	
+	animateParts(animatePartsStep);
+	
 	$('#gameFour').hide();
 	$("#gameInstructionBg").hide();
 	
-	$('#timerInside').animate({width:"298px"},0);
+	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
 	
 	jQuery( "#gameFourElements #abomSnowmanMouth" ).on( "tap", function() {
@@ -459,7 +461,7 @@ function gameFourStart(){
       
     }
 	
-	counter=setInterval(gameFourtimer, 1000);
+	counter=setInterval(gameFourtimer, 1500);
 	gameFourtimer();
 }
 
@@ -583,7 +585,8 @@ function gameFourWon(){
 		
 		 gameFourEnded = true;
 		 gameFourStar = true;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $("#abomSnowmanCloseUp").remove();
 		 $("#resultsScreen #goldStar").show();
 		 $('#gameFourElements').remove();
@@ -595,7 +598,8 @@ function gameFourLost(){
 
 		 gameFourEnded = true;
 		 gameFourStar = false;
-		 $("#gameAreaResults").show();
+		 $('#timer').hide();
+		 $("#resultsScreen").show();
 		 $("#abomSnowmanCloseUp").remove();
 		 $('#gameFourElements').remove();
 		 
