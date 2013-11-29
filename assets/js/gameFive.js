@@ -2,6 +2,7 @@ var gameFiveImages = [];
 var gameFiveColor = ["#bedbe5"];
 var gameFiveTimer = 11;
 var counter;
+var gameFiveLive = false;
 var gameFiveEnded = false;
 var gameFiveStar = false;
 var spriteLocation;
@@ -31,7 +32,6 @@ var rightComplete;
 
 var mkrProg;
 
-
 var tl;
 var tlProg;
 var prsObj;
@@ -42,12 +42,14 @@ if (retina) {
 	//console.log('retina');
 	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite@2x.png"];
 	spriteLocation = "assets/images/gameFive/mainSprite@2x.png";
+	inLocation = "assets/images/instructionImages@2x.png";
 	backgroundS = "554px 788px";
 }
 else {
 	//console.log('notRetina');
 	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite.png"];
 	spriteLocation = "assets/images/gameFive/mainSprite.png";
+	inLocation = "assets/images/instructionImages.png";
 	backgroundS = "554px 788px";
 
 }
@@ -57,29 +59,78 @@ function gameFiveInit(){
 	gameFiveEnded = false;
 	gameFiveTimer = 11;
 	
-	$( "#gameNavigation #gameArea" ).append( "<div id='gameFive'><p>Start Game Instructions</p></div><div id='gameFiveElements'><div id='landscape'></div><div id='landscapeColour'></div><div id='funnel'></div><div id='greenWheelL'></div><div id='greenWheelM'></div><div id='greenWheelS'></div><div id='sack'></div><div id='topWheelShadow'></div><div id='lift'></div><div id='present'></div><div id='handleLeft'></div><div id='distance'><div id ='marker'></div></div><div id='handleRight'></div></div>" );
+	//$("#gameNavigation").append("<div id='previewIn'>");
+	
+	$( "#gameNavigation #gameArea" ).append( "<div id='gameFive'><p>"+mainCopy[5].lineOne+"</p><p>"+mainCopy[5].lineTwo+"<span> "+ mainCopy[5].span+" "+"</span>"+mainCopy[5].lineThree+"</p></div><div id='inImage'></div><div id='gameFiveElements'><div id='landscape'></div><div id='landscapeColour'></div><div id='funnel'></div><div id='greenWheelL'></div><div id='greenWheelM'></div><div id='greenWheelS'></div><div id='sack'></div><div id='topWheelShadow'></div><div id='lift'></div><div id='present'></div><div id='handleLeft'></div><div id='distance'><div id ='marker'></div></div><div id='handleRight'></div></div>" );
+	
+	/*$("#previewIn").css({	
+		
+			background: "url(assets/images/gameFive/previewInstructions.jpg)",
+			backgroundSize:"360px 640px",
+			width:"100%",
+			height:"100%",
+			position:"absolute",
+			top:"0px",
+			left:"0px",
+			zIndex:"9"
+		
+	});*/
 	
 	$("#gameFive").css({	
 		
-			top: "40%",
-			width: "100px",
-			zIndex: "4",
+			top: "141px",
+			width: "282px",
 			color: "white",
 			textAlign: "center",
-			backgroundColor: "blue",
-			marginLeft: "-50px",
-			left: "50%",
+			left: "18px",
 			position: "absolute",
-			zIndex:"6"
+			zIndex:"10"
 			
 		});
 		
 		$("#gameFive p").css({
 			
+			fontFamily:"gerogia",
+			letterSpacing:"0.5px",
+			fontSize:"20px",
+			lineHeigh:"23px",
 			margin: "0",
 			padding: "0",
-			position: "relative",
-			top: "2px"
+			position: "relative"
+			
+		});
+		
+		$("#gameFive p span").css({
+			
+			
+			fontSize:"22px",
+			fontWeight:"bold",
+			color:"#f74a4a"
+			
+			
+		});
+		
+		$("#gameFive p:last").css({
+			
+			top:"18px",
+			letterSpacing:"0.7px",
+			width:"236px",
+			lineHeight:"23px",
+			left:"25px"
+			
+	
+		});
+		
+		$("#inImage").css({
+			
+			background:'url('+ inLocation +') no-repeat scroll -0px -150px',
+			backgroundSize:"375px 233px",
+			position:"absolute",
+			left:"70px",
+			top:"342px",
+			width:"180px",
+			height:"78px",
+			zIndex:"11"
 			
 		});
 		
@@ -322,7 +373,10 @@ function gameFiveInit(){
 		
 		$("#gameFive").show();
 		$("#gameInstructionBg").show();
-		setTimeout(gameFiveStart, 5000);
+		$("#startGame").css({
+			display:"inline"
+		})
+		//setTimeout(gameFiveStart, 5000);
 	
 }
 
@@ -332,6 +386,7 @@ function gameFiveStart(){
 	$("#gameInstructionBg").hide();
 	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
+	$("#inImage").remove();
 	counter=setInterval(gameFivetimer, 2000);
 	gameFivetimer();
 	
@@ -494,7 +549,7 @@ function gameFiveStart(){
 
 
 function gameFivetimer(){
-
+		 gameFiveLive = true;
 		 gameFiveTimer --;
 		 $('#timerInside').animate({width:"-=30px"},500);
 		 if (gameFiveTimer <= 0)
@@ -507,6 +562,7 @@ function gameFivetimer(){
 
 function gameFiveComplete(){
 		//console.log('gameFiveComplete')
+		gameFiveLive = false;
 		clearInterval(counter);
 		grnWhlsObj = $('#greenWheelS');
 		TweenLite.to(grnWhlsObj, 2, {css:{rotation:720}, delay:0.1, ease:Elastic.easeOut});
@@ -514,7 +570,7 @@ function gameFiveComplete(){
 }
 
 function gameFiveWon(){
-		
+		 gameFiveLive = false;
 		 gameFiveEnded = true;
 		 gameFiveStar = true;
 		 $('#timer').hide();
@@ -526,7 +582,7 @@ function gameFiveWon(){
 	}
 	
 function gameFiveLost(){
-
+         gameFiveLive = false;
 		 gameFiveEnded = true;
 		 gameFiveStar = false;
 		 $('#timer').hide();

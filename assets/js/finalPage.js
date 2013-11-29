@@ -21,10 +21,33 @@ else {
 
 function finalPageInit(starAmount){
 
-	$( "#gameNavigation #gameArea" ).append( "<div id='finalPageImages'></div>" );
+	$( "#gameNavigation #gameArea" ).append( "<div id='finalPageImages'></div><div id='twitterBtn'><p>tweet</p></div>" );
 				
 		//setTimeout(function(){animateFinalPage(1);},1000);
 		console.log("starsWon"+starAmount);
+		
+		$("#twitterBtn").css({	
+		
+			top: "40%",
+			width: "100px",
+			zIndex: "4",
+			color: "white",
+			textAlign: "center",
+			backgroundColor: "blue",
+			marginLeft: "-50px",
+			left: "50%",
+			position: "absolute",
+			zIndex:"7"
+			
+		});
+		
+		jQuery( "#twitterBtn").on( "tap", function() {
+		
+			window.open('http://twitter.com/intent/tweet?text=I+Got+'+starAmount+'+Stars!+', '_blank');
+	
+		});
+		
+		
 	
 }
 

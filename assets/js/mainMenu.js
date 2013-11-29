@@ -1,19 +1,19 @@
 /* - - - Images to load - - - */
 var mainMenuImages = [];
 var mainMenuColor = ["#bad3e3"];
-
+var mainMenuLive = false;
 var retinaCopy = "";
 
 if (retina) {
 	
 	retinaCopy = "@2x";
-	backgroundSizeMainSprite = "408px 1000px"; 
+	
 	mainMenuImages = ["assets/images/bg2x.png","assets/images/mainSprite@2x.png"];
 }
 else {
 
 	retinaCopy = "";
-	backgroundSizeMainSprite = "408px 1000px"; 
+	
 	mainMenuImages = ["assets/images/bg2x.png","assets/images/mainSprite.png"];
 	
 }
@@ -152,7 +152,7 @@ function mainMenuInit(){
 			height:"250px"
 			
 		});
-		
+			
 		setTimeout(function(){
 		
 		animateMainPage(1);
@@ -170,18 +170,17 @@ function animateMainPage(switchAmount){
 			TweenLite.to("#hill1", 1.8, {y:-335, ease:Expo.easeOut});
 			TweenLite.to("#hill2", 2.0, {y:-295,delay:0.2, ease:Expo.easeOut});
 			TweenLite.to("#ball", 1.5, {y:320,delay:0.8, ease:Elastic.easeOut});
-			TweenLite.to("#naughtyLogo", 2, {alpha:1, delay:2});
+			$( "#naughtyLogo" ).delay(2000).animate({ "opacity": "1" }, 2000 );
 			setTimeout(function(){animateMainPage(2);},4000);
 			
 		break;
 		
 		case 2 :
-			
-			TweenLite.to("#naughtyLogo", 1, {alpha:0});
-			TweenLite.to("#mainMenuHeader", 1, {alpha:1, delay:1.5});
-			TweenLite.to("#mainMenuText", 1, {alpha:1, delay:2});
+			$( "#naughtyLogo" ).animate({ "opacity": "0" }, 1000 );
+			$( "#mainMenuHeader" ).delay(1500).animate({ "opacity": "1" }, 1000 );
+			$( "#mainMenuText" ).delay(2000).animate({ "opacity": "1" }, 1000 );
 			setTimeout(function(){$("#mainMenuElements #mainMenuStart").css({display:"inline"});},2000);
-			TweenLite.to("#mainMenuStart", 1, {alpha:1, delay:2.5});		
+			$( "#mainMenuStart" ).delay(2500).animate({ "opacity": "1" }, 1000 );	
 			
 		break;
 		
@@ -195,9 +194,7 @@ function animateMainPage(switchAmount){
 			TweenLite.to("#hill1", 1.8, {y:-335, ease:Expo.easeOut});
 			setTimeout(function(){animateMainPage(3);},4000);
 		break;
-		
-		
+				
 	}
-
 	
 }

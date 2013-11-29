@@ -2,6 +2,7 @@ var gameSixImages = [];
 var gameSixColor = "#e0f4f4";
 var gameSixTimer = 11;
 var counter;
+var gameSixLive = false;
 var gameSixEnded = false;
 var gameSixStar = false;
 var spriteLocation;
@@ -12,6 +13,11 @@ var eatingNumber = 0;
 var hangingNumber = 0;
 var walkingNumber = 0;
 var raindeerTimer = [];
+var raindeerIn = [true,false,false,false,false,false];
+
+var rainIn = new Howl({urls: ['assets/sounds/inPen.mp3', 'assets/sounds/inPen.ogg', 'assets/sounds/inPen.aac']});
+var penShut = new Howl({urls: ['assets/sounds/gateClose.mp3', 'assets/sounds/gateClose.ogg', 'assets/sounds/gateClose.aac']});
+
 if (retina) {
 
 	var gameSixImages = ["assets/images/bg2x.png","assets/images/gameSix/mainSprite@2x.png","assets/images/gameSix/raindeerEating@2x.png","assets/images/gameSix/snowTracksBg@2x.png","assets/images/gameSix/peachHillBg@2x.png"];
@@ -19,6 +25,7 @@ if (retina) {
 	peachLocation = "assets/images/gameSix/peachHillBg@2x.png";
 	spriteLocation = "assets/images/gameSix/mainSprite@2x.png";
 	raindeerLocation = "assets/images/gameSix/raindeerEating@2x.png";
+	inLocation = "assets/images/instructionImages@2x.png";
 	raindeerS = "188px 1314px";
 	backgroundS = "471px 220px";
 	trackS = "360px 511px";
@@ -32,6 +39,7 @@ else {
 	peachLocation = "assets/images/gameSix/peachHillBg.png";
 	spriteLocation = "assets/images/gameSix/mainSprite.png";
 	raindeerLocation ="assets/images/gameSix/raindeerEating.png";
+	inLocation = "assets/images/instructionImages.png";
 	raindeerS = "188px 1314px";
 	backgroundS = "471px 220px";
 	trackS = "360px 511px";
@@ -46,29 +54,78 @@ function gameSixInit(){
 	gameSixEnded = false;
 	gameSixStar = false;
 	
-	$( "#gameNavigation #gameArea" ).append( "<div id='gameSix'><p>Start Game Instructions</p></div><div id='gameSixElements'><div id='deer0'></div><div id='deer1'></div><div id='deer2'></div><div id='deer3'></div><div id='deer4'></div><div id='deer5'></div><div id='penBack'></div><div id='penFront'></div><div id='backgroundPrints'></div><div id='peachHillBg'></div></div></div>" );
+	//$("#gameNavigation").append("<div id='previewIn'>");
+	
+	$( "#gameNavigation #gameArea" ).append( "<div id='gameSix'><p>"+mainCopy[7].lineOne+"</p><p><span>"+mainCopy[7].span+" "+"</span>"+mainCopy[7].lineTwo+"</p></div><div id='inImage'></div><div id='gameSixElements'><div id='deer0'></div><div id='deer1'></div><div id='deer2'></div><div id='deer3'></div><div id='deer4'></div><div id='deer5'></div><div id='penBack'></div><div id='penFront'></div><div id='backgroundPrints'></div><div id='peachHillBg'></div></div></div>" );
+	
+		/*$("#previewIn").css({	
+			
+				background: "url(assets/images/gameSix/previewInstructions.jpg)",
+				backgroundSize:"360px 640px",
+				width:"100%",
+				height:"100%",
+				position:"absolute",
+				top:"0px",
+				left:"0px",
+				zIndex:"9"
+			
+		});*/
 		
 		$("#gameSix").css({	
 		
-			top: "40%",
-			width: "100px",
-			zIndex: "4",
+			top: "141px",
+			width: "282px",
 			color: "white",
 			textAlign: "center",
-			backgroundColor: "blue",
-			marginLeft: "-50px",
-			left: "50%",
+			left: "18px",
 			position: "absolute",
-			zIndex:"7"
+			zIndex:"10"
 			
 		});
 		
 		$("#gameSix p").css({
 			
+			fontFamily:"gerogia",
+			letterSpacing:"0.5px",
+			fontSize:"20px",
+			lineHeigh:"23px",
 			margin: "0",
 			padding: "0",
-			position: "relative",
-			top: "2px"
+			position: "relative"
+			
+		});
+		
+		$("#gameSix p span").css({
+			
+			
+			fontSize:"22px",
+			fontWeight:"bold",
+			color:"#f74a4a"
+			
+			
+		});
+		
+		$("#gameSix p:last").css({
+			
+			top:"18px",
+			letterSpacing:"0.7px",
+			width:"236px",
+			lineHeight:"23px",
+			left:"25px"
+			
+	
+		});
+		
+		$("#inImage").css({
+			
+			background:'url('+ inLocation +') no-repeat scroll -0px -70px',
+			backgroundSize:"375px 233px",
+			position:"absolute",
+			left:"70px",
+			top:"342px",
+			width:"180px",
+			height:"68px",
+			zIndex:"11"
 			
 		});
 		
@@ -317,8 +374,40 @@ function gameSixInit(){
 		
 		$("#gameSix").show();
 		$("#gameInstructionBg").show();
-		setTimeout(gameSixStart, 5000);
+		$("#startGame").css({
+			display:"inline"
+		})
+		//setTimeout(gameSixStart, 5000);
+		
+}
 
+function startAgain(){
+
+	if(raindeerIn[1] == false){
+		
+		animateRaindeerGraze(eatingNumber,1,raindeerLocation,raindeerS,150,44,800);
+		
+	}
+	if(raindeerIn[2] == false){
+		
+		animateRaindeerWalk(walkingNumber,2,raindeerLocation,raindeerS,150,73,1200,raindeers[2].increment);
+		
+	}
+	if(raindeerIn[3] == false){
+		
+		animateRaindeerGraze(eatingNumber,3,raindeerLocation,raindeerS,150,44,800);
+	
+	}
+	if(raindeerIn[4] == false){
+		
+		animateRaindeerWalk(walkingNumber,4,raindeerLocation,raindeerS,150,73,1200,raindeers[4].increment);
+		
+	}
+	if(raindeerIn[5] == false){
+		
+		animateRaindeerWalk(walkingNumber,5,raindeerLocation,raindeerS,150,73,1200,raindeers[5].increment);
+		
+	}
 
 }
 
@@ -334,6 +423,7 @@ function gameSixStart(){
 		$("#gameInstructionBg").hide();
 		$('#timerInside').animate({width:"296px"},0);
 		$('#timer').show();
+		$("#inImage").remove();
 		
 	for(i=1;i<=5;i++){
 	
@@ -390,7 +480,9 @@ function gameSixStart(){
 						$('#'+currentId).animate({left:raindeers[l].endL,top:raindeers[l].endT}, 150);
 						raindeers[changeIndex].dragStop = true
 						clearTimeout(raindeerTimer[changeIndex]);
+						raindeerIn[changeIndex] = true;
 						insidePen(changeIndex);
+						rainIn.play();
 					}
 					else{
 						changeIndex = $(this).attr('id').slice(-1);
@@ -411,17 +503,16 @@ function gameSixStart(){
 						}		
 								
 						}
-					
+		
 					}
-				}
-			
+				}		
 			}
 			
 		});
 	}
 
-	//counter=setInterval(gameSixtimer, 1000);
-	//gameSixtimer();
+	counter=setInterval(gameSixtimer, 1000);
+	gameSixtimer();
 
 }
 
@@ -529,7 +620,9 @@ function insidePen(whatNumber){
 function correctCounter(){
 	
 	if (countSuccess >= 5 ){
-	
+		gameSixLive = false;
+		penShut.play();
+		
 		clearInterval(counter);
 		
 		$("#gameSixElements #penBack").css({
@@ -552,7 +645,7 @@ function correctCounter(){
 }
 
 function gameSixtimer(){
-
+         gameSixLive = true;
 		 gameSixTimer --;
 		 $('#timerInside').animate({width:"-=30px"},500);
 		 if (gameSixTimer <= 0)
@@ -564,7 +657,7 @@ function gameSixtimer(){
 }
 
 function gameSixWon(){
-		
+		 gameSixLive = false;
 		 gameSixEnded = true;
 		 gameSixStar = true;
 		 $("#resultsScreen").show();
@@ -576,7 +669,7 @@ function gameSixWon(){
 }
 	
 function gameSixLost(){
-
+         gameSixLive = false;
 		 gameSixEnded = true;
 		 gameSixStar = false;
 		 $("#resultsScreen").show();

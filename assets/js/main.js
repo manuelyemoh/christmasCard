@@ -4,21 +4,22 @@ var firstTimeArray = [isFirstTimemainMenu = true,isFirstTimegameOne = true,isFir
 var retina = window.devicePixelRatio > 1;
 var retinaCopy = "";
 var backgroundStarArray = ["-5px -142px","-39px -142px","-71px -142px","-5px -181px","-41px -178px","-5px -142px"];
-var backgroundSizeMainSprite;
+var backgroundSizeMainSprite = "408px 1123px";
 var ismobile;
+var orientation;
 
 var mainCopy = [];
 
 if (retina) {
 	
 	retinaCopy = "@2x";
-	backgroundSizeMainSprite = "408px 1000px";
+	
 
 }
 else {
 
 	retinaCopy = "";
-	backgroundSizeMainSprite = "408px 1000px"; 
+	
 }
 
 
@@ -27,6 +28,14 @@ else {
 		"background": 'url("assets/images/PageLoaderTree'+retinaCopy+'.gif") 0px 0',
 		"backgroundSize": '80px 135px'
 
+	});
+	
+	$("#previewStuff").css({
+		
+		"background": 'url("assets/images/previewResults@2x.jpg") 0px 0',
+		"backgroundSize": '360px 640px'
+
+		
 	});
 	
 	$("#timerInside").css({
@@ -40,14 +49,14 @@ else {
 		
 		$("#goldStar"+[r]).css({
 			
-			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") 0 -5px',
+			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -5px -5px',
 			"backgroundSize": backgroundSizeMainSprite
 			
 		});
 		
 		$("#greyStar"+[r]).css({
 			
-			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -61px -5px',
+			"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -111px -5px',
 			"backgroundSize": backgroundSizeMainSprite
 		
 		});
@@ -82,14 +91,35 @@ else {
 		
 	});
 	
-	$("#resultsScreen #abLose").css({
+	$("#resultsScreen #elfDance").css({
+	
+		"background": 'url("assets/images/results/elfDancing'+retinaCopy+'.gif") 0px 0px',
+		"backgroundSize":"100px 115px"
+		
+	});
+	
+	$("#resultsScreen #elfLost").css({
+	
+		"background": 'url("assets/images/results/pngElfLostHuff'+retinaCopy+'.gif") 0px 0px',
+		"backgroundSize":"53px 100px"
+		
+	});
+	
+	$("#resultsScreen #abLost").css({
 	
 		"background": 'url("assets/images/results/abLose'+retinaCopy+'.gif") 0px 0px',
-		"backgroundSize":"78px 99px"
+		"backgroundSize":"81px 120px"
 		
 	});
 	
 	$("#resultsScreen #abWon").css({
+	
+		"background": 'url("assets/images/results/abWon'+retinaCopy+'.gif") 0px 0px',
+		"backgroundSize":"78px 99px"
+		
+	});
+	
+	$("#resultsScreen #snowManLost").css({
 	
 		"background": 'url("assets/images/results/abWon'+retinaCopy+'.gif") 0px 0px',
 		"backgroundSize":"78px 99px"
@@ -123,14 +153,91 @@ else {
 	});
 
 window.onload=function() {
+
+  var view = window.matchMedia("(orientation: portrait)");
+
+	if(view.matches) {
+		orientation = "portrait";
+		console.log(orientation);
+		//positionPortrait();
+	} else {
+		orientation = "landscape";
+		console.log(orientation);
+		//positionLandScape();
+	}
+	
+  view.addListener(function(v) {
+  
+  	gamePause = gameViews[currentPage]+"Live";
+  	whatTimer = gameViews[currentPage]+"timer";
+	
+		if(v.matches) {
+			orientation = "portrait";
+			console.log(orientation);
+			
+			if(eval(gamePause) === true){
+				
+				counter=setInterval(eval(whatTimer), 1000);
+				
+				if(currentPage == 1){
+					
+					window.addEventListener('shake', shakeEventDidOccur, false);
+					
+				}
+				if(currentPage == 4){
+					
+					t = setTimeout(function(){animateParts(animatePartsStep)},mouthAnimationSpeed);
+					
+				}
+				if(currentPage == 6){
+					
+					startAgain();
+					
+				}	
+				
+			}	
+			
+		} else {
+			orientation = "landscape";
+			console.log(orientation);
+			
+			if(eval(gamePause) === true){
+				
+				//stopTime
+				clearInterval(counter);
+				
+				if(currentPage == 1){
+					
+					window.removeEventListener('shake', shakeEventDidOccur, false);
+					
+				}
+				if(currentPage == 4){
+					
+					clearInterval(t);
+					
+				}
+				if(currentPage == 6){
+					
+					//clearTimeout(raindeerTimer[changeIndex]);
+					console.log(raindeerTimer);
+					for(d=0; d <= raindeerTimer.length; d++){
+						
+						clearTimeout(raindeerTimer[d]);
+						
+					}
+					
+				}	
+			}
+		}
+		
+  });
 	
   //sounds
 
-  var sound = new Howl({
-  	urls: ['assets/sounds/intro.mp3', 'assets/sounds/intro.ogg', 'assets/sounds/intro.wav', 'assets/sounds/intro.aac']
-  }).play();
+  var introSound = new Howl({urls: ['assets/sounds/intro.mp3', 'assets/sounds/intro.ogg', 'assets/sounds/intro.aac'],loop: true,});
+  var gameLost = new Howl({urls: ['assets/sounds/failGame.mp3', 'assets/sounds/failGame.ogg', 'assets/sounds/failGame.aac']});
+  var gameWon = new Howl({urls: ['assets/sounds/winGame.mp3', 'assets/sounds/winGame.ogg', 'assets/sounds/winGame.aac']});
 
-	
   //cache javaScript Pages
   $.ajaxSetup({
   	cache: true
@@ -154,7 +261,7 @@ window.onload=function() {
     
   function populateCopy(){
 	  
-	  //console.log(mainCopy[0]);
+	  //console.log(mainCopy[3].span);
 	  
   }
    
@@ -221,9 +328,15 @@ window.onload=function() {
 	
 		console.log(loadPage);
 		isLoaded = 0;
+		
+		if(loadPage == 0){
+			
+			introSound.play();
+			
+		}
 	
 		if(firstTimeArray[loadPage] === true){  
-	
+			
 			// - - - Load external JS file, and run code if successful or return Error message - - - //
 			$.getScript( "assets/js/"+gameViews[loadPage]+".js" )
 			  .done(function( script, textStatus ) {
@@ -254,6 +367,19 @@ window.onload=function() {
 	
 	}
 	
+	jQuery( "#startGame").on( "tap", function() {
+		
+		var startString = gameViews[currentPage]+"Start";
+		startString = window[startString];
+		
+		startString();
+		
+		$("#startGame").css({
+			display:"none"	
+		})
+
+	});
+	
 	function startGame(currentPage){
 		
 		// - - - Convent string into a function name - - - //
@@ -279,7 +405,9 @@ window.onload=function() {
 		},3000);
 
 		jQuery( "#mainMenuStart").on( "tap", function() {
-
+			
+		introSound.fadeOut(0.0, 3000);
+			
 		initPage(shuffleArray[randomGame]);
 		//initPage(testingNumber);
 		
@@ -293,7 +421,7 @@ window.onload=function() {
 		
 	});
 	}
-	
+		
 	function hasGameEnd(){
 		
 
@@ -315,14 +443,23 @@ window.onload=function() {
 				starsWon++;
 				console.log("starsWon"+starsWon);
 				animateResultsPage(currentPage,"won");
+				gameWon.play();
 			}
 			else{
 			
 				$('#resultsText p:first').text("You failed");
-				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");	
+				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");
 				$('#resultsText').animate({opacity:1},500);
 				$('#resultsLost').animate({opacity:1},500);
+				$("#goldStar"+[currentStar]).css({
+				
+				"display":"inline",
+				"backgroundPosition":"-55px -5px"
+				
+				});
+				$("#goldStar"+[currentStar]).animate({transform: 'scale(1,1) rotate(0deg)', opacity:"1"},0);
 				animateResultsPage(currentPage,"lost");
+				gameLost.play();
 			}
 			
 			currentStar++;
@@ -355,13 +492,13 @@ window.onload=function() {
 	
 	function pausePage(){
 		
-		
+		//need for Live
 		
 	}
 	
 	function resumeGame(){
 		
-		
+		//need for Live
 		
 	}
 	
@@ -374,9 +511,12 @@ window.onload=function() {
 				case 1:
 				break;
 				case 2:
+				$("#elfDance").css({"display":"inline"});
 				$("#robotWon").css({"display":"inline"});
+				TweenLite.to($('#elfDance'), 0.5, {alpha:1});
 				TweenLite.to($('#robotWon'), 0.5, {alpha:1});
 				removeResultsParams($("#robotWon"));
+				removeResultsParams($("#elfDance"));
 				break;
 				case 3:
 				break;
@@ -404,16 +544,23 @@ window.onload=function() {
 				case 1:
 				break;
 				case 2:
+				
+				$("#elfLost").css({"display":"inline"});
 				$("#robotLose").css({"display":"inline"});
+				TweenLite.to($('#elfLost'), 0.5, {alpha:1});
 				TweenLite.to($('#robotLose'), 0.5, {alpha:1});
+				removeResultsParams($("#elfLost"));
 				removeResultsParams($("#robotLose"));
 				break;
 				case 3:
 				break;
 				case 4:
-				$("#abLose").css({"display":"inline"});
-				TweenLite.to($('#abLose'), 0.5, {alpha:1});
-				removeResultsParams($("#abLose"));
+				$("#abBody").css({"display":"inline"});
+				TweenLite.to($('#abBody'), 0.5, {alpha:1});
+				$("#abLost").css({"display":"inline"});
+				TweenLite.to($('#abLost'), 0.5, {alpha:1});
+				removeResultsParams($("#abBody"));
+				removeResultsParams($("#abLost"));
 				break;
 				case 5:
 				break;
@@ -429,6 +576,7 @@ window.onload=function() {
 		setTimeout(function(){
 		
 			$(whatElement).css({"display":"none"});
+			TweenLite.to($(whatElement), 0.5, {alpha:0});
 		
 		},6000);
 	}
@@ -507,6 +655,22 @@ window.onload=function() {
 		
 	}
 	
+	jQuery( "#soundButton").on( "tap", function() {
+		
+		initPage(0);
+		
+		$( "#soundButton").remove();
+		//introSound.play();
+		
+		setTimeout(function(){
+			
+			introSound.stop();
+			
+		},10);
+		
+	
+	});
+	
 	/*function checkDevice (whatMobile){
 
 		//alert(whatMobile.indexOf('iphone'));
@@ -573,5 +737,5 @@ window.onload=function() {
 	//}
 	
 	//checkDevice(ismobile);
-	initPage(0);
+	
 }

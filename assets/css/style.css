@@ -1,402 +1,413 @@
 html {
-    background: #000;
+	background:#000;
 }
 
 body {
-
-	margin: 0px;
-	padding: 0px;
+	margin:0;
+	padding:0;
 	width:100%;
 	height:100%;
-	background:#000;1
+	background:#000;
 }
 
 /* #### Mobile Phones Portrait #### */
-@media screen and (max-device-width: 480px) and (orientation: portrait){
-  /* some CSS here */
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+	/* some CSS here */
+	
 }
 
 /* #### Mobile Phones Landscape #### */
 @media screen and (orientation:landscape) {
-  
-  
-#errorCase {
+	#errorCase {
+		width:100%;
+		height:100%;
+		background-color:#000;
+		opacity:1;
+		position:absolute;
+		z-index:100000;
+	}
 	
-	width:100%;
-	height:100%;
-	background-color:black;
-	opacity:1;
-	position:absolute;
-	z-index:100000;
+	#errorLandscape {
+		background-image:url(../images/rotate.png);
+		width:290px;
+		height:166px;
+		position:relative;
+		z-index:10000;
+		margin:0 auto;
+	}
 	
-}
-
-#errorLandscape{
-	  
-	  background-image:url(../images/rotate.png);
-	  width:290px;
-	  height:166px;
-	  position:relative;
-	  z-index:10000;
-	  margin:0 auto;
-	  
-}
-
-/* #### Mobile Phones Portrait or Landscape #### */
-@media screen and (max-device-width: 640px){
-  /* some CSS here */
+	/* #### Mobile Phones Portrait or Landscape #### */
+	@media screen and (max-device-width: 640px) {
+	/* some CSS here */
+	
 }
 
 /* #### iPhone 4+ Portrait or Landscape #### */
-@media screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2){
-  /* some CSS here */
+@media screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+	/* some CSS here */
+	
 }
 
 /* #### Tablets Portrait or Landscape #### */
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
-  /* some CSS here */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	/* some CSS here */
+	
 }
 
 /* #### Desktops #### */
-@media screen and (min-width: 1024px){
-
-  #main{
-	  
-	  background-image:url()!important;
-	  
-  }
-  
+@media screen and (min-width: 1024px) {
+	#main {
+		background-image:url()!important;
+	}
 }
 
 #main.source-image {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+	width:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}	
 }
 
-}
-
-.canvas-container{
-	
-   height: 100%;
-   left: 0;
-   position: absolute;
-   top: 0;
-   width: 100%;
+.canvas-container {
+	height:100%;
+	left:0;
+	position:absolute;
+	top:0;
+	width:100%;
 }
 
 #main {
-
-   /*background-image: url(../images/bg2x.jpg);*/
-    background-color:#e1f3f3;
-    background-repeat: no-repeat;
-    background-size: 360px 640px;
-    display: block;
-    left: 0;
-    position: absolute!important;
-    top: 0;
-    overflow: hidden;
-
+/*background-image: url(../images/bg2x.jpg);*/
+	background-color:#e1f3f3;
+	background-repeat:no-repeat;
+	background-size:360px 640px;
+	display:block;
+	left:0;
+	position:absolute!important;
+	top:0;
+	overflow:hidden;
 }
+
+/* - - - Sound Button - - - */
+#soundButton {
+	background-color:blue;
+	width:100px;
+	height:100px;
+	margin-top:50%;
+	margin-left:50%;
+	left:-50px;
+	top:-50px;
+	position:absolute;
+	z-index:90000;
+}
+
+#soundButton p {
+	color:#fff;
+}
+
 /* - - - Pre Loader - - - */
-
-#preloader{
-
+#preloader {
 	background-color:#fff;
 	width:100%;
 	height:100%;
 	position:absolute;
 	z-index:9999;
-	
+	top:0;
+	left:0;
 }
 
-	#preloaderClip{
+#preloaderClip {
+	height:140px;
+	left:50%;
+	margin-left:-40px;
+	margin-top:-70px;
+	opacity:0;
+	position:relative;
+	top:50%;
+	width:80px;
+}
+
+#previewStuff{
+
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
 	
-	    height: 140px;
-	    left: 50%;
-	    margin-left: -40px;
-	    margin-top: -70px;
-	    opacity: 0;
-	    position: relative;
-	    top: 50%;
-	    width: 80px;
-	    
-	}
+}
 
 /*media only screen and (-webkit-min-device-pixel-ratio: 2), 
 only screen and (min-device-pixel-ratio: 2) {
 		
 }*/
-
 /* - - - Game Items - - - */
-
-#timer{
-
-	background-color: #07afa6;
-    height: 14px;
-    left: 50%;
-    margin: 0 auto 0 -150px;
-    position: absolute;
-    top: 10px;
-    width: 300px;
-    z-index: 100;
-    border-radius:25px;
-    
+#timer {
+	background-color:#07afa6;
+	height:14px;
+	left:50%;
+	margin:0 auto 0 -150px;
+	position:absolute;
+	top:10px;
+	width:300px;
+	z-index:100;
+	border-radius:25px;
 }
 
-	#timerInside{
-		
-		background-color: #e63d40;
-	    height: 10px;
-	    left: 2px;
-	    position: relative;
-	    top: 2px;
-	    width: 296px;
-	    border-radius:25px;
-	    
-	}
+#timerInside {
+	background-color:#e63d40;
+	height:10px;
+	left:2px;
+	position:relative;
+	top:2px;
+	width:296px;
+	border-radius:25px;
+}
+
 /* - - - Navigation Items - - - */
-
-#gameNavigation{
-
-	height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 6;
-    
+#gameNavigation {
+	height:100%;
+	left:0;
+	position:absolute;
+	top:0;
+	width:100%;
+	z-index:6;
 }
 
-#gameArea{
-
-    height: 480px;
-    margin: -240px auto 0;
-    position: relative;
-    top: 50%;
-    width: 320px;
-    border: 1px solid red;
+#gameArea {
+	height:480px;
+	margin:-240px auto 0;
+	position:relative;
+	top:50%;
+	width:320px;
+	border:1px solid red;
 }
 
-#gameAreaResults{
-
-    height: 480px;
-    margin: -240px auto 0;
-    position: relative;
-    top: 50%;
-    width: 320px;
-
+#gameAreaResults {
+	height:480px;
+	margin:-240px auto 0;
+	position:relative;
+	top:50%;
+	width:320px;
 }
 
-#gameInstructionBg{
-
-	background-color: #000000;
-    height: 100%;
-    margin: 0;
-    opacity: 0.7;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    display:none;
-    z-index: 6;
-    
+#gameInstructionBg {
+	background-color:#000;
+	height:100%;
+	margin:0;
+	opacity:.8;
+	position:absolute;
+	top:0;
+	width:100%;
+	display:none;
+	z-index:6;
 }
 
-#resultsScreen{
-
-	background-color: #c8e2f1;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 6;
-
-}
-#greyContainer{
-
-	height: 50px;
-    margin: 0 auto;
-    position: relative;
-    top: 25px;
-    width: 318px;
-    z-index: 6;	
-
+#startGame {
+	background-color:#00F;
+	height:50px;
+	left:50%;
+	margin-left:-50px;
+	position:absolute;
+	top:60%;
+	width:100px;
+	z-index:15;
+	display:none;
 }
 
-	#greyStar0,#greyStar1,#greyStar2,#greyStar3,#greyStar4,#greyStar5{
-		
-	    float: left;
-	    height: 40px;
-	    left: 16px;
-	    position: relative;
-	    width: 49px;
-	    z-index: 6;
+#resultsScreen {
+	background-color:#c8e2f1;
+	height:100%;
+	position:absolute;
+	top:0;
+	width:100%;
+	z-index:6;
+}
 
-	}
-	
-	#starContainer{
-	
-		height: 50px;
-	    margin: 0 auto;
-	    position: relative;
-	    top: -25px;
-	    width: 318px;
-	    z-index: 7;
-	
-	}
+#greyContainer {
+	height:50px;
+	margin:0 auto;
+	position:relative;
+	top:67px;
+	width: 295px;
+	z-index:6;
+}
 
-	#goldStar0,#goldStar1,#goldStar2,#goldStar3,#goldStar4,#goldStar5{
-		
-	    display: none;
-	    float: left;
-	    height: 40px;
-	    left: 10px;
-	    opacity: 0.8;
-	    position: relative;
-	    width: 49px;
+#greyStar0,#greyStar1,#greyStar2,#greyStar3,#greyStar4,#greyStar5 {
 
-	}
-	
-		#resultsScreen #robotLose{
-			
-			display: none;
-		    height: 80px;
-		    left: 77px;
-		    opacity: 0;
-		    position: absolute;
-		    top: 288px;
-		    width: 75px;
-		    z-index: 10;
-			
-		}
-		
-		#resultsScreen #robotWon{
-			
-			display: none;
-		    height: 68px;
-		    left: 93px;
-		    opacity: 0;
-		    position: absolute;
-		    top: 290px;
-		    width: 54px;
-		    z-index: 10;
-			
-		}
-		
-		#resultsScreen #abBody{
-			
-			display: none;
-		    height: 210px;
-		    left: 37px;
-		    opacity: 0;
-		    position: absolute;
-		    top: 168px;
-		    width: 152px;
-		    z-index: 10;
-			
-		}
-		
-		#resultsScreen #abLost{
-			
-			display: none;
-		    height: 80px;
-		    left: 77px;
-		    opacity: 0;
-		    position: absolute;
-		    top: 288px;
-		    width: 75px;
-		    z-index: 10;
-			
-		}
-		
-		#resultsScreen #abWon{
-			
-			display: none;
-		    height: 90px;
-		    left: 73px;
-		    opacity: 0;
-		    position: absolute;
-		    top: 210px;
-		    width: 81px;
-		    z-index: 10;
-			
-		}
-	
-	#resultsScreen #resultsCircle{
-
-	    height: 245px;
-	    left: 36px;
-	    position: absolute;
-	    top: -23px;
-	    width: 246px;
-	    z-index: 5;
-	
-	}
-	
-	#resultsScreen #resultsWon{
-
-	    height: 42px;
-	    left: 95px;
-	    position: absolute;
-	    top: 70px;
-	    width: 136px;
-	    z-index: 7;
-	    opacity:0;
-	
-	}
-	
-	#resultsScreen #resultsLost{
-	
-	    height: 42px;
-	    left: 105px;
-	    position: absolute;
-	    top: 70px;
-	    width: 116px;
-	    z-index: 7;
-	    opacity:0;
-	    
-	}
-	
-	#resultsScreen #resultsBottom{
-	
-		 height: 42px;
-		 left: -20px;
-		 position: absolute;
-		 top: 322px;
-		 width: 360px;
-		 z-index: 7;
-
-	}
-	
-	#resultsBottom #bottomWhite{
-	
-		background-color: #FFFFFF;
-	    height: 800px;
-	    position: relative;
-	    top: 26px;
-	    width: 100%;
-	
-	}
-	
-	#Star0,#Star1,#Star2,#Star3,#Star4,#Star5{
-	
-	     position: absolute;
-	     z-index: 11;
-
-	}
-
-#Star0{
-
-	background-position: -5px -142px;
+	float: left;
     height: 40px;
-    left: 2px;
-    top: -58px;
-    width: 40px;
+    left: 16px;
+    position: relative;
+    width: 41px;
+    z-index: 6;
+    
+}
+
+#starContainer {
+	height:50px;
+	margin:0 auto;
+	position:relative;
+	top:17px;
+	width:318px;
+	z-index:7;
+}
+
+#goldStar0,#goldStar1,#goldStar2,#goldStar3,#goldStar4,#goldStar5 {
+	display:none;
+	float:left;
+	height:40px;
+	left:32px;
+	opacity:.8;
+	position:relative;
+	width: 41px;
+}
+
+#resultsScreen #robotLose {
+	display:none;
+	height:80px;
+	left:77px;
+	opacity:0;
+	position:absolute;
+	top:288px;
+	width:75px;
+	z-index:10;
+}
+
+#resultsScreen #robotWon {
+	display:none;
+	height:68px;
+	left:93px;
+	opacity:0;
+	position:absolute;
+	top:290px;
+	width:54px;
+	z-index:10;
+}
+
+#resultsScreen #abBody {
+	display:none;
+	height:210px;
+	left:37px;
+	opacity:0;
+	position:absolute;
+	top:168px;
+	width:152px;
+	z-index:10;
+}
+
+#resultsScreen #elfDance {
+	
+	display:none;
+	opacity:0;
+	height: 115px;
+    left: 155px;
+    position: absolute;
+    top: 252px;
+    width: 100px;
+    z-index: 10;
 
 }
 
-#Star1{
+
+#resultsScreen #elfLost {
+	
+	display:none;
+	opacity:0;
+	height: 100px;
+    left: 163px;
+    position: absolute;
+    top: 264px;
+    width: 53px;
+    z-index: 10;
+
+}
+
+#resultsScreen #abLost {
+	
+	display:none;
+	height: 120px;
+    left: 93px;
+    opacity: 0;
+    position: absolute;
+    top: 198px;
+    width: 82px;
+    z-index: 100;
+	
+}
+
+#resultsScreen #abWon {
+	display:none;
+	height:90px;
+	left:73px;
+	opacity:0;
+	position:absolute;
+	top:210px;
+	width:81px;
+	z-index:10;
+}
+
+#resultsScreen #resultsCircle {
+	height:245px;
+	left:36px;
+	position:absolute;
+	top:20px;
+	width:246px;
+	z-index:5;
+}
+
+#resultsScreen #resultsWon {
+	height:42px;
+	left:95px;
+	position:absolute;
+	top:70px;
+	width:136px;
+	z-index:7;
+	opacity:0;
+}
+
+#resultsScreen #resultsLost {
+	height:42px;
+	left:105px;
+	position:absolute;
+	top:70px;
+	width:116px;
+	z-index:7;
+	opacity:0;
+}
+
+#resultsScreen #resultsBottom {
+	height:42px;
+	left:-20px;
+	position:absolute;
+	top:322px;
+	width:360px;
+	z-index:7;
+}
+
+#resultsBottom #bottomWhite {
+	background-color:#FFF;
+	height:800px;
+	position:relative;
+	top:26px;
+	width:100%;
+}
+
+#Star0,#Star1,#Star2,#Star3,#Star4,#Star5 {
+	position:absolute;
+	z-index:11;
+}
+
+#Star0 {
+	background-position:-5px -142px;
+	height:40px;
+	left:2px;
+	top:-58px;
+	width:40px;
+}
+
+/*#Star1{
 
 	background-position: -39px -142px;
     height: 40px;
@@ -442,25 +453,20 @@ only screen and (min-device-pixel-ratio: 2) {
     top: 208px;
     width: 40px;
 
+}*/
+#resultsScreen #resultsText {
+	margin:0 auto;
+	position:relative;
+	top:20px;
+	width:260px;
+	z-index:6;
 }
-	
-	#resultsScreen #resultsText{
 
-		margin: 0 auto;
-	    position: relative;
-	    top: 20px;
-	    width: 260px;
-	    z-index: 6;
-    
-    }
-    
-    #resultsScreen #resultsText p{
-	    
-	    color: #000000;
-	    font-family: georgia;
-	    font-size: 15px;
-	    margin: 0;
-	    padding: 0;
-	    text-align: center;
-    
-    }
+#resultsScreen #resultsText p {
+	color:#000;
+	font-family:georgia;
+	font-size:15px;
+	margin:0;
+	padding:0;
+	text-align:center;
+}
