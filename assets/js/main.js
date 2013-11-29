@@ -30,17 +30,17 @@ else {
 
 	});
 	
-	$("#previewStuff").css({
+	/*$("#previewStuff").css({
 		
 		"background": 'url("assets/images/previewResults@2x.jpg") 0px 0',
 		"backgroundSize": '360px 640px'
 
 		
-	});
+	});*/
 	
 	$("#timerInside").css({
 		
-		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -50px 340px',
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -55px 463px',
 		"backgroundSize": backgroundSizeMainSprite
 
 	});
@@ -119,12 +119,12 @@ else {
 		
 	});
 	
-	$("#resultsScreen #snowManLost").css({
+	/*$("#resultsScreen #snowManLost").css({
 	
 		"background": 'url("assets/images/results/abWon'+retinaCopy+'.gif") 0px 0px',
 		"backgroundSize":"78px 99px"
 		
-	});
+	});*/
 	
 	$("#resultsScreen #resultsCircle").css({
 	
@@ -135,13 +135,13 @@ else {
 	
 	$("#resultsScreen #resultsWon").css({
 	
-		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -3px -52px',
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -8px 118px',
 		"backgroundSize": backgroundSizeMainSprite
 	});
 	
 	$("#resultsScreen #resultsLost").css({
 		
-		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -3px -96px',
+		"background": 'url("assets/images/mainSprite'+retinaCopy+'.png") -9px 64px',
 		"backgroundSize": backgroundSizeMainSprite
 	});
 	
@@ -434,8 +434,8 @@ window.onload=function() {
 			
 			if(eval(gameEndStar) === true){
 	
-				$('#resultsText p:first').text("You got a gold star");
-				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");
+				$('#resultsText p:first').text("Elf must be");
+				$('#resultsText p:last').text("sobering up");
 				$('#resultsText').animate({opacity:1},500);
 				$('#resultsWon').animate({opacity:1},500);
 				$("#goldStar"+[currentStar]).css("display","inline");
@@ -447,14 +447,14 @@ window.onload=function() {
 			}
 			else{
 			
-				$('#resultsText p:first').text("You failed");
-				$('#resultsText p:last').text("Lorem ipsum dolor sit amet.");
+				$('#resultsText p:first').text("Elf must still");
+				$('#resultsText p:last').text("be a little merry");
 				$('#resultsText').animate({opacity:1},500);
 				$('#resultsLost').animate({opacity:1},500);
 				$("#goldStar"+[currentStar]).css({
 				
 				"display":"inline",
-				"backgroundPosition":"-55px -5px"
+				"backgroundPosition":"-59px -5px"
 				
 				});
 				$("#goldStar"+[currentStar]).animate({transform: 'scale(1,1) rotate(0deg)', opacity:"1"},0);
