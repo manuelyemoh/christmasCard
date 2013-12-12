@@ -1,37 +1,47 @@
 {
-    "StartScreen": "Too many Sherries… Help the naughty little elf put right all his wrongs. Complete the games to help get him back in Santa’s good books.",
-    "ResultScreenPass": "Well done! Elf must be sobering up",
-    "ResultScreenFail": "Better luck next time… Elf must still be a little merry",
-    "GameOneInstructionsAbominablesnowman": {
-        "span": "Flick",
-        "lineOne": "Naughty Elf has decorated the sleeping abominable snowman! ",
-        "lineTwo": "everything off in time without waking him. Careful, don't touch his mout or he'll get mad. "
-    },
-    "GameTwoInstructionsSnowFamily": {
-        "span": "Drag",
-        "lineOne": "Naughty Elf has separated the snow family!",
-        "lineTwo": "the bodies and heads to their right bases in time to make them all smile again!"
-    },
-    "GameThreeInstructionsConveyoBelt": {
-        "span": "turn",
-        "lineOne": "Naughty Elf shirked his shift. Get the last present in the sack before Santa finds out!",
-        "lineTwo": "Use your finger to",
-        "lineThree": "the levers."
-    },
-    "GameFourInstructionsIceCube": {
-        "span": "tapping",
-        "lineOne": "Naughty Elf left the presents out in the cold to freeze!",
-        "lineTwo": "the ice cubes to break them free before the time is up.",
-        "lineThree":"Keep"
-    },
-    "GameFiveInstructionsReindeerPen": {
-        "span": "Drag",
-        "lineOne": "Naughty Elf let the reindeer out!",
-        "lineTwo": "each of them into the pen before time is up."
-    },
-    "GameSixInstructionsSantasPants": {
-        "span": "Shake",
-        "lineOne": "Naughty Elf has hung Santa’s pants on the North Pole!",
-        "lineTwo": "your phone to get them down before Santa sees!"
-    }
+   "StartScreen":"...has been up to no good. Complete the games to help him get back on Santa’s nice list before Christmas.",
+   "ResultAlt":"ok",
+   "ResultAlt":"ok",
+   "GameOneInstructionsAbominablesnowman":{
+      "span":"Flick",
+      "lineOne":"Naughty Elf has decorated the sleeping abominable snowman! ",
+      "lineTwo":"everything off in time without waking him. Careful, don't touch his mouth or he'll get mad. "
+   },
+   "GameTwoInstructionsSnowFamily":{
+      "span":"Drag",
+      "lineOne":"Naughty Elf has separated the snow family!",
+      "lineTwo":"the bodies and heads to their right places in time to make them all smile again!"
+   },
+   "GameThreeInstructionsConveyoBelt":{
+      "span":"turn",
+      "lineOne":"Naughty Elf shirked his shift. Get the last present in the sack before Santa finds out!",
+      "lineTwo":"Use your finger to",
+      "lineThree":"the wheels."
+   },
+   "GameFourInstructionsIceCube":{
+      "span":"tapping",
+      "lineOne":"Naughty Elf left the presents out in the cold to freeze!",
+      "lineTwo":"the ice cubes to break them free before the time is up.",
+      "lineThree":"Keep"
+   },
+   "GameFiveInstructionsReindeerPen":{
+      "span":"Drag",
+      "lineOne":"Naughty Elf let the reindeer out!",
+      "lineTwo":"each of them into the pen before the time is up."
+   },
+   "GameSixInstructionsSantasPants":{
+      "span":"Shake",
+      "lineOne":"Naughty Elf has hung Santa’s pants on the North Pole!",
+      "lineTwo":"your phone to get them down before Santa sees!"
+   },
+   "FinalScreenTitleBad":"Poor Work.",
+   "FinalScreenCopyBad":"Looks like Elf’s getting coal from Santa this Christmas!",
+   "FinalScreenTitleOK":"Santa’s Unsure.",
+   "FinalScreenCopyOk":"There’s a chance Elf’s  getting coal from Santa this  Christmas.",
+   "FinalScreenTitleGood":"Great work",
+   "FinalScreenCopyGood":"Elf is back on Santa’s nice list. No coal in his stocking this Christmas!",
+   "ResultScreenPassOne":"Elf worked his socks",
+   "ResultScreenPassTwo":"off there, nice job!",
+   "ResultScreenFailOne":"Naughty Elf has yet to",
+   "ResultScreenFailTwo":"learn his lesson!"
 }

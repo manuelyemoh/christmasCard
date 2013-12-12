@@ -1,5 +1,5 @@
 var gameFiveImages = [];
-var gameFiveColor = ["#bedbe5"];
+var gameFiveColor = ["#C9E3F2"];
 var gameFiveTimer = 11;
 var counter;
 var gameFiveLive = false;
@@ -8,6 +8,14 @@ var gameFiveStar = false;
 var spriteLocation;
 var backgroundS;
 
+var arrowL;
+var arrowLeftSeq;
+
+var arrowR;
+var arrowRightSeq;
+
+
+
 var rot;
 var rotTmp;
 var rotRnd;
@@ -15,7 +23,7 @@ var leftDraggable
 var rightDraggable 
 
 //the incremental amount per handle rotation
-var rotInc = 1;
+var rotInc = 3;
 //combined accured incremental amount
 var rotAmt;
 //gets the left postion of the marker (xProgress - notVar)
@@ -26,9 +34,8 @@ var cssRotL;
 var cssRotM;
 var cssRotS;
 
-//init the state of the left/right movement as not complete
-var leftComplete;
-var rightComplete;
+var leftObj;
+var rightObj;
 
 var mkrProg;
 
@@ -40,16 +47,30 @@ var liftObj;
 
 if (retina) {
 	//console.log('retina');
-	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite@2x.png"];
+	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite@2x.png","assets/images/results/presantWon@2x.png","assets/images/results/presantLost@2x.png","assets/images/results/elfDancing@2x.jpg","assets/images/results/pngElfLostHuff@2x.jpg"];
 	spriteLocation = "assets/images/gameFive/mainSprite@2x.png";
 	inLocation = "assets/images/instructionImages@2x.png";
+	
+	arrowRightSeq = "assets/images/gameFive/arrowSeqRight@2x.gif";
+	arrowR = "48px 80px";
+	
+	arrowLeftSeq = "assets/images/gameFive/arrowSeqLeft@2x.gif";
+	arrowL = "48px 80px";
+	
 	backgroundS = "554px 788px";
 }
 else {
 	//console.log('notRetina');
-	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite.png"];
+	gameFiveImages = ["assets/images/bg2x.png","assets/images/gameFive/mainSprite.png","assets/images/results/presantWon.png","assets/images/results/presantLost.png","assets/images/results/elfDancing.jpg","assets/images/results/pngElfLostHuff.jpg"];
 	spriteLocation = "assets/images/gameFive/mainSprite.png";
 	inLocation = "assets/images/instructionImages.png";
+	
+	arrowRightSeq = "assets/images/gameFive/arrowSeqRight.gif";
+	arrowR = "48px 80px";
+	
+	arrowLeftSeq = "assets/images/gameFive/arrowSeqLeft.gif";
+	arrowL = "48px 80px";
+	
 	backgroundS = "554px 788px";
 
 }
@@ -58,27 +79,15 @@ function gameFiveInit(){
 
 	gameFiveEnded = false;
 	gameFiveTimer = 11;
-	
+		
 	//$("#gameNavigation").append("<div id='previewIn'>");
 	
-	$( "#gameNavigation #gameArea" ).append( "<div id='gameFive'><p>"+mainCopy[5].lineOne+"</p><p>"+mainCopy[5].lineTwo+"<span> "+ mainCopy[5].span+" "+"</span>"+mainCopy[5].lineThree+"</p></div><div id='inImage'></div><div id='gameFiveElements'><div id='landscape'></div><div id='landscapeColour'></div><div id='funnel'></div><div id='greenWheelL'></div><div id='greenWheelM'></div><div id='greenWheelS'></div><div id='sack'></div><div id='topWheelShadow'></div><div id='lift'></div><div id='present'></div><div id='handleLeft'></div><div id='distance'><div id ='marker'></div></div><div id='handleRight'></div></div>" );
+	$( "#gameNavigation #gameArea" ).append( "<div id='gameFive'><p>"+mainCopy[4].lineOne+"</p><p>"+mainCopy[4].lineTwo+"<span> "+ mainCopy[4].span+" "+"</span>"+mainCopy[4].lineThree+"</p></div><div id='inImage'></div><div id='gameFiveElements'><div id='landscape'></div><div id='landscapeColour'></div><div id='funnel'></div><div id='greenWheelL'></div><div id='greenWheelM'></div><div id='greenWheelS'></div><div id='sack'></div><div id='topWheelShadow'></div><div id='lift'></div><div id='present'></div><div id='handleLeft'></div><div id='distance'><div id ='marker'></div></div><div id='handleRight'></div><div id='arrowRight'></div><div id='arrowLeft'></div></div>" );
 	
-	/*$("#previewIn").css({	
-		
-			background: "url(assets/images/gameFive/previewInstructions.jpg)",
-			backgroundSize:"360px 640px",
-			width:"100%",
-			height:"100%",
-			position:"absolute",
-			top:"0px",
-			left:"0px",
-			zIndex:"9"
-		
-	});*/
 	
 	$("#gameFive").css({	
 		
-			top: "141px",
+			top: "100px",
 			width: "282px",
 			color: "white",
 			textAlign: "center",
@@ -142,26 +151,40 @@ function gameFiveInit(){
 			top:"30px",
 
 		});
-	
-	/*
-		$("#gameBg").css({
+		
+		
+	 $("#gameFiveElements #arrowRight").css({
 				
-			background: "url("+ bgLocation +")",			
-			backgroundSize: "360px 640px",
-			XXwidth: "100%",
-			XXheight: "100%",
-			width: "360px",
-			height: "640px",
+			background: "url("+ arrowRightSeq +")no-repeat 0px 0px",			
+			backgroundSize: arrowR,
+			width:"48px",
+			height:"80px",
+			top:"34px",
+			left:"156px",
 			position:"absolute",
-			top: "-0px",
-			left:"-0px",
-			zIndex:"1",
-			XXopacity: "0.5",
-			XXborder: "1px solid #FF00FF"
+			zIndex:"2",
+			opacity:"0",
+			XXborder: "1px solid #FFFF00"
 			
 		});
-		*/
 		
+		$("#gameFiveElements #arrowLeft").css({
+				
+			background: "url("+ arrowLeftSeq +")no-repeat 0px 0px",			
+			backgroundSize: arrowL,
+			width:"48px",
+			height:"80px",
+			top:"282px",
+			left:"109px",
+			position:"absolute",
+			zIndex:"2",
+			XXopacity:"0.5",
+			XXborder: "1px solid #FFFF00"
+			
+		});
+		
+		
+					
 		$("#gameFiveElements #landscape").css({
 				
 			background: "url("+ spriteLocation +")449px -1185px ",			
@@ -180,7 +203,7 @@ function gameFiveInit(){
 		$("#gameFiveElements #landscapeColour").css({
 			backgroundColor: "#FFFFFF",	
 			width:"360px",
-			height:"40px",
+			height:"300px",
 			top:"440px",
 			left:"-20px",
 			position:"absolute",
@@ -272,7 +295,7 @@ function gameFiveInit(){
 			backgroundSize: backgroundS,
 			width:"180px",
 			height:"126px",
-			top:"19px",
+			top:"20px",
 			left:"198px",
 			position:"absolute",
 			zIndex:"5",
@@ -299,6 +322,7 @@ function gameFiveInit(){
 		});
 		
 		
+		
 		$("#gameFiveElements #handleLeft").css({
 				
 			background: "url("+ spriteLocation +")490px -6px ",			
@@ -306,9 +330,9 @@ function gameFiveInit(){
 			width:"102px",
 			height:"102px",
 			top:"268px",
-			left:"4px",
+			left:"4px",			
 			position:"absolute",
-			zIndex:"2",
+			zIndex:"3",
 			XXborder: "1px solid #FF0000"
 			
 		});
@@ -328,6 +352,7 @@ function gameFiveInit(){
 			
 		});
 		
+				
 		
 		$("#gameFiveElements #present").css({
 				
@@ -362,7 +387,7 @@ function gameFiveInit(){
 			width:"20px",
 			height:"20px",
 			top:"0px",
-			left:"0px",
+			left:"1px",
 			position:"absolute",
 			backgroundColor: "#3300FF",
 			zIndex:"5",
@@ -376,7 +401,6 @@ function gameFiveInit(){
 		$("#startGame").css({
 			display:"inline"
 		})
-		//setTimeout(gameFiveStart, 5000);
 	
 }
 
@@ -387,16 +411,21 @@ function gameFiveStart(){
 	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
 	$("#inImage").remove();
-	counter=setInterval(gameFivetimer, 2000);
+	
+	
+	counter=setInterval(gameFivetimer, 2000);	
 	gameFivetimer();
-	
-	tl = new TimelineMax({paused:true});
-	
+		
 	//add code here
 	prsObj = $('#present');			 
 	TweenLite.to(prsObj, 1, {css:{top:"145px"}, ease:Bounce.easeOut});
 	
-	$("#marker").css('left', '0px');	
+	$("#marker").css('left', '0px');
+	$('#handleRight').css({opacity: 0.5});
+	
+	leftObj = $('#handleLeft');	
+	rightObj = $('#handleRight');	
+	
 	leftComplete = false;
 	rightComplete = false;
 	mkrPos = 0;
@@ -405,11 +434,25 @@ function gameFiveStart(){
 	rotAmt = 0;
 	rotTmp = 0;
 	tlProg = 0;
-	//tl.progress(0);
+	
+	
+					
+	liftObj = $('#lift');
+	prsObj = $('#present');
+		
+	tl = new TimelineMax({paused:true, onComplete:tlComplete});	
+	tl.add( TweenLite.to(prsObj, 1, {left:236}) );
+	tl.appendMultiple([new TweenLite(prsObj, 1, {top:280}),
+                       new TweenLite(liftObj, 1, {css:{clip:"rect(20px,70px,220px,0px)", top:122}})]);
+                       
+                       
+     setInterval(monMkr, 10);
+	
 	
 	
 	leftDraggable = Draggable.create("#handleLeft", {type: "rotation", throwProps: false,
-			onDrag:function() {
+	
+	onDrag:function() {
 			//console.log('dragStarted')	 	
 		        rot = $("#handleLeft")[0]._gsTransform.rotation*(180 / Math.PI)
 	            rotRnd = Math.round(rot)
@@ -418,10 +461,9 @@ function gameFiveStart(){
 	            cssRotL = "rotate(" + rot*5 + "deg)";
 	            cssRotM = "rotate(" + rot*15 + "deg)";
 	            
-	             monMkr();
 	            
-	            if(mkrPos >=0){
-	            
+	            //monMkr();
+	            	            
 		            if(rotRnd <rotTmp){	            	
 			            rotAmt -= rotInc;			     
 		            }
@@ -429,131 +471,123 @@ function gameFiveStart(){
 		            if(rotRnd >rotTmp){	           		
 			            rotAmt += rotInc;
 		            }
-		             rotTmp = rotRnd
-		                 
-		            $("#marker").css('left', rotAmt);
-		            $("#greenWheelL").css({ "transform": cssRotL});
-		            $("#greenWheelM").css({ "transform": cssRotM});
+		            
+		           rotTmp = rotRnd;
+		          
+		          if(rotAmt >0){
+			          console.log('rotAmt'+rotAmt)
+			          $("#marker").css('left', rotAmt);
+			          $('#handleLeft').css({opacity: 1});	
+		          }else{
+			          $('#handleLeft').css({opacity: 0.5});
+		          }
+		              
+		          $("#greenWheelL").css({ "transform": cssRotL});
+		          $("#greenWheelM").css({ "transform": cssRotM});
 
-	            }
-	            
-	         else {
-	           		console.log('lessThan0');
-	            	rotAmt += rotInc;
-	            	$("#marker").css('left', rotAmt)
-	            	tl.progress(0);
-	            	leftDraggable[0].disable();
-	          } 
+	             
 	          
-	         if(mkrPos >150){
-	         	  console.log('greaterThan150');
-	         	  leftComplete = true;
+	        
+	         if(mkrPos >148){
+	         	  console.log('greaterThan150');	         	
 	         	  rightDraggable[0].enable();
 		          rotAmt -= rotInc;
 		          $("#marker").css('left', rotAmt)
 	              leftDraggable[0].disable();
-	          }              
+	              
+	              //switch the opacity of the active handle and animating arrows
+	              $('#handleLeft').css({opacity: 0.5});
+	              $('#arrowLeft').css({opacity: 0});
+	              
+	              //TweenLite.to($('#handleRight'), 1, {css:{rotation:0}, ease:Power3.easeOut});
+	              $('#handleRight').css({opacity: 1});
+	              $('#arrowRight').css({opacity: 1});
+	          } 
+	                    
 	        },
 	                
 	        onDragEnd:function() {
 	          console.log("dragEnded");
-	          if(leftComplete == false){
-		          leftDraggable[0].enable();
+	          if(rotAmt <0){
+	          	rotAmt = 0
+	          	TweenLite.to(leftObj, 2, {css:{rotation:"0px"}, ease:Elastic.easeOut});
 	          }
 	        }, 
-		});
+	});
 	
 
-		rightDraggable = Draggable.create("#handleRight", {type: "rotation", throwProps: false,
+	rightDraggable = Draggable.create("#handleRight", {type: "rotation", throwProps: false,
 			onDrag:function() {		
 				//console.log('dragStarted')	  	
-		        rot = $("#handleRight")[0]._gsTransform.rotation*(180 / Math.PI)
+		        rot = $("#handleRight")[0]._gsTransform.rotation*(180 / Math.PI);
+		        
 	            rotRnd = Math.round(rot)
 	            mkrPos = $('#marker').position().left;
 	            
 	            cssRotS = "rotate(" + rot*5 + "deg)";
 	            
-	            monMkr();
-	            
-	            if(mkrPos >=150){
-	            
-		            if(rotRnd <rotTmp){	            	
-			            rotAmt -= rotInc;
+	           //monMkr();	            
+		           
+		            if(rotRnd <rotTmp){	 		               	
+			            rotAmt += rotInc;	           		            
 		            }
 		            
-		            if(rotRnd >rotTmp){	           		
-			            rotAmt += rotInc;
+		            if(rotRnd >rotTmp){		            	        		
+			            rotAmt -= rotInc;
 		            }
-		             rotTmp = rotRnd
-		                 
-		            $("#marker").css('left', rotAmt);
+		             
+		           rotTmp = rotRnd;	
+		           	            		                    
+		           if(rotAmt >149){	
+		           		console.log('rotAmt'+rotAmt)
+		           		$("#marker").css('left', rotAmt);
+		           		$('#handleRight').css({opacity: 1});	 		                
+		            }else{
+			            $('#handleRight').css({opacity: 0.5});
+		            }
 		            $("#greenWheelS").css({ "transform": cssRotS});
 	            
-	            }
-	            
-	         else {
-	           		console.log('lessThan150');
-	            	rotAmt += rotInc;
-	            	$("#marker").css('left', rotAmt)
-	            	rightDraggable[0].disable();
-	          } 
-	          
+	           	          
 	         if(mkrPos >299){
 	         	  console.log('greaterThan300');
-	         	  console.log('//////gameWin');
-	         	  gameFiveComplete();
-	         	  //gameFiveWon();
-	         	  rightComplete = true;
-		          rotAmt -= rotInc;
+	         	  console.log('gameWin');
+	         	  gameFiveComplete();       
+	         	  rotAmt -= rotInc;
 		          $("#marker").css('left', rotAmt)
 	              rightDraggable[0].disable();
+	              $('#handleRight').css({opacity: 0.5});
+	              $('#arrowRight').css({opacity: 0});
 	          }              
 	        },
 	        
 	        onDragEnd:function() {
 	          console.log("dragEnded");
-	          if(rightComplete == false){
-		          rightDraggable[0].enable();
+	         if(rotAmt <150){
+	          	rotAmt = 150
+	          	TweenLite.to(rightObj, 2, {css:{rotation:"0px"}, ease:Elastic.easeOut});
 	          }
 	        }, 
 		});
-		rightDraggable[0].disable();	
-		
-		
-		
-		function monMkr(){
-			mkrProg = Math.round((mkrPos/300)*100);
-			//console.log('mkrProg '+mkrProg+"%")
-			
-			tlProg = tl.progress();
-			//console.log('tlProg '+tlProg+"%")
-			
-			tl.progress(mkrProg/100);
-		}
-		
-		 liftObj = $('#lift');
-		 prsObj = $('#present');
-		
-		
-		tl.add( TweenLite.to(prsObj, 1, {left:236}) );
-		tl.appendMultiple([new TweenLite(prsObj, 1, {top:270}),
-                           new TweenLite(liftObj, 1, {css:{clip:"rect(30px,70px,220px,0px)", top:112}})]);
-				
-		function tlComplete(){
-			console.log('tlComplete');
-		}
-		
-		
-	}
+		rightDraggable[0].disable();		
+}
 
+function monMkr(){		
+	mkrProg = Math.round((mkrPos/300)*103);				
+	tl.progress(mkrProg/100);
+	
+}
+
+function tlComplete(){
+	console.log('tlComplete');
+}
 
 
 function gameFivetimer(){
 		 gameFiveLive = true;
 		 gameFiveTimer --;
-		 $('#timerInside').animate({width:"-=30px"},500);
-		 if (gameFiveTimer <= 0)
-		 {		 
+		 $('#timerInside').animate({width:"-=30px"},2000);
+		
+		 if (gameFiveTimer <= 0) {		 
 			 clearInterval(counter);
 			 gameFiveLost();
 

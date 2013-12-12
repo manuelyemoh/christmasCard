@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="utf-8"><!-- set viewport width to 660px and disable zooming/scaling -->
+    <meta name="viewport" content="user-scalable=0, initial-scale=1.0"><!-- tell iOS that this app can work in full screen mode. No need for navbars -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- link the app icons - shown on the home screen -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <title>Naughty Little Elf</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/m.css"> 
+    <div id="dRedirect">
+	 <?php include 'dRedirect.php'; ?>
+	 <?php include_once("analyticstracking.php") ?>
+    </div>
+    <link rel="icon" type="image/png" href="assets/images/favicon.ico">
+</head>
+
+<body>
+    <audio></audio>
+
+    <div id="errorCase">
+        <div id="errorLandscape"></div>
+    </div>
+
+    <div id="preloader">
+        <div id="preloaderClip"><div id="loadingText"></div></div>
+       
+    </div>
+
+    <div id="loader"></div>
+
+    <div class="canvas-container">
+        <div id="main">
+            <div id="timer">
+                <div id="timerInside"></div>
+            </div>
+            <div id="gameNavigation">
+                <div id="gameArea"><div id="startGame"></div></div>
+                <div id="gameInstructionBg"></div>
+                <div id="previewStuff"></div>
+                <div id="resultsScreen">
+                    <div id="gameAreaResults">
+                    	<div id="elfDance"></div>
+                    	<div id="elfLost"></div>
+                    	<div id="elfPants"></div>
+                    	<div id="elfInSnow"></div>
+                    	<div id="signPostWon"></div>
+                        <div id="signPostLose"></div>
+                        <div id="presantWon"></div>
+                        <div id="presantLose"></div>                       
+                        <div id="robotWon"></div>
+                        <div id="robotLose"></div>
+                        <div id="raindeerWon"></div>
+                        <div id="raindeerLose"></div>
+                        <div id="abWon"></div>
+                        <div id="abLost"></div> 
+                        <div id="snowManWin"></div>          
+                        <div id="snowManLose"></div>
+                        <div id="raindeerFootprints"></div>
+
+                        <div id="greyContainer">
+                            <div id="greyStar0"></div>
+
+                            <div id="greyStar1"></div>
+
+                            <div id="greyStar2"></div>
+
+                            <div id="greyStar3"></div>
+
+                            <div id="greyStar4"></div>
+
+                            <div id="greyStar5"></div>
+                        </div>
+
+                        <div id="starContainer">
+                            <div id="goldStar0"></div>
+
+                            <div id="goldStar1"></div>
+
+                            <div id="goldStar2"></div>
+
+                            <div id="goldStar3"></div>
+
+                            <div id="goldStar4"></div>
+
+                            <div id="goldStar5"></div>
+                        </div>
+
+                        <div id="resultsWon"></div>
+
+                        <div id="resultsLost"></div>
+
+                        <div id="resultsText">
+                            <p></p>
+
+                            <p></p>
+                        </div>
+
+                        <div id="resultsCircle"></div>
+
+                        <div id="resultsBottom">
+                            <div id="bottomWhite"></div>
+                        </div>
+
+                        <div id="Stars"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><script src="assets/js/CSSPlugin.js" type="text/javascript">
+</script><script src="assets/js/EasePack.js" type="text/javascript">
+</script><script src="assets/js/ThrowPropsPlugin.min.js" type="text/javascript">
+</script><script src="assets/js/Draggable.min.js" type="text/javascript">
+</script><script src="assets/js/shake.js" type="text/javascript">
+</script><script src="assets/js/TweenLite.js" type="text/javascript">
+</script><script src="assets/js/jquery.js" type="text/javascript">
+</script><script src="assets/js/TimelineMax.min.js" type="text/javascript">
+</script><script src="assets/js/TweenMax.min.js" type="text/javascript">
+</script><script src="assets/js/jquery.mobile.js" type="text/javascript">
+</script><script src="assets/js/jquery.transform2d.js" type="text/javascript">
+</script><script src="assets/js/howler.min.js" type="text/javascript">
+</script><script src="assets/js/html5Preload.js" type="text/javascript">
+</script><script src="assets/js/main.js" type="text/javascript">
+</script><!--<script src="phonegap.js"></script>-->
+</body>
+</html>

@@ -1,6 +1,6 @@
 //var gameTwoImages = ["assets/images/bg2x.jpg","#d9ebec"];
 var gameTwoImages = [];
-var gameTwoColor = ["#d9ebec"];
+var gameTwoColor = ["#C9E3F2"];
 var gameTwoTimer = 11;
 var counter;
 var gameTwoLive = false;
@@ -24,13 +24,17 @@ var iceCrack = new Howl({urls: ['assets/sounds/iceCracked.mp3', 'assets/sounds/i
 var breakPositions = ["","-174px -151px","-174px -296px","-174px -439px","-174px -560px"];
 
 if (retina) {
-	gameTwoImages = ["assets/images/bg2x.png","assets/images/gameTwo/mainSprite@2x.png"];
+
+	retinaCopy = "@2x";
+	gameTwoImages = ["assets/images/bg2x.png","assets/images/gameTwo/mainSprite@2x.png","assets/images/results/robotWon@2x.jpg","assets/images/results/robotLose@2x.jpg","assets/images/results/elfDancing@2x.jpg","assets/images/results/pngElfLostHuff@2x"];
 	spriteLocation = "assets/images/gameTwo/mainSprite@2x.png";
 	inLocation = "assets/images/instructionImages@2x.png";
 	backgroundS = "305px 695px";
 }
 else {
-	gameTwoImages = ["assets/images/bg2x.png","assets/images/gameTwo/mainSprite.png"];
+
+	retinaCopy = "";
+	gameTwoImages = ["assets/images/bg2x.png","assets/images/gameTwo/mainSprite.png","assets/images/results/robotWon.jpg","assets/images/results/robotLose.jpg","assets/images/results/elfDancing.jpg","assets/images/results/pngElfLostHuff"];
 	spriteLocation = "assets/images/gameTwo/mainSprite.png";
 	inLocation = "assets/images/instructionImages.png";
 	backgroundS = "305px 695px";
@@ -47,10 +51,11 @@ function gameTwoInit(){
 	brokeOne = false;
 	brokeTwo = false;
 	brokeThree = false;
+	gameTwoLive = false;
 	
 	//$("#gameNavigation").append("<div id='previewIn'>");
 
-	$( "#gameNavigation #gameArea" ).append( "<div id='gameTwo'><p>"+mainCopy[6].lineOne+"</p><p>"+mainCopy[6].lineThree+"<span> "+ mainCopy[6].span+" "+"</span>"+mainCopy[6].lineTwo+"</p></div><div id='inImage'></div><div id='gameTwoElements'><div id='breakOneToy'></div><div id='breakTwoToy'></div><div id='breakThreeToy'></div><div id='breakOne'></div><div id='breakTwo'></div><div id='breakThree'></div><div id='breakMount'><div id='whiteSpace'></div></div></div>" );
+	$( "#gameNavigation #gameArea" ).append( "<div id='gameTwo'><p>"+mainCopy[5].lineOne+"</p><p>"+mainCopy[5].lineThree+"<span> "+ mainCopy[5].span+" "+"</span>"+mainCopy[5].lineTwo+"</p></div><div id='gameTwoElements'><div id='breakOneToy'></div><div id='breakTwoToy'></div><div id='breakThreeToy'></div><div id='breakOne'></div><div id='breakTwo'></div><div id='breakThree'></div><div id='breakMount'><div id='whiteSpace'></div></div></div>" );
 	
 	/*$("#previewIn").css({	
 		
@@ -67,7 +72,7 @@ function gameTwoInit(){
 	
 	$("#gameTwo").css({	
 		
-			top: "141px",
+			top: "95px",
 			width: "282px",
 			color: "white",
 			textAlign: "center",
@@ -86,7 +91,7 @@ function gameTwoInit(){
 			margin: "0",
 			padding: "0",
 			position: "relative",
-			top: "2px"
+			top: "7px"
 			
 		});
 		
@@ -102,7 +107,7 @@ function gameTwoInit(){
 		
 		$("#gameTwo p:last").css({
 			
-			top:"22px",
+			top:"28px",
 			letterSpacing:"0.7px",
 			width:"270px",
 			lineHeight:"23px",
@@ -110,29 +115,17 @@ function gameTwoInit(){
 			
 	
 		});
-		
-		$("#inImage").css({
-			
-			background:'url('+ inLocation +') no-repeat scroll -0px -150px',
-			backgroundSize:"375px 233px",
-			position:"absolute",
-			left:"70px",
-			top:"342px",
-			width:"180px",
-			height:"78px",
-			zIndex:"11"
-			
-		});
 	
 	$("#gameTwoElements #breakMount").css({
 				
-			backgroundImage:"url(assets/images/gameTwo/breakMount.png)",
+			background:"url(assets/images/gameTwo/breakMount"+retinaCopy+".png)",
+			backgroundSize:"361px 142px",
 		    height: "144px",
 		    left: "-20px",
 		    opacity: "1",
 		    position: "absolute",
 		    top: "82px",
-		    width: "360px",
+		    width: "361px",
 		    zIndex: "1"
 			
 		});
@@ -159,7 +152,7 @@ function gameTwoInit(){
 		position:"absolute",
 		background: 'url('+ spriteLocation +') no-repeat scroll -28px -108px rgba(0, 0, 0, 0)',
 		backgroundSize: backgroundS,
-		zIndex: "2"
+		zIndex: "2",
 
 	});
 	
@@ -237,7 +230,10 @@ function gameTwoInit(){
 		})
 			
 	}
- 
+	
+	$('#breakOneToy').addClass('unselectable');
+	$('#breakTwoToy').addClass('unselectable');
+	$('#breakThreeToy').addClass('unselectable');
 	$("#gameTwo").show();
 	$("#gameInstructionBg").show();
 	$("#startGame").css({
@@ -253,73 +249,77 @@ function gameTwoStart(){
 	$("#gameInstructionBg").hide();
 	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
-	$("#inImage").remove();
 	
 	counter=setInterval(gameTwotimer, 1000);
 	gameTwotimer();
 	
-	jQuery( "#gameTwoElements #breakOne" ).on( "tap", function() {
 	
-		oneClicks ++;
-		iceHit.play();
+	setTimeout(function(){
+	
+		jQuery( "#gameTwoElements #breakOne" ).on( "tap", function() {
 		
-		$('#gameTwoElements '+'#'+breakElements[0].part).css({
-		
-			"background-position": breakPositions[oneClicks]
-			//"top": breakTop[oneClicks]
-		
+			oneClicks ++;
+			iceHit.play();
+			
+			$('#gameTwoElements '+'#'+breakElements[0].part).css({
+			
+				"background-position": breakPositions[oneClicks]
+				//"top": breakTop[oneClicks]
+			
+			});
+			
+			if(oneClicks > 4){
+			
+				$("#gameTwoElements #breakOne").hide();
+				brokeOne = true;
+				animationToyOne();	
+				iceCrack.play();		
+			}
+			allBroken();
 		});
 		
-		if(oneClicks > 4){
-		
-			$("#gameTwoElements #breakOne").hide();
-			brokeOne = true;
-			animationToyOne();	
-			iceCrack.play();		
-		}
-		allBroken();
-	});
-	
-	jQuery( "#gameTwoElements #breakTwo" ).on( "tap", function() {
-		
-		twoClicks ++;
-		iceHit.play();
-		
-		$('#gameTwoElements '+'#'+breakElements[1].part).css({
-		
-			"background-position": breakPositions[twoClicks]
-		
+		jQuery( "#gameTwoElements #breakTwo" ).on( "tap", function() {
+			
+			twoClicks ++;
+			iceHit.play();
+			
+			$('#gameTwoElements '+'#'+breakElements[1].part).css({
+			
+				"background-position": breakPositions[twoClicks]
+			
+			});
+			
+			if(twoClicks > 4){
+			
+				$("#gameTwoElements #breakTwo").hide();
+				brokeTwo = true;
+				animationToyTwo();
+				iceCrack.play();
+			}
+			allBroken();
 		});
 		
-		if(twoClicks > 4){
+		jQuery( "#gameTwoElements #breakThree" ).on( "tap", function() {
 		
-			$("#gameTwoElements #breakTwo").hide();
-			brokeTwo = true;
-			animationToyTwo();
-			iceCrack.play();
-		}
-		allBroken();
-	});
-	
-	jQuery( "#gameTwoElements #breakThree" ).on( "tap", function() {
-	
-		threeClicks ++;
-		iceHit.play();		
-		$('#gameTwoElements '+'#'+breakElements[2].part).css({
-		
-			"background-position": breakPositions[threeClicks]
-		
+			threeClicks ++;
+			iceHit.play();		
+			$('#gameTwoElements '+'#'+breakElements[2].part).css({
+			
+				"background-position": breakPositions[threeClicks]
+			
+			});
+			
+			if(threeClicks > 4){
+			
+				$("#gameTwoElements #breakThree").hide();
+				brokeThree = true;
+				animationToyThree();
+				iceCrack.play();
+			}
+			allBroken();
 		});
 		
-		if(threeClicks > 4){
-		
-			$("#gameTwoElements #breakThree").hide();
-			brokeThree = true;
-			animationToyThree();
-			iceCrack.play();
-		}
-		allBroken();
-	});
+		},500)
 	
 }
 
@@ -385,7 +385,7 @@ function gameTwotimer(){
 		 gameTwoLive = true;
 		 gameTwoTimer --;
 		 
-		 $('#timerInside').animate({width:"-=30px"},500);
+		 $('#timerInside').animate({width:"-=30px"},1000);
 		 if (gameTwoTimer <= 0)
 		 {		 
 			clearInterval(counter);

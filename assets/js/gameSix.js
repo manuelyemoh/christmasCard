@@ -1,5 +1,5 @@
 var gameSixImages = [];
-var gameSixColor = "#e0f4f4";
+var gameSixColor = "#C9E3F2";
 var gameSixTimer = 11;
 var counter;
 var gameSixLive = false;
@@ -20,7 +20,7 @@ var penShut = new Howl({urls: ['assets/sounds/gateClose.mp3', 'assets/sounds/gat
 
 if (retina) {
 
-	var gameSixImages = ["assets/images/bg2x.png","assets/images/gameSix/mainSprite@2x.png","assets/images/gameSix/raindeerEating@2x.png","assets/images/gameSix/snowTracksBg@2x.png","assets/images/gameSix/peachHillBg@2x.png"];
+	var gameSixImages = ["assets/images/bg2x.png","assets/images/gameSix/mainSprite@2x.png","assets/images/gameSix/raindeerEating@2x.png","assets/images/gameSix/snowTracksBg@2x.png","assets/images/gameSix/peachHillBg@2x.png","assets/images/results/RaindeerWin@2x.jpg","assets/images/results/elfInTheSnow@2x.jpg"];
 	tracksLocation = "assets/images/gameSix/snowTracksBg@2x.png";
 	peachLocation = "assets/images/gameSix/peachHillBg@2x.png";
 	spriteLocation = "assets/images/gameSix/mainSprite@2x.png";
@@ -34,7 +34,7 @@ if (retina) {
 }
 else {
 
-	var gameSixImages = ["assets/images/bg2x.png","assets/images/gameSix/mainSprite.png","assets/images/gameSix/raindeerEating.png","assets/images/gameSix/snowTracksBg.png","assets/images/gameSix/peachHillBg.png"];
+	var gameSixImages = ["assets/images/bg2x.png","assets/images/gameSix/mainSprite.png","assets/images/gameSix/raindeerEating.png","assets/images/gameSix/snowTracksBg.png","assets/images/gameSix/peachHillBg.png","assets/images/results/RaindeerWin.jpg","assets/images/results/elfInTheSnow.jpg"];
 	tracksLocation = "assets/images/gameSix/snowTracksBg.png";
 	peachLocation = "assets/images/gameSix/peachHillBg.png";
 	spriteLocation = "assets/images/gameSix/mainSprite.png";
@@ -51,12 +51,19 @@ function gameSixInit(){
 
 	countSuccess = 0;
 	gameSixTimer = 11;
+	gameSixLive = false;
 	gameSixEnded = false;
-	gameSixStar = false;
+	gameSixStar = false;	
+	eatingNumber = 0;
+	hangingNumber = 0;
+	walkingNumber = 0;
+	raindeerIn = [true,false,false,false,false,false];
+	raindeerTimer = [];
+	currentlyDown = false;
 	
 	//$("#gameNavigation").append("<div id='previewIn'>");
 	
-	$( "#gameNavigation #gameArea" ).append( "<div id='gameSix'><p>"+mainCopy[7].lineOne+"</p><p><span>"+mainCopy[7].span+" "+"</span>"+mainCopy[7].lineTwo+"</p></div><div id='inImage'></div><div id='gameSixElements'><div id='deer0'></div><div id='deer1'></div><div id='deer2'></div><div id='deer3'></div><div id='deer4'></div><div id='deer5'></div><div id='penBack'></div><div id='penFront'></div><div id='backgroundPrints'></div><div id='peachHillBg'></div></div></div>" );
+	$( "#gameNavigation #gameArea" ).append( "<div id='gameSix'><p>"+mainCopy[6].lineOne+"</p><p><span>"+mainCopy[6].span+" "+"</span>"+mainCopy[6].lineTwo+"</p></div><div id='gameSixElements'><div id='deer0'></div><div id='deer1'></div><div id='deer2'></div><div id='deer3'></div><div id='deer4'></div><div id='deer5'></div><div id='penBack'></div><div id='penFront'></div><div id='backgroundPrints'></div><div id='peachHillBg'></div></div></div>" );
 	
 		/*$("#previewIn").css({	
 			
@@ -73,7 +80,7 @@ function gameSixInit(){
 		
 		$("#gameSix").css({	
 		
-			top: "141px",
+			top: "149px",
 			width: "282px",
 			color: "white",
 			textAlign: "center",
@@ -107,26 +114,13 @@ function gameSixInit(){
 		
 		$("#gameSix p:last").css({
 			
-			top:"18px",
-			letterSpacing:"0.7px",
-			width:"236px",
+			top:"21px",
+			letterSpacing:"0.5px",
+			width:"286px",
 			lineHeight:"23px",
-			left:"25px"
+			left:"-1px"
 			
 	
-		});
-		
-		$("#inImage").css({
-			
-			background:'url('+ inLocation +') no-repeat scroll -0px -70px',
-			backgroundSize:"375px 233px",
-			position:"absolute",
-			left:"70px",
-			top:"342px",
-			width:"180px",
-			height:"68px",
-			zIndex:"11"
-			
 		});
 		
 		$("#gameSixElements").css({
@@ -217,8 +211,8 @@ function gameSixInit(){
 			xR:"280",
 			yT:"49",
 			yB:"135",
-			sL:"9px",
-			sT:"80px",
+			sL:"15px",
+			sT:"90px",
 			color:"blue",
 			width:"64px",
 			height:"44px",
@@ -237,8 +231,8 @@ function gameSixInit(){
 			xR:"280",
 			yT:"49",
 			yB:"135",
-			sL:"175px",
-			sT:"375px",
+			sL:"213px",
+			sT:"347px",
 			color:"blue",
 			width:"64px",
 			height:"72px",
@@ -258,8 +252,8 @@ function gameSixInit(){
 			xR:"280",
 			yT:"49",
 			yB:"135",
-			sL:"200px",
-			sT:"340px",
+			sL:"145px",
+			sT:"304px",
 			color:"blue",
 			width:"64px",
 			height:"44px",
@@ -278,8 +272,8 @@ function gameSixInit(){
 			xR:"280",
 			yT:"49",
 			yB:"135",
-			sL:"225px",
-			sT:"240px",
+			sL:"236px",
+			sT:"186px",
 			color:"blue",
 			width:"64px",
 			height:"72px",
@@ -292,15 +286,15 @@ function gameSixInit(){
 			endL:"171px",
 			endT:"107px",
 			dragStop:false,
-			index: "6"
+			index: "8"
 			},whichDeer={
 			part:"deer5",
 			xL:"64",
 			xR:"280",
 			yT:"49",
 			yB:"135",
-			sL:"15px",
-			sT:"278px",
+			sL:"26px",
+			sT:"240px",
 			color:"blue",
 			width:"64px",
 			height:"72px",
@@ -413,17 +407,16 @@ function startAgain(){
 
 function gameSixStart(){
 
-		animateRaindeerGraze(eatingNumber,1,raindeerLocation,raindeerS,150,44,800);
-		animateRaindeerWalk(walkingNumber,2,raindeerLocation,raindeerS,150,73,1200,raindeers[2].increment);
-		animateRaindeerGraze(eatingNumber,3,raindeerLocation,raindeerS,150,44,800);
-		animateRaindeerWalk(walkingNumber,4,raindeerLocation,raindeerS,150,73,1200,raindeers[4].increment);
-		animateRaindeerWalk(walkingNumber,5,raindeerLocation,raindeerS,150,73,1200,raindeers[5].increment);
+		animateRaindeerGraze(eatingNumber,1,raindeerLocation,raindeerS,150,44,400);
+		animateRaindeerWalk(walkingNumber,2,raindeerLocation,raindeerS,115,73,1200,raindeers[2].increment);
+		animateRaindeerGraze(eatingNumber,3,raindeerLocation,raindeerS,150,44,400);
+		animateRaindeerWalk(walkingNumber,4,raindeerLocation,raindeerS,115,73,1200,raindeers[4].increment);
+		animateRaindeerWalk(walkingNumber,5,raindeerLocation,raindeerS,115,73,1200,raindeers[5].increment);
 	
 		$("#gameSix").hide();
 		$("#gameInstructionBg").hide();
 		$('#timerInside').animate({width:"296px"},0);
 		$('#timer').show();
-		$("#inImage").remove();
 		
 	for(i=1;i<=5;i++){
 	
@@ -435,7 +428,7 @@ function gameSixStart(){
 				
 				currentlyDown = true;
 				clearTimeout(raindeerTimer[changeIndex]);
-				animateRaindeerHang(hangingNumber,changeIndex,raindeerLocation,raindeerS,100,63,630);
+				animateRaindeerHang(hangingNumber,changeIndex,raindeerLocation,raindeerS,100,62,630);
 			}
 					
 		});
@@ -510,6 +503,13 @@ function gameSixStart(){
 			
 		});
 	}
+	
+	$('#deer0').addClass('unHighlightable');
+	$('#deer1').addClass('unHighlightable');
+	$('#deer2').addClass('unHighlightable');
+	$('#deer3').addClass('unHighlightable');
+	$('#deer4').addClass('unHighlightable');
+	$('#deer5').addClass('unHighlightable');
 
 	counter=setInterval(gameSixtimer, 1000);
 	gameSixtimer();
@@ -531,7 +531,7 @@ function animateRaindeerGraze(whatNumber,whatArray,whatLocation,whatSize,whatSpe
 
 	raindeerTimer[whatArray] = setTimeout(function(){
 	
-		animateRaindeerGraze(whatNumber,whatArray,raindeerLocation,raindeerS,150,44,800)
+		animateRaindeerGraze(whatNumber,whatArray,raindeerLocation,raindeerS,150,44,340)
 	
 	},whatSpeed);
 	
@@ -560,7 +560,7 @@ function animateRaindeerHang(whatNumber,whatArray,whatLocation,whatSize,whatSpee
 
 	raindeerTimer[whatArray] = setTimeout(function(){
 	
-		animateRaindeerHang(whatNumber,whatArray,raindeerLocation,raindeerS,100,63,630)
+		animateRaindeerHang(whatNumber,whatArray,raindeerLocation,raindeerS,100,62,300)
 	
 	},whatSpeed);
 	
@@ -604,7 +604,19 @@ function animateRaindeerWalk(whatNumber,whatArray,whatLocation,whatSize,whatSpee
 }
 
 
-function insidePen(whatNumber){
+	function insidePen(whatNumber){
+	
+	if(whatNumber == 4){
+		
+		$('#gameSixElements '+'#'+raindeers[whatNumber].part).css({
+
+		"zIndex": '6',
+	
+			
+		})
+
+		
+	}
 	
 	$('#gameSixElements '+'#'+raindeers[whatNumber].part).css({
 
@@ -647,7 +659,7 @@ function correctCounter(){
 function gameSixtimer(){
          gameSixLive = true;
 		 gameSixTimer --;
-		 $('#timerInside').animate({width:"-=30px"},500);
+		 $('#timerInside').animate({width:"-=30px"},1000);
 		 if (gameSixTimer <= 0)
 		 {		 
 			 clearInterval(counter);
@@ -662,7 +674,7 @@ function gameSixWon(){
 		 gameSixStar = true;
 		 $("#resultsScreen").show();
 		 $('#timer').hide();
-		 $("#resultsScreen #goldStar").show();
+		 $("#gameSix").remove();
 		 $("#gameNavigation #gameArea #gameSix").remove();
 		 $("#gameNavigation #gameArea #gameSixElements").remove();
 		 
@@ -675,6 +687,7 @@ function gameSixLost(){
 		 $("#resultsScreen").show();
 		 $('#timer').hide();
 		 $("#gameSix").remove();
+		 $("#gameNavigation #gameArea #gameSix").remove();
 		 $("#gameNavigation #gameArea #gameSixElements").remove();
 		 
 }

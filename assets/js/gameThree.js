@@ -1,5 +1,5 @@
 var gameThreeImages = [];
-var gameThreeColor = ["#c0dce6"];
+var gameThreeColor = ["#C9E3F2"];
 var gameThreeTimer = 11;
 var counter;
 var countSuccess = 0;
@@ -16,13 +16,13 @@ var backgroundS;
 var snowManClick = new Howl({urls: ['assets/sounds/snowManClick.mp3', 'assets/sounds/snowManClick.ogg', 'assets/sounds/snowManClick.aac']});
 
 if (retina) {
-	gameThreeImages = ["assets/images/bg2x.png","assets/images/gameThree/mainSprite@2x.png"];
+	gameThreeImages = ["assets/images/bg2x.png","assets/images/gameThree/mainSprite@2x.png","assets/images/results/elfDancing@2x.jpg","assets/images/results/SnowManWin@2x.jpg","assets/images/results/elfInTheSnow@2x.jpg","assets/images/results/SnowManLose@2x.jpg"];
 	inLocation = "assets/images/instructionImages@2x.png";
 	spriteLocation = "assets/images/gameThree/mainSprite@2x.png";
 	backgroundS = "346px 236px";
 }
 else {
-	gameThreeImages = ["assets/images/bg2x.png","assets/images/gameThree/mainSprite.png"];
+	gameThreeImages = ["assets/images/bg2x.png","assets/images/gameThree/mainSprite.png","assets/images/results/elfDancing.jpg","assets/images/results/SnowManWin.jpg","assets/images/results/elfInTheSnow.jpg","assets/images/results/SnowManLose.jpg"];
 	inLocation = "assets/images/instructionImages.png";
 	spriteLocation = "assets/images/gameThree/mainSprite.png";
 	backgroundS = "346px 236px";
@@ -34,13 +34,15 @@ function gameThreeInit(){
 	 gameThreeTimer = 11;
 	 countSuccess = 0;
 	 gameThreeEnded = false;
+	 gameThreeStar = false;
 	 middleOne = false;
 	 middleTwo = false;
 	 middleThree = false;
+	 gameThreeLive = false;
 	 
 	 //$("#gameNavigation").append("<div id='previewIn'>");
 	
-		$( "#gameNavigation #gameArea" ).append( "<div id='gameThree'><p>"+mainCopy[4].lineOne+"</p><p><span>"+mainCopy[4].span+" "+"</span>"+mainCopy[4].lineTwo+"</p></div><div id='inImage'></div><div id='gameThreeElements'><div id='snowManBodyOne'></div><div id='snowManBodyTwo'></div><div id='snowManBodyThree'></div><div id='snowManMiddleOne'></div><div id='snowManMiddleTwo'></div><div id='snowManMiddleThree'></div><div id='snowManTopOne'></div><div id='snowManTopTwo'></div><div id='snowManTopThree'></div><div id='snowManMiddleOneHit'></div><div id='snowManMiddleTwoHit'></div><div id='snowManMiddleThreeHit'></div><div id='snowManTopOneHit'></div><div id='snowManTopTwoHit'></div><div id='snowManTopThreeHit'></div><div id='snowManMount'><div id='whiteSpace'></div></div></div>");
+		$( "#gameNavigation #gameArea" ).append( "<div id='gameThree'><p>"+mainCopy[3].lineOne+"</p><p><span>"+mainCopy[3].span+" "+"</span>"+mainCopy[3].lineTwo+"</p></div><div id='gameThreeElements'><div id='snowManBodyOne'></div><div id='snowManBodyTwo'></div><div id='snowManBodyThree'></div><div id='snowManMiddleOne'></div><div id='snowManMiddleTwo'></div><div id='snowManMiddleThree'></div><div id='snowManTopOne'></div><div id='snowManTopTwo'></div><div id='snowManTopThree'></div><div id='snowManMiddleOneHit'></div><div id='snowManMiddleTwoHit'></div><div id='snowManMiddleThreeHit'></div><div id='snowManTopOneHit'></div><div id='snowManTopTwoHit'></div><div id='snowManTopThreeHit'></div><div id='snowManMount'><div id='whiteSpace'></div></div></div>");
 		
 		/*$("#previewIn").css({	
 		
@@ -57,11 +59,11 @@ function gameThreeInit(){
 
 		$("#gameThree").css({	
 		
-			top: "142px",
+			top: "96px",
 			width: "300px",
 			color: "white",
 			textAlign: "center",
-			left: "11px",
+			left: "13px",
 			position: "absolute",
 			zIndex:"10"
 			
@@ -76,7 +78,7 @@ function gameThreeInit(){
 			margin: "0",
 			padding: "0",
 			position: "relative",
-			top: "2px"
+			top: "4px"
 			
 		});
 		
@@ -92,22 +94,12 @@ function gameThreeInit(){
 		
 		$("#gameThree p:last").css({
 			
-			top:"20px",
-			letterSpacing:"0.7px"
+			top:"27px",
+			letterSpacing:"0.7px",
+			lineHeight:"23px",
+			left:"18px",
+			width:"267px"
 	
-		});
-		
-		$("#inImage").css({
-			
-			background:'url('+ inLocation +') no-repeat scroll -190px -76px',
-			backgroundSize:"375px 233px",
-			position:"absolute",
-			left:"70px",
-			top:"342px",
-			width:"180px",
-			height:"67px",
-			zIndex:"11"
-			
 		});
 		
 		$("#gameThreeElements").css({
@@ -365,9 +357,8 @@ function gameThreeInit(){
 					"background": 'url('+ spriteLocation +') '+ snowBodyParts[f].bPosL +' '+ snowBodyParts[f].bPosT +'',
 					"backgroundSize": backgroundS,
 					"position":"absolute",
-					"opacity":"0.8",
+					"opacity":"1",
 					"zIndex":"2"
-
 					
 				});
 				
@@ -388,8 +379,7 @@ function gameThreeStart(){
 	$("#gameInstructionBg").hide();
 	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
-	$("#inImage").remove();
-	counter=setInterval(gameThreetimer, 1500);
+	counter=setInterval(gameThreetimer, 2000);
 	gameThreetimer();
 	
 	for(i=0;i<=5;i++){
@@ -564,7 +554,7 @@ function gameThreetimer(){
 		 gameThreeLive = true;
 		 gameThreeTimer --;
 		 
-		 $('#timerInside').animate({width:"-=30px"},500);
+		 $('#timerInside').animate({width:"-=30px"},2000);
 		 if (gameThreeTimer <= 0)
 		 {		 
 			clearInterval(counter);

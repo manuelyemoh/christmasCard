@@ -2,7 +2,7 @@
 // SHAKE GAME //
 
 var gameOneImages = [];
-var gameOneColor = ["#c8e2f1"];
+var gameOneColor = ["#C9E3F2"];
 var gameOneTimer = 11;
 var counter;
 var shakeCounter = 0;
@@ -17,18 +17,18 @@ var shakeHit = new Howl({urls: ['assets/sounds/shakeSound.mp3', 'assets/sounds/s
 
 if (retina) {
 
-	gameOneImages = ["assets/images/bg2x.png","assets/images/gameOne/mainSprite@2x.png"];
+	gameOneImages = ["assets/images/bg2x.png","assets/images/gameOne/mainSprite@2x.png","assets/images/gameOne/shakeBot.png","assets/images/results/elfSantasPantsWin@2x.jpg","assets/images/results/signPostWin@2x.png","assets/images/results/pngElfLostHuff@2x.jpg","assets/images/results/signPostLost@2x.png"];
 	spriteLocation = "assets/images/gameOne/mainSprite@2x.png";
 	inLocation = "assets/images/instructionImages@2x.png";
-	backgroundS = "227px 342px";
+	backgroundS = "277px 342px";
 	
 }
 else {
 
-	gameOneImages = ["assets/images/bg2x.png","assets/images/gameOne/mainSprite.png"];
+	gameOneImages = ["assets/images/bg2x.png","assets/images/gameOne/mainSprite.png","assets/images/gameOne/shakeBot.png","assets/images/results/elfSantasPantsWin.jpg","assets/images/results/signPostWin.png","assets/images/results/pngElfLostHuff.jpg","assets/images/results/signPostLost.png"];
 	spriteLocation = "assets/images/gameOne/mainSprite.png";
 	inLocation = "assets/images/instructionImages.png";
-	backgroundS = "227px 342px";
+	backgroundS = "277px 342px";
 	
 }
 
@@ -37,10 +37,12 @@ function gameOneInit(){
 		gameOneEnded = false;
 		shakeCounter = 0;
 		snowDrop = 2;
+		gameOneLive = false;
+		gameOneStar = false;
 		
 		//$("#gameNavigation").append("<div id='previewIn'>");
 		
-		$( "#gameNavigation #gameArea" ).append( "</div><div id='gameOne'><p>"+mainCopy[8].lineOne+"</p><p><span>"+mainCopy[8].span+" "+"</span>"+mainCopy[8].lineTwo+"</p></div><div id='inImage'></div><div id='gameOneElements'><div id='pants'></div><div id='mainPole'></div><div id='northPole'></div><div id='snowFrag0'></div><div id='snowFrag1'></div><div id='snowFrag2'></div><div id='snowFrag3'></div><div id='snowFrag4'></div><div id='shakeMount'><div id='whiteSpace'></div></div></div></div>" );
+		$( "#gameNavigation #gameArea" ).append( "</div><div id='gameOne'><p>"+mainCopy[7].lineOne+"</p><p><span>"+mainCopy[7].span+" "+"</span>"+mainCopy[7].lineTwo+"</p></div><div id='gameOneElements'><div id='pants'></div><div id='mainPole'></div><div id='northPole'></div><div id='snowFrag0'></div><div id='snowFrag1'></div><div id='snowFrag2'></div><div id='snowFrag3'></div><div id='snowFrag4'></div><div id='shakeMount'><div id='whiteSpace'></div></div></div></div>" );
 		
 		/*$("#previewIn").css({	
 		
@@ -58,7 +60,7 @@ function gameOneInit(){
 		
 		$("#gameOne").css({	
 		
-			top: "145px",
+			top: "124px",
 			width: "300px",
 			color: "white",
 			textAlign: "center",
@@ -94,19 +96,6 @@ function gameOneInit(){
 			top:"20px",
 			letterSpacing:"0.7px"
 	
-		});
-		
-		$("#inImage").css({
-			
-			background:'url('+ inLocation +') no-repeat scroll -185px -6px',
-			backgroundSize:"375px 233px",
-			position:"absolute",
-			left:"70px",
-			top:"342px",
-			width:"180px",
-			height:"54px",
-			zIndex:"11"
-			
 		});
 		
 		$("#gameOneElements").css({
@@ -147,7 +136,7 @@ function gameOneInit(){
 		shakeElements = [whatElement={
 			part:"pants",
 			index:"3",
-			sL:"78px",
+			sL:"68px",
 			sT:"108px",
 			color:"blue",
 			width:"95px",
@@ -162,7 +151,7 @@ function gameOneInit(){
 			color:"blue",
 			width:"31px",
 			height:"325px",
-			bPosL:"-187px",
+			bPosL:"-231px",
 			bPosT:"-10px"
 			},whatElement={
 			part:"northPole",
@@ -170,9 +159,9 @@ function gameOneInit(){
 			sL:"185px",
 			sT:"216px",
 			color:"blue",
-			width:"100px",
+			width:"120px",
 			height:"176px",
-			bPosL:"-3px",
+			bPosL:"-10px",
 			bPosT:"-126px"
 			},whatElement={
 			part:"snowFrag0",
@@ -182,7 +171,7 @@ function gameOneInit(){
 			color:"blue",
 			width:"38px",
 			height:"21px",
-			bPosL:"-101px",
+			bPosL:"-131px",
 			bPosT:"-231px"
 			},whatElement={
 			part:"snowFrag1",
@@ -192,7 +181,7 @@ function gameOneInit(){
 			color:"blue",
 			width:"38px",
 			height:"20px",
-			bPosL:"-148px",
+			bPosL:"-181px",
 			bPosT:"-242px"
 			},whatElement={
 			part:"snowFrag2",
@@ -200,9 +189,9 @@ function gameOneInit(){
 			sL:"253px",
 			sT:"226px",
 			color:"blue",
-			width:"40px",
+			width:"47px",
 			height:"40px",
-			bPosL:"-108px",
+			bPosL:"-127px",
 			bPosT:"-261px"
 			},whatElement={
 			part:"snowFrag3",
@@ -212,7 +201,7 @@ function gameOneInit(){
 			color:"blue",
 			width:"20px",
 			height:"21px",
-			bPosL:"-147px",
+			bPosL:"-182px",
 			bPosT:"-274px"
 			},whatElement={
 			part:"snowFrag4",
@@ -222,7 +211,7 @@ function gameOneInit(){
 			color:"blue",
 			width:"15px",
 			height:"21px",
-			bPosL:"-173px",
+			bPosL:"-209px",
 			bPosT:"-275px"
 			}];
 		
@@ -260,7 +249,6 @@ function gameOneStart(){
 	$("#gameInstructionBg").hide();
 	$('#timerInside').animate({width:"296px"},0);
 	$('#timer').show();
-	$("#inImage").remove();
 	window.addEventListener('shake', shakeEventDidOccur, false);
 	counter=setInterval(gameOnetimer, 1000);
 	gameOnetimer();
@@ -268,19 +256,15 @@ function gameOneStart(){
 }
 
 function gameOnetimer(){
-
-		 gameOneTimer --;
-		 $('#timerInside').animate({width:"-=30px"},500);
-		 if (gameOneTimer <= 0)
-		 {		 
-			 clearInterval(counter);
-			 window.removeEventListener('shake', shakeEventDidOccur);
-			 gameOneLost();
-
-		 }
-
+	 gameOneTimer --;
+	 $('#timerInside').animate({width:"-=30px"},1000);
+	 if (gameOneTimer <= 0)
+	 {		 
+		 clearInterval(counter);
+		 window.removeEventListener('shake', shakeEventDidOccur);
+		 gameOneLost();
+	 }
 }
-
 
 //define a custom method to fire when shake occurs.
 function shakeEventDidOccur () {
@@ -297,7 +281,7 @@ function shakeEventDidOccur () {
 				"width":"105px",
 				"top":"340px",
 				"left":"85px",
-				"background-position": "-85px -24px",
+				"background-position": "-115px -24px",
 				"backgroundSize": backgroundS
 			})
 		
